@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Gestión de Clientes - Mi Web Pro</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <nav>
+            <a href="/" class="logo">MI WEB PRO</a>
+            <a href="/dashboard">Volver al Panel</a>
+        </nav>
+
+        <h1 style="margin: 40px 0;">Gestión de <span>Clientes</span></h1>
+        
+        <div class="card" style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                <thead>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <th style="padding: 15px;">Nombre</th>
+                        <th style="padding: 15px;">Empresa</th>
+                        <th style="padding: 15px;">Servicio</th>
+                        <th style="padding: 15px;">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% clients.forEach(client => { %>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <td style="padding: 15px;"><%= client.name %></td>
+                        <td style="padding: 15px;"><%= client.company %></td>
+                        <td style="padding: 15px;"><%= client.service %></td>
+                        <td class="<%= client.status === 'Activo' ? 'status-active' : 'status-inactive' %>" style="padding: 15px;"><%= client.status %></td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

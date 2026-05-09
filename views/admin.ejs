@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel - Mi Web Pro</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <nav>
+            <a href="/" class="logo">ADMIN CONTROL</a>
+            <div>
+                <a href="/dashboard">Mi Dashboard</a>
+                <a href="/logout">Salir</a>
+            </div>
+        </nav>
+
+        <h1 style="margin: 40px 0;">Panel de <span>Administración</span></h1>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3><%= users.length %></h3>
+                <p>Usuarios Totales</p>
+            </div>
+            <div class="stat-card">
+                <h3><%= clients.length %></h3>
+                <p>Clientes Activos</p>
+            </div>
+            <div class="stat-card">
+                <h3><%= tickets.filter(t => t.status === 'Abierto').length %></h3>
+                <p>Tickets Abiertos</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 40px; background: rgba(0, 255, 213, 0.02);">
+            <h3>Análisis de Tráfico</h3>
+            <canvas id="visitsChart" data-visits="<%= stats.visits %>" style="max-height: 300px; width: 100%;"></canvas>
+        </div>
+
+        <div class="grid" style="margin-top: 40px;">
+            <div class="card">
+                <h3>Usuarios Registrados</h3>
+                <ul style="list-style: none; margin-top: 15px;">
+                    <% users.forEach(u => { %>
+                        <li style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 10px 0;">
+                            <%= u.name %> - <small><%= u.email %></small> 
+                            <span style="color: #00ffd5; font-size: 10px; float: right;"><%= u.role || 'user' %></span>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3>Configuración del Sistema</h3>
+                <p>Estado del Servidor: <span style="color: #00ffd5;">Online</span></p>
+                <button style="background: #ff4b2b; color: white;">Mantenimiento</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('visitsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Visitas Totales'],
+                datasets: [{
+                    label: 'Interacciones',
+                    data: [Number(document.getElementById('visitsChart').dataset.visits) || 0],
+                    backgroundColor: 'rgba(0, 255, 213, 0.2)',
+                    borderColor: '#00ffd5',
+                    borderWidth: 2,
+                    borderRadius: 10,
+                    barThickness: 50
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: { color: '#888' }
+                    },
+                    x: { ticks: { color: '#888' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

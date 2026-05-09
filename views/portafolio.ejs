@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Portafolio - Trabajos Terminados</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <nav>
+            <a href="/" class="logo" style="text-decoration: none; color: inherit;">MI WEB PRO</a>
+            <div>
+                <a href="/login">Login</a>
+                <a href="/register" class="primary-btn" style="padding: 8px 15px;">Empezar mi proyecto</a>
+            </div>
+        </nav>
+
+        <header style="text-align: center; margin: 50px 0;">
+            <h1>Nuestros <span>Trabajos Terminados</span></h1>
+            <p>Ejemplos reales de ecosistemas digitales creados para nuestros clientes.</p>
+        </header>
+
+        <section class="tech-section">
+            <h2 style="text-align: center; margin-bottom: 30px; font-size: 1.2rem; color: #777; text-transform: uppercase; letter-spacing: 3px;">Tecnologías que dominamos</h2>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <i class="fab fa-node-js"></i>
+                    <span>Node.js</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-js-square"></i>
+                    <span>JavaScript</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-envira"></i>
+                    <span>MongoDB</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-react"></i>
+                    <span>React</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-css3-alt"></i>
+                    <span>CSS3</span>
+                </div>
+            </div>
+        </section>
+
+        <h2 style="margin-top: 60px; margin-bottom: 30px;">Proyectos Destacados</h2>
+        <div class="grid">
+            <% projects.forEach(project => { %>
+                <div class="card">
+                    <div style="background: #333; height: 150px; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: #555;">[<%= project.category %>]</div>
+                    <h3><%= project.title %></h3>
+                    <p><%= project.description %></p>
+                    <% if (project.github) { %>
+                        <a href="<%= project.github %>" target="_blank" rel="noopener noreferrer" class="primary-btn" style="margin-top: 15px; display: inline-block; padding: 10px 16px; font-size: 0.95rem;">Ver avance en GitHub</a>
+                    <% } %>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</body>
+</html>

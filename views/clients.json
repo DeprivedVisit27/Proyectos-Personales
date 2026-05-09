@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "name": "Juan Pérez",
+        "company": "Moda Elite",
+        "status": "Activo",
+        "service": "E-commerce"
+    },
+    {
+        "id": 2,
+        "name": "Ana García",
+        "company": "Tech Solutions",
+        "status": "En Pausa",
+        "service": "Landing Page"
+    }
+]

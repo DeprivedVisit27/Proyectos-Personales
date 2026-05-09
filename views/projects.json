@@ -1,0 +1,26 @@
+[
+    {
+        "title": "E-commerce \"Moda Elite\"",
+        "description": "Tienda online completa con pasarela de pagos y gestión de inventario.",
+        "category": "Tienda Online",
+        "github": "https://github.com/DeprivedVisit/Garett-Barrantes-Benavides"
+    },
+    {
+        "title": "Landing Page \"Tech Solutions\"",
+        "description": "Página de aterrizaje optimizada para conversión de leads de servicios IT.",
+        "category": "Landing Page",
+        "github": "https://github.com/DeprivedVisit/Garett-Barrantes-Benavides"
+    },
+    {
+        "title": "SaaS \"Gestión Plus\"",
+        "description": "Plataforma de administración interna con dashboard personalizado.",
+        "category": "SaaS",
+        "github": "https://github.com/DeprivedVisit/Garett-Barrantes-Benavides"
+    },
+    {
+        "title": "RFLX Detail",
+        "description": "Repositorio de avance del proyecto RFLX Detail.",
+        "category": "App Web",
+        "github": "https://github.com/DeprivedVisit27/RFLX-Detail"
+    }
+]

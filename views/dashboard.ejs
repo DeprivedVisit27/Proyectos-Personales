@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - Mi Web Pro</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="dashboard-body">
+    <div class="background"></div>
+    <nav>
+        <a href="/" class="logo" style="text-decoration: none; color: inherit;">MI WEB PRO</a>
+        <div>
+            <span>Hola, <%= user %></span>
+            <% if (locals.role === 'admin') { %>
+                <a href="/admin" style="color: #00ffd5; font-weight: bold; margin-left: 20px;">Panel Admin</a>
+            <% } %>
+            <a href="/logout" style="margin-left: 20px;">Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Panel de Control</h1>
+        <div class="grid">
+            <a href="/portafolio" class="card-link">
+                <div class="card">
+                    <h3>Mis Proyectos</h3>
+                    <p>Estado del desarrollo:</p>
+                    <div class="progress-container">
+                        <div class="progress-bar <%= isDelayed ? 'delayed' : '' %>" data-progress="<%= projectProgress %>"></div>
+                    </div>
+                    <p class="<%= isDelayed ? 'delayed-text' : 'completed-text' %>" style="font-size: 12px; margin-top: 8px;">
+                        <%= projectProgress %>% <%= isDelayed ? 'Retrasado' : 'Completado' %>
+                    </p>
+                </div>
+            </a>
+
+            <a href="/tickets" class="card-link">
+                <div class="card">
+                    <h3>Soporte</h3>
+                    <p>Tienes <strong><%= ticketCount %></strong> tickets activos. Haz clic aquí para solicitar ayuda técnica.</p>
+                </div>
+            </a>
+
+            <div class="card"><h3>Facturación</h3><p>Próximamente: Gestiona tus suscripciones y revisa tus facturas.</p></div>
+
+            <% if (locals.role === 'admin') { %>
+                <a href="/admin" class="card-link">
+                    <div class="card" style="border: 1px solid #00ffd5; background: rgba(0, 255, 213, 0.05);">
+                        <h3>🛠️ Panel Admin</h3>
+                        <p>Gestión global de usuarios, base de datos de clientes y tickets de soporte.</p>
+                    </div>
+                </a>
+            <% } %>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.progress-bar[data-progress]').forEach(el => {
+            const progress = Number(el.dataset.progress) || 0;
+            el.style.width = `${progress}%`;
+        });
+    </script>
+</body>
+</html>
