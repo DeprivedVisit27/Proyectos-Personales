@@ -1053,3 +1053,159 @@ button{
     justify-content: center;
     padding: 0 5px;
 }
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════════════════ */
+
+/* ── Tablet ──────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .container { padding: 28px 24px; }
+
+    .hero { margin-top: 60px; }
+    .hero h1 { font-size: 44px; }
+
+    .welcome { margin-top: 60px; padding: 40px 24px; }
+    .welcome h2 { font-size: 1.6rem; }
+
+    .quote-section { padding: 44px 32px; margin-top: 60px; }
+
+    .grid { margin-top: 50px; }
+
+    .stats { grid-template-columns: repeat(3, 1fr); }
+
+    .admin-leads-list .lead-item { flex-wrap: wrap; }
+    .lead-actions { min-width: 100%; margin-top: 12px; flex-direction: row; align-items: center; justify-content: space-between; }
+}
+
+/* ── Mobile ──────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .container { padding: 16px; }
+
+    /* Nav general */
+    nav {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 12px 16px;
+    }
+
+    .nav-actions {
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    .nav-btn {
+        padding: 6px 11px;
+        font-size: 0.75rem;
+    }
+
+    .nav-btn::after { display: none; }
+
+    /* Logo */
+    .logo {
+        padding: 8px 12px;
+        gap: 8px;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+    }
+
+    .logo-mark {
+        width: 36px;
+        height: 36px;
+        font-size: 0.82rem;
+    }
+
+    /* Hero */
+    .hero { margin-top: 36px; }
+
+    .hero h1 {
+        font-size: 30px;
+        max-width: 100%;
+    }
+
+    .hero p { font-size: 0.95rem; }
+
+    .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 28px;
+    }
+
+    .hero-buttons .primary-btn,
+    .hero-buttons .secondary-btn {
+        margin: 0;
+        text-align: center;
+        display: block;
+        padding: 14px 20px;
+    }
+
+    /* Welcome */
+    .welcome { margin-top: 36px; padding: 28px 16px; }
+    .welcome h2 { font-size: 1.3rem; }
+    .welcome p { font-size: 0.92rem; }
+
+    /* Grid */
+    .grid {
+        grid-template-columns: 1fr;
+        margin-top: 28px;
+        gap: 12px;
+    }
+
+    .card { padding: 20px; }
+
+    /* Quote form */
+    .quote-section { padding: 28px 16px; margin-top: 36px; }
+    .quote-header h2 { font-size: 1.3rem; }
+    .quote-row { grid-template-columns: 1fr; gap: 14px; }
+
+    /* Auth */
+    .auth-container { margin: 30px auto; padding: 24px 18px; }
+    .auth-container h1 { font-size: 1.4rem; }
+
+    /* Stats admin */
+    .stats { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .stat-card { padding: 16px 12px; }
+    .stat-card h3 { font-size: 1.6rem; }
+
+    /* Leads admin */
+    .lead-item { flex-direction: column; gap: 12px; }
+    .lead-top { flex-wrap: wrap; }
+    .lead-actions {
+        width: 100%;
+        min-width: unset;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .lead-status-select { width: auto; flex: 1; }
+
+    /* Titles */
+    h1 { font-size: 1.7rem; }
+    h2 { font-size: 1.3rem; }
+
+    /* WhatsApp float */
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        font-size: 22px;
+        right: 14px;
+        bottom: 14px;
+    }
+
+    /* Modal */
+    .modal-box { padding: 24px 16px; margin: 0 8px; }
+
+    /* Tech stack */
+    .tech-stack { gap: 18px; }
+    .tech-item i { font-size: 28px; }
+
+    /* Filter bar */
+    .filter-bar { gap: 6px; }
+    .filter-btn { padding: 6px 12px; font-size: 0.78rem; }
+
+    /* Notification banner */
+    .notification-banner { flex-direction: column; gap: 12px; text-align: center; }
+}
