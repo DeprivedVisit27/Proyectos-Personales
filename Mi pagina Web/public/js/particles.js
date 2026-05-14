@@ -73,24 +73,24 @@
     const GROUND = H * 0.66;
 
     const sky = ctx.createLinearGradient(0, 0, 0, GROUND);
-    sky.addColorStop(0, '#04040a');
-    sky.addColorStop(0.55, '#07070f');
-    sky.addColorStop(1, '#0c0c1a');
+    sky.addColorStop(0, '#000008');
+    sky.addColorStop(0.6, '#03051a');
+    sky.addColorStop(1, '#080d28');
     ctx.fillStyle = sky;
     ctx.fillRect(0, 0, W, GROUND);
 
-    ctx.fillStyle = '#040407';
+    ctx.fillStyle = '#02020a';
     ctx.fillRect(0, GROUND, W, H - GROUND);
 
     drawGrid(GROUND);
 
-    const hg = ctx.createLinearGradient(0, GROUND - 70, 0, GROUND + 50);
+    const hg = ctx.createLinearGradient(0, GROUND - 90, 0, GROUND + 60);
     hg.addColorStop(0, 'transparent');
-    hg.addColorStop(0.35, 'rgba(0,180,255,0.022)');
-    hg.addColorStop(0.55, 'rgba(100,20,255,0.028)');
+    hg.addColorStop(0.35, 'rgba(0,160,255,0.08)');
+    hg.addColorStop(0.55, 'rgba(120,20,255,0.06)');
     hg.addColorStop(1, 'transparent');
     ctx.fillStyle = hg;
-    ctx.fillRect(0, GROUND - 70, W, 120);
+    ctx.fillRect(0, GROUND - 90, W, 150);
 
     drawStreams();
     drawBuildings(GROUND);
@@ -121,7 +121,7 @@
     for (let i = 0; i <= 20; i++) {
       const t = i / 20;
       const y = horizon + (H - horizon) * (t * t * t);
-      ctx.strokeStyle = `rgba(0,200,255,${0.012 + t * 0.048})`;
+      ctx.strokeStyle = `rgba(0,200,255,${0.04 + t * 0.12})`;
       ctx.lineWidth = 0.5;
       ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
     }
@@ -129,7 +129,7 @@
       const t = i / 30;
       const xB = t * W;
       const prox = 1 - Math.abs(t - 0.5) * 2;
-      ctx.strokeStyle = `rgba(0,200,255,${0.008 + prox * 0.028})`;
+      ctx.strokeStyle = `rgba(0,200,255,${0.03 + prox * 0.08})`;
       ctx.lineWidth = 0.5;
       ctx.beginPath(); ctx.moveTo(VP, horizon); ctx.lineTo(xB, H + 10); ctx.stroke();
     }
@@ -152,17 +152,22 @@
     buildings.forEach(b => {
       const bx = b.x, by = ground - b.h, bw = b.w, bh = b.h;
 
-      ctx.fillStyle = '#07070f';
+      ctx.fillStyle = '#0d0d22';
       ctx.fillRect(bx, by, bw, bh + 2);
 
-      if (b.accent) {
-        const eg = ctx.createLinearGradient(bx, 0, bx + 5, 0);
-        eg.addColorStop(0, 'rgba(0,210,255,0.14)'); eg.addColorStop(1, 'transparent');
-        ctx.fillStyle = eg; ctx.fillRect(bx, by, 5, bh);
+      /* Subtle border right */
+      ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+      ctx.lineWidth = 0.5;
+      ctx.strokeRect(bx, by, bw, bh);
 
-        const tg = ctx.createLinearGradient(0, by, 0, by + 4);
-        tg.addColorStop(0, 'rgba(0,210,255,0.09)'); tg.addColorStop(1, 'transparent');
-        ctx.fillStyle = tg; ctx.fillRect(bx, by, bw, 4);
+      if (b.accent) {
+        const eg = ctx.createLinearGradient(bx, 0, bx + 6, 0);
+        eg.addColorStop(0, 'rgba(0,210,255,0.5)'); eg.addColorStop(1, 'transparent');
+        ctx.fillStyle = eg; ctx.fillRect(bx, by, 6, bh);
+
+        const tg = ctx.createLinearGradient(0, by, 0, by + 5);
+        tg.addColorStop(0, 'rgba(0,210,255,0.35)'); tg.addColorStop(1, 'transparent');
+        ctx.fillStyle = tg; ctx.fillRect(bx, by, bw, 5);
       }
 
       if (b.antenna) {
@@ -178,8 +183,8 @@
         if (!w.lit) return;
         if (w.flicker && Math.sin(frame * 0.08 + w.phase) < 0.2) return;
         const wx = bx + w.cx - 4, wy = by + w.cy - 3;
-        ctx.shadowColor = `rgba(${w.color},0.9)`; ctx.shadowBlur = 5;
-        ctx.fillStyle = `rgba(${w.color},0.22)`;
+        ctx.shadowColor = `rgba(${w.color},1)`; ctx.shadowBlur = 8;
+        ctx.fillStyle = `rgba(${w.color},0.55)`;
         ctx.fillRect(wx, wy, 7, 5);
         ctx.shadowBlur = 0;
       });
