@@ -14,109 +14,110 @@
     <nav>
         <a href="/" class="logo">ADMIN CONTROL</a>
         <div class="nav-actions">
-            <a href="#leads" class="nav-btn" data-tooltip="Cotizaciones recibidas">Leads</a>
+            <a href="#leads"    class="nav-btn" data-tooltip="Cotizaciones recibidas">Leads</a>
             <a href="#clientes" class="nav-btn" data-tooltip="Clientes registrados">Clientes</a>
-            <a href="#tickets" class="nav-btn" data-tooltip="Soporte activo">Tickets</a>
+            <a href="#tickets"  class="nav-btn" data-tooltip="Soporte activo">Tickets</a>
             <a href="#contactos" class="nav-btn" data-tooltip="Mensajes de contacto">Mensajes</a>
             <a href="/dashboard" class="nav-btn" data-tooltip="Tu panel de control">Dashboard</a>
-            <a href="/logout" class="nav-btn" data-tooltip="Cerrar sesión">Salir</a>
+            <a href="/logout"   class="nav-btn" data-tooltip="Cerrar sesión">Salir</a>
         </div>
     </nav>
 
     <h1 style="margin:40px 0 30px;">Panel de <span>Administración</span></h1>
 
-    <!-- ── Stats ─────────────────────────────────────────────────────────── -->
+    <!-- ── Stats ──────────────────────────────────────────────── -->
     <div class="stats">
         <div class="stat-card">
-            <h3><%= users.filter(u => u.role !== 'admin').length %></h3>
+            <h3><%= (users || []).filter(u => u.role !== 'admin').length %></h3>
             <p>Clientes</p>
         </div>
         <div class="stat-card stat-card--accent">
-            <h3><%= leads.filter(l => l.status === 'Nuevo').length %></h3>
+            <h3><%= (leads || []).filter(l => l.status === 'Nuevo').length %></h3>
             <p>Leads nuevos</p>
         </div>
         <div class="stat-card">
-            <h3><%= tickets.filter(t => t.status === 'Abierto').length %></h3>
+            <h3><%= (tickets || []).filter(t => t.status === 'Abierto').length %></h3>
             <p>Tickets abiertos</p>
         </div>
         <div class="stat-card">
-            <h3><%= tickets.filter(t => t.status === 'Cerrado').length %></h3>
+            <h3><%= (tickets || []).filter(t => t.status === 'Cerrado').length %></h3>
             <p>Tickets cerrados</p>
         </div>
         <div class="stat-card">
-            <h3><%= stats.visits || 0 %></h3>
+            <h3><%= (stats || {}).visits || 0 %></h3>
             <p>Visitas totales</p>
         </div>
         <div class="stat-card stat-card--warn">
-            <h3><%= contacts.filter(c => !c.read).length %></h3>
+            <h3><%= (contacts || []).filter(c => !c.read).length %></h3>
             <p>Mensajes nuevos</p>
         </div>
     </div>
 
-    <!-- ── Gráficos ─────────────────────────────────────────────────────── -->
+    <!-- ── Gráficos ───────────────────────────────────────────── -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px;">
         <div class="card">
             <h3 style="margin-bottom:16px;">Leads por servicio</h3>
-            <canvas id="leadsServiceChart" style="max-height:220px;"></canvas>
+            <div id="chart-service-wrap"><canvas id="leadsServiceChart" style="max-height:220px;"></canvas></div>
         </div>
         <div class="card">
             <h3 style="margin-bottom:16px;">Leads por estado</h3>
-            <canvas id="leadsStatusChart" style="max-height:220px;"></canvas>
+            <div id="chart-status-wrap"><canvas id="leadsStatusChart" style="max-height:220px;"></canvas></div>
         </div>
     </div>
     <div class="card" style="margin-top:16px;">
         <h3 style="margin-bottom:16px;">Visitas · Leads · Tickets</h3>
-        <canvas id="visitsChart" data-visits="<%= stats.visits %>" style="max-height:200px;width:100%;"></canvas>
+        <canvas id="visitsChart" style="max-height:200px;width:100%;"></canvas>
     </div>
 
-    <!-- ── LEADS ──────────────────────────────────────────────────────────── -->
+    <!-- ── LEADS ──────────────────────────────────────────────── -->
     <section id="leads" style="margin-top:60px;">
         <h2 style="margin-bottom:20px;">
             Cotizaciones / <span>Leads</span>
-            <% const newLeadsCount = leads.filter(l => l.status === 'Nuevo').length; %>
+            <% var newLeadsCount = (leads || []).filter(function(l){ return l.status === 'Nuevo'; }).length; %>
             <% if (newLeadsCount > 0) { %>
                 <span class="notif-badge" style="position:static;display:inline-flex;margin-left:10px;"><%= newLeadsCount %></span>
             <% } %>
         </h2>
 
-        <% if (leads.length === 0) { %>
+        <% if (!leads || leads.length === 0) { %>
             <div class="card" style="text-align:center;color:#555;padding:40px;">
                 <p>Aún no hay cotizaciones recibidas.</p>
             </div>
         <% } else { %>
             <div class="admin-leads-list">
-                <% leads.slice().reverse().forEach(lead => { %>
+                <% leads.slice().reverse().forEach(function(lead) { %>
                     <div class="lead-item">
-                        <div class="lead-avatar"><%= (lead.name || '?').charAt(0).toUpperCase() %></div>
+                        <div class="lead-avatar"><%= ((lead.name || '?').charAt(0)).toUpperCase() %></div>
                         <div class="lead-info">
                             <div class="lead-top">
-                                <strong><%= lead.name %></strong>
-                                <span class="lead-tag lead-service"><%= lead.service %></span>
-                                <span class="lead-tag lead-budget"><%= lead.budget %></span>
+                                <strong><%= lead.name || '—' %></strong>
+                                <span class="lead-tag lead-service"><%= lead.service || '—' %></span>
+                                <span class="lead-tag lead-budget"><%= lead.budget || '—' %></span>
                                 <% if (lead.deadline && lead.deadline !== '—') { %>
                                     <span class="lead-tag" style="color:#888;">📅 <%= lead.deadline %></span>
                                 <% } %>
                             </div>
                             <div class="lead-contact">
-                                <span>📱 <%= lead.whatsapp %></span>
-                                <span>✉ <%= lead.email %></span>
+                                <span>📱 <%= lead.whatsapp || '—' %></span>
+                                <span>✉ <%= lead.email || '—' %></span>
                             </div>
-                            <p class="lead-desc"><%= lead.description %></p>
+                            <p class="lead-desc"><%= lead.description || '' %></p>
                         </div>
                         <div class="lead-actions">
-                            <small style="color:#555;display:block;margin-bottom:8px;text-align:right;"><%= lead.date %></small>
+                            <small style="color:#555;display:block;margin-bottom:8px;text-align:right;"><%= lead.date || '' %></small>
                             <form action="/admin/leads/status" method="POST">
                                 <input type="hidden" name="leadId" value="<%= lead.id %>">
                                 <select name="status"
                                     class="lead-status-select status-<%= (lead.status || 'Nuevo').toLowerCase().replace(/ /g,'-') %>"
                                     onchange="this.form.submit()">
-                                    <% ['Nuevo','Contactado','Propuesta enviada','Cerrado ganado','Cerrado perdido'].forEach(s => { %>
+                                    <% ['Nuevo','Contactado','Propuesta enviada','Cerrado ganado','Cerrado perdido'].forEach(function(s) { %>
                                         <option value="<%= s %>" <%= lead.status === s ? 'selected' : '' %>><%= s %></option>
                                     <% }); %>
                                 </select>
                             </form>
                             <% if (lead.whatsapp) { %>
-                                <a href="https://wa.me/<%= lead.whatsapp.replace(/\D/g,'') %>?text=Hola%20<%= encodeURIComponent(lead.name) %>%2C%20vi%20tu%20solicitud%20de%20cotizaci%C3%B3n%20para%20<%= encodeURIComponent(lead.service) %>%20y%20me%20gustar%C3%ADa%20coordinar." target="_blank"
+                                <a href="https://wa.me/<%= lead.whatsapp.replace(/\D/g,'') %>?text=Hola%20<%= encodeURIComponent(lead.name || '') %>%2C%20vi%20tu%20solicitud%20de%20cotizaci%C3%B3n%20para%20<%= encodeURIComponent(lead.service || '') %>%20y%20me%20gustar%C3%ADa%20coordinar."
+                                   target="_blank"
                                    style="display:block;text-align:center;padding:8px;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.25);color:#25d366;border-radius:8px;text-decoration:none;font-size:0.8rem;margin-top:8px;">
                                     📲 WhatsApp
                                 </a>
@@ -128,24 +129,24 @@
         <% } %>
     </section>
 
-    <!-- ── CLIENTES ───────────────────────────────────────────────────────── -->
+    <!-- ── CLIENTES ───────────────────────────────────────────── -->
     <section id="clientes" style="margin-top:60px;">
         <h2 style="margin-bottom:20px;">Clientes <span>Registrados</span></h2>
 
-        <% const clientes = users.filter(u => u.role !== 'admin'); %>
+        <% var clientes = (users || []).filter(function(u){ return u.role !== 'admin'; }); %>
         <% if (clientes.length === 0) { %>
             <div class="card" style="text-align:center;color:#555;padding:40px;">
                 <p>Aún no hay clientes registrados.</p>
             </div>
         <% } else { %>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;">
-                <% clientes.forEach(cliente => { %>
+                <% clientes.forEach(function(cliente) { %>
                     <%
-                        const clientTickets = tickets.filter(t => t.email === cliente.email);
-                        const openTickets   = clientTickets.filter(t => t.status === 'Abierto').length;
-                        const closedTickets = clientTickets.filter(t => t.status === 'Cerrado').length;
-                        const progress      = cliente.projectProgress ?? 0;
-                        const delayed       = cliente.isDelayed ?? false;
+                        var clientTickets = (tickets || []).filter(function(t){ return t.email === cliente.email; });
+                        var openTickets   = clientTickets.filter(function(t){ return t.status === 'Abierto'; }).length;
+                        var closedTickets = clientTickets.filter(function(t){ return t.status === 'Cerrado'; }).length;
+                        var progress      = cliente.projectProgress != null ? cliente.projectProgress : 0;
+                        var delayed       = cliente.isDelayed || false;
                     %>
                     <div class="card" style="border:1px solid rgba(255,255,255,0.07);">
 
@@ -154,9 +155,7 @@
                                 <h3 style="margin-bottom:4px;"><%= cliente.name %></h3>
                                 <small style="color:#555;"><%= cliente.email %></small>
                             </div>
-                            <span style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.13);color:#999;font-size:0.7rem;padding:4px 10px;border-radius:50px;">
-                                Cliente
-                            </span>
+                            <span style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.13);color:#999;font-size:0.7rem;padding:4px 10px;border-radius:50px;">Cliente</span>
                         </div>
 
                         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
@@ -236,15 +235,15 @@
         <% } %>
     </section>
 
-    <!-- ── TICKETS ────────────────────────────────────────────────────────── -->
+    <!-- ── TICKETS ────────────────────────────────────────────── -->
     <section id="tickets" style="margin-top:60px;">
         <h2 style="margin-bottom:20px;">Tickets de <span>Soporte</span></h2>
         <div class="card">
-            <% if (tickets.length === 0) { %>
+            <% if (!tickets || tickets.length === 0) { %>
                 <p style="color:#555;text-align:center;padding:20px;">No hay tickets aún.</p>
             <% } else { %>
                 <ul style="list-style:none;">
-                    <% tickets.forEach(t => { %>
+                    <% tickets.forEach(function(t) { %>
                         <li style="border-bottom:1px solid rgba(255,255,255,0.05);padding:15px 0;">
                             <div style="display:flex;justify-content:space-between;align-items:flex-start;">
                                 <div>
@@ -265,7 +264,7 @@
                                 </form>
                             <% } else { %>
                                 <p style="font-size:0.85rem;color:#ccc;background:rgba(255,255,255,0.04);border-left:2px solid rgba(255,255,255,0.2);padding:10px;border-radius:8px;margin-top:10px;">
-                                    <strong>R:</strong> <%= t.adminResponse %>
+                                    <strong>R:</strong> <%= t.adminResponse || '' %>
                                 </p>
                             <% } %>
                         </li>
@@ -275,23 +274,23 @@
         </div>
     </section>
 
-    <!-- ── MENSAJES DE CONTACTO ───────────────────────────────────────────── -->
+    <!-- ── MENSAJES DE CONTACTO ───────────────────────────────── -->
     <section id="contactos" style="margin-top:60px;margin-bottom:80px;">
         <h2 style="margin-bottom:20px;">
             Mensajes de <span>Contacto</span>
-            <% const unreadCount = contacts.filter(c => !c.read).length; %>
+            <% var unreadCount = (contacts || []).filter(function(c){ return !c.read; }).length; %>
             <% if (unreadCount > 0) { %>
                 <span class="notif-badge" style="position:static;display:inline-flex;margin-left:10px;background:#ffb800;"><%= unreadCount %></span>
             <% } %>
         </h2>
-        <% if (contacts.length === 0) { %>
+        <% if (!contacts || contacts.length === 0) { %>
             <div class="card" style="text-align:center;color:#555;padding:40px;">
                 <p>No hay mensajes de contacto aún.</p>
             </div>
         <% } else { %>
             <div class="card">
                 <ul style="list-style:none;">
-                    <% contacts.slice().reverse().forEach(c => { %>
+                    <% contacts.slice().reverse().forEach(function(c) { %>
                         <li style="border-bottom:1px solid rgba(255,255,255,0.05);padding:18px 0;">
                             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
                                 <div>
@@ -302,11 +301,11 @@
                                     <% if (!c.read) { %>
                                         <span style="font-size:0.7rem;background:rgba(255,184,0,0.12);color:#ffb800;border:1px solid rgba(255,184,0,0.3);padding:3px 8px;border-radius:50px;">Nuevo</span>
                                     <% } %>
-                                    <small style="color:#555;"><%= c.date %></small>
+                                    <small style="color:#555;"><%= c.date || '' %></small>
                                 </div>
                             </div>
-                            <p style="font-size:0.85rem;color:#fff;margin-bottom:6px;font-weight:600;"><%= c.subject %></p>
-                            <p style="font-size:0.9rem;color:#aaa;line-height:1.6;"><%= c.message %></p>
+                            <p style="font-size:0.85rem;color:#fff;margin-bottom:6px;font-weight:600;"><%= c.subject || '' %></p>
+                            <p style="font-size:0.9rem;color:#aaa;line-height:1.6;"><%= c.message || '' %></p>
                         </li>
                     <% }); %>
                 </ul>
@@ -317,76 +316,80 @@
 </div>
 
 <script>
-    const chartDefaults = {
+(function () {
+    var leadsRaw   = <%- JSON.stringify(leads   || []) %>;
+    var ticketsRaw = <%- JSON.stringify(tickets || []) %>;
+    var statsRaw   = <%- JSON.stringify(stats   || {}) %>;
+
+    var chartBase = {
         responsive: true,
-        plugins: { legend: { labels: { color: '#888', font: { size: 12 } } } },
+        plugins: { legend: { labels: { color: '#666', font: { size: 12 } } } },
         scales: {
-            y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888' } },
-            x: { ticks: { color: '#888' }, grid: { display: false } }
+            y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#666' } },
+            x: { ticks: { color: '#666' }, grid: { display: false } }
         }
     };
 
-    // Datos seguros desde servidor
-    const leadsRaw   = <%- JSON.stringify(leads   || []) %>;
-    const ticketsRaw = <%- JSON.stringify(tickets || []) %>;
+    function noDataMsg(id) {
+        var el = document.getElementById(id);
+        if (el) el.parentElement.innerHTML = '<p style="color:#444;text-align:center;padding:30px;font-size:0.85rem;">Sin datos aún</p>';
+    }
 
-    // Leads por servicio
-    const serviceCounts = leadsRaw.reduce((acc, l) => {
-        const key = l.service || 'Sin definir';
-        acc[key] = (acc[key] || 0) + 1;
+    /* — Leads por servicio — */
+    var svcCounts = leadsRaw.reduce(function(acc, l) {
+        var k = l.service || 'Sin definir';
+        acc[k] = (acc[k] || 0) + 1;
         return acc;
     }, {});
 
-    if (Object.keys(serviceCounts).length > 0) {
+    if (Object.keys(svcCounts).length > 0) {
         new Chart(document.getElementById('leadsServiceChart'), {
             type: 'bar',
             data: {
-                labels: Object.keys(serviceCounts),
-                datasets: [{ label: 'Leads', data: Object.values(serviceCounts),
-                    backgroundColor: 'rgba(0,210,255,0.15)', borderColor: 'rgba(0,210,255,0.6)',
+                labels: Object.keys(svcCounts),
+                datasets: [{ label: 'Leads', data: Object.values(svcCounts),
+                    backgroundColor: 'rgba(0,200,255,0.12)',
+                    borderColor: 'rgba(0,200,255,0.55)',
                     borderWidth: 1, borderRadius: 6 }]
             },
-            options: { ...chartDefaults, plugins: { legend: { display: false } } }
+            options: Object.assign({}, chartBase, { plugins: { legend: { display: false } } })
         });
-    } else {
-        document.getElementById('leadsServiceChart').parentElement.innerHTML += '<p style="color:#555;text-align:center;padding:20px;font-size:0.85rem;">Sin datos aún</p>';
-    }
+    } else { noDataMsg('leadsServiceChart'); }
 
-    // Leads por estado
-    const statusCounts = leadsRaw.reduce((acc, l) => {
-        const key = l.status || 'Nuevo';
-        acc[key] = (acc[key] || 0) + 1;
+    /* — Leads por estado — */
+    var stCounts = leadsRaw.reduce(function(acc, l) {
+        var k = l.status || 'Nuevo';
+        acc[k] = (acc[k] || 0) + 1;
         return acc;
     }, {});
-    const statusColors = ['rgba(255,255,255,0.7)','rgba(96,165,250,0.7)','rgba(251,191,36,0.7)','rgba(52,211,153,0.7)','rgba(248,113,113,0.7)'];
+    var stColors = ['rgba(255,255,255,0.65)','rgba(96,165,250,0.65)','rgba(251,191,36,0.65)','rgba(52,211,153,0.65)','rgba(248,113,113,0.65)'];
 
-    if (Object.keys(statusCounts).length > 0) {
+    if (Object.keys(stCounts).length > 0) {
         new Chart(document.getElementById('leadsStatusChart'), {
             type: 'doughnut',
             data: {
-                labels: Object.keys(statusCounts),
-                datasets: [{ data: Object.values(statusCounts), backgroundColor: statusColors, borderWidth: 0 }]
+                labels: Object.keys(stCounts),
+                datasets: [{ data: Object.values(stCounts), backgroundColor: stColors, borderWidth: 0 }]
             },
-            options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#888', font: { size: 11 } } } } }
+            options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#666', font: { size: 11 } } } } }
         });
-    } else {
-        document.getElementById('leadsStatusChart').parentElement.innerHTML += '<p style="color:#555;text-align:center;padding:20px;font-size:0.85rem;">Sin datos aún</p>';
-    }
+    } else { noDataMsg('leadsStatusChart'); }
 
-    // Visitas · Leads · Tickets
+    /* — Visitas · Leads · Tickets — */
     new Chart(document.getElementById('visitsChart'), {
         type: 'bar',
         data: {
             labels: ['Visitas', 'Leads', 'Tickets'],
             datasets: [{
-                data: [Number(document.getElementById('visitsChart').dataset.visits) || 0, leadsRaw.length, ticketsRaw.length],
-                backgroundColor: ['rgba(255,255,255,0.12)','rgba(0,210,255,0.2)','rgba(251,191,36,0.2)'],
-                borderColor: ['rgba(255,255,255,0.5)','rgba(0,210,255,0.7)','rgba(251,191,36,0.7)'],
+                data: [statsRaw.visits || 0, leadsRaw.length, ticketsRaw.length],
+                backgroundColor: ['rgba(255,255,255,0.1)','rgba(0,200,255,0.18)','rgba(251,191,36,0.18)'],
+                borderColor:     ['rgba(255,255,255,0.4)','rgba(0,200,255,0.6)','rgba(251,191,36,0.6)'],
                 borderWidth: 1, borderRadius: 8
             }]
         },
-        options: { ...chartDefaults, plugins: { legend: { display: false } } }
+        options: Object.assign({}, chartBase, { plugins: { legend: { display: false } } })
     });
+})();
 </script>
 <script src="/js/particles.js"></script>
 </body>

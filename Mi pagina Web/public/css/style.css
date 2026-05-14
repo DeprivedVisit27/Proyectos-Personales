@@ -26,10 +26,13 @@
   box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  background: #000;
+}
 
 body {
-  background: #000008;
+  background: transparent;
   color: var(--text);
   font-family: 'Inter', Arial, sans-serif;
   font-size: 15px;
@@ -37,6 +40,17 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Grind dot grid ──────────────────────────*/
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.13) 1px, transparent 1px);
+  background-size: 26px 26px;
+  z-index: -2;
+  pointer-events: none;
 }
 
 /* ── Background div (fallback for EJS views) */
