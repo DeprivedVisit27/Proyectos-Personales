@@ -30,45 +30,47 @@
       LOOP<span class="lp-logo-accent">-LANDING</span><span class="lp-logo-dim">.COM</span>
     </a>
 
-    <!-- Nav + dropdown en una sola línea -->
+    <!-- Nav en una sola línea -->
     <nav class="lp-nav">
       <a href="/portafolio">Proyectos</a>
       <a href="/precios">Precios</a>
       <a href="#servicios">Servicios</a>
       <a href="#cotizacion">Contacto</a>
+      <a href="/login" class="lp-nav-login">Iniciar sesión</a>
+      <a href="#cotizacion" class="lp-nav-cta">Get Started →</a>
 
-      <!-- Dropdown stack -->
+      <!-- Dropdown a la derecha del Get Started -->
       <div class="lp-dropdown-wrap" id="techDropdown">
-        <button class="lp-dropdown-btn" id="techBtn">
-          Stack ▾
+        <button class="lp-dropdown-btn" id="techBtn" aria-label="Menú">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <rect x="2" y="4" width="14" height="1.5" rx="0.75" fill="currentColor"/>
+            <rect x="2" y="8.25" width="14" height="1.5" rx="0.75" fill="currentColor"/>
+            <rect x="2" y="12.5" width="14" height="1.5" rx="0.75" fill="currentColor"/>
+          </svg>
         </button>
         <div class="lp-dropdown" id="techMenu">
-          <p class="lp-drop-label">FRONTEND</p>
-          <div class="lp-drop-grid">
-            <div class="lp-drop-item"><span style="color:#e34c26">⬡</span> HTML5</div>
-            <div class="lp-drop-item"><span style="color:#264de4">⬡</span> CSS3</div>
-            <div class="lp-drop-item"><span style="color:#f7df1e">⬡</span> JavaScript</div>
+          <p class="lp-drop-label">NAVEGACIÓN</p>
+          <div class="lp-drop-col">
+            <a href="/portafolio" class="lp-drop-link">📁 Portafolio</a>
+            <a href="/precios"    class="lp-drop-link">💰 Precios</a>
+            <a href="#servicios"  class="lp-drop-link">⚙️ Servicios</a>
+            <a href="#proyectos"  class="lp-drop-link">🚀 Proyectos</a>
+            <a href="#cotizacion" class="lp-drop-link">✉️ Cotización</a>
           </div>
-          <p class="lp-drop-label" style="margin-top:14px;">BACKEND</p>
-          <div class="lp-drop-grid">
-            <div class="lp-drop-item"><span style="color:#68a063">⬡</span> Node.js</div>
-            <div class="lp-drop-item"><span style="color:#fff">⬡</span> Express.js</div>
-            <div class="lp-drop-item"><span style="color:#aaa">⬡</span> EJS</div>
+          <div class="lp-drop-divider"></div>
+          <p class="lp-drop-label">CUENTA</p>
+          <div class="lp-drop-col">
+            <a href="/login"    class="lp-drop-link">🔐 Iniciar sesión</a>
+            <a href="/register" class="lp-drop-link">📝 Registrarse</a>
           </div>
-          <p class="lp-drop-label" style="margin-top:14px;">INFRA & DATOS</p>
-          <div class="lp-drop-grid">
-            <div class="lp-drop-item"><span style="color:#ff9900">⬡</span> AWS S3</div>
-            <div class="lp-drop-item"><span style="color:#34a853">⬡</span> Google Sheets</div>
-            <div class="lp-drop-item"><span style="color:#ea4b71">⬡</span> n8n</div>
-            <div class="lp-drop-item"><span style="color:#ff6384">⬡</span> Chart.js</div>
-            <div class="lp-drop-item"><span style="color:#00d4ff">⬡</span> PDFKit</div>
-            <div class="lp-drop-item"><span style="color:#aaa">⬡</span> Nodemailer</div>
+          <div class="lp-drop-divider"></div>
+          <p class="lp-drop-label">CONTACTO DIRECTO</p>
+          <div class="lp-drop-col">
+            <a href="https://wa.me/50663144171" target="_blank" class="lp-drop-link" style="color:#25d366;">💬 WhatsApp</a>
+            <a href="https://www.instagram.com/garett_barrantes/" target="_blank" class="lp-drop-link">📸 Instagram</a>
           </div>
         </div>
       </div>
-
-      <a href="/login" class="lp-nav-login">Iniciar sesión</a>
-      <a href="#cotizacion" class="lp-nav-cta">Get Started →</a>
     </nav>
 
     <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Menú">☰</button>

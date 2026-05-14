@@ -2295,24 +2295,24 @@ button:hover { background: #e2e2e2; }
 .lp-dropdown-btn {
   display: flex;
   align-items: center;
-  gap: 5px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: rgba(255,255,255,0.65);
-  font-size: 0.82rem;
-  font-weight: 500;
-  padding: 6px 12px;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.7);
   border-radius: 8px;
   cursor: pointer;
   font-family: inherit;
   transition: all 0.2s;
-  white-space: nowrap;
+  flex-shrink: 0;
+  padding: 0;
 }
 
 .lp-dropdown-btn:hover,
 .lp-dropdown-wrap.open .lp-dropdown-btn {
-  background: rgba(255,255,255,0.09);
-  border-color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.28);
   color: #fff;
 }
 
@@ -2324,20 +2324,48 @@ button:hover { background: #e2e2e2; }
   background: #0d0d0d;
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 14px;
-  padding: 20px 22px;
-  min-width: 320px;
+  padding: 18px 20px;
+  min-width: 220px;
   z-index: 999;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.7);
-  animation: lp-drop-in 0.18s ease;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.8);
 }
 
-.lp-dropdown--open {
+.lp-dropdown--open,
+.lp-dropdown[style*="block"] {
   display: block;
+  animation: lp-drop-in 0.16s ease;
 }
 
 @keyframes lp-drop-in {
-  from { opacity: 0; transform: translateY(-6px); }
+  from { opacity: 0; transform: translateY(-8px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+.lp-drop-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lp-drop-link {
+  display: block;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.lp-drop-link:hover {
+  background: rgba(255,255,255,0.07);
+  color: #fff;
+}
+
+.lp-drop-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+  margin: 12px 0;
 }
 
 .lp-drop-label {
