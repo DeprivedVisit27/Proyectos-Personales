@@ -16,5 +16,32 @@
         "icon": "fas fa-server",
         "technologies": ["Node.js", "Express", "EJS"],
         "github": "https://github.com/DeprivedVisit27/Proyectos-Personales"
+    },
+    {
+        "title": "Miss MB Tattoo",
+        "description": "Landing page de agenda de citas para la tatuadora Miss MB. Diseño negro y dorado con formulario de contacto vía WhatsApp.",
+        "category": "Landing Page",
+        "status": "En proceso",
+        "icon": "fas fa-paint-brush",
+        "technologies": ["HTML", "CSS", "JavaScript"],
+        "github": "https://github.com/DeprivedVisit27/Proyectos-Personales"
+    },
+    {
+        "title": "EcoPollo Premium",
+        "description": "Sistema de cotización web con clasificación automática de clientes en 5 segmentos, descuentos por volumen y panel administrativo. Cartago, Costa Rica.",
+        "category": "App Web",
+        "status": "En proceso",
+        "icon": "fas fa-drumstick-bite",
+        "technologies": ["HTML", "CSS", "JavaScript"],
+        "github": ""
+    },
+    {
+        "title": "ArteVerde Vivero",
+        "description": "Landing page boutique para vivero de zacate y paisajismo. Incluye catálogo de variedades, tabla de precios, galería antes/después y agenda de citas vía WhatsApp.",
+        "category": "Landing Page",
+        "status": "En proceso",
+        "icon": "fas fa-leaf",
+        "technologies": ["HTML", "CSS", "JavaScript"],
+        "github": ""
     }
 ]
