@@ -1,16 +1,20 @@
 [
     {
         "title": "RFLX Detail",
-        "description": "Repositorio de avance del proyecto RFLX Detail.",
+        "description": "Plataforma de avance de proyecto RFLX Detail con seguimiento en tiempo real.",
         "category": "App Web",
-        "icon": "fab fa-react",
+        "status": "En proceso",
+        "logo": "/logo-rflx.png",
+        "technologies": ["React", "Node.js", "CSS3"],
         "github": "https://github.com/DeprivedVisit27/RFLX-Detail"
     },
     {
         "title": "Mi Web Pro",
-        "description": "Plataforma SaaS en desarrollo para gestión de clientes y proyectos.",
-        "category": "En proceso",
+        "description": "Plataforma SaaS para gestión de clientes, proyectos y soporte técnico.",
+        "category": "SaaS",
+        "status": "En proceso",
         "icon": "fas fa-server",
+        "technologies": ["Node.js", "Express", "EJS"],
         "github": "https://github.com/DeprivedVisit27/Proyectos-Personales"
     }
 ]

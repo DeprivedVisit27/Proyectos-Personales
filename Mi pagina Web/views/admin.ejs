@@ -23,7 +23,7 @@
         </div>
     </nav>
 
-    <h1 style="margin:40px 0 30px;">Panel de <span style="color:#00ffd5;">Administración</span></h1>
+    <h1 style="margin:40px 0 30px;">Panel de <span>Administración</span></h1>
 
     <!-- ── Stats ─────────────────────────────────────────────────────────── -->
     <div class="stats">
@@ -62,7 +62,7 @@
     <!-- ── LEADS ──────────────────────────────────────────────────────────── -->
     <section id="leads" style="margin-top:60px;">
         <h2 style="margin-bottom:20px;">
-            Cotizaciones / <span style="color:#00ffd5;">Leads</span>
+            Cotizaciones / <span>Leads</span>
             <% const newLeadsCount = leads.filter(l => l.status === 'Nuevo').length; %>
             <% if (newLeadsCount > 0) { %>
                 <span class="notif-badge" style="position:static;display:inline-flex;margin-left:10px;"><%= newLeadsCount %></span>
@@ -77,7 +77,7 @@
             <div class="admin-leads-list">
                 <% leads.slice().reverse().forEach(lead => { %>
                     <div class="lead-item">
-                        <div class="lead-avatar"><%= lead.name.charAt(0).toUpperCase() %></div>
+                        <div class="lead-avatar"><%= (lead.name || '?').charAt(0).toUpperCase() %></div>
                         <div class="lead-info">
                             <div class="lead-top">
                                 <strong><%= lead.name %></strong>
@@ -98,7 +98,7 @@
                             <form action="/admin/leads/status" method="POST">
                                 <input type="hidden" name="leadId" value="<%= lead.id %>">
                                 <select name="status"
-                                    class="lead-status-select status-<%= lead.status.toLowerCase().replace(/ /g,'-') %>"
+                                    class="lead-status-select status-<%= (lead.status || 'Nuevo').toLowerCase().replace(/ /g,'-') %>"
                                     onchange="this.form.submit()">
                                     <% ['Nuevo','Contactado','Propuesta enviada','Cerrado ganado','Cerrado perdido'].forEach(s => { %>
                                         <option value="<%= s %>" <%= lead.status === s ? 'selected' : '' %>><%= s %></option>
@@ -114,7 +114,7 @@
 
     <!-- ── CLIENTES ───────────────────────────────────────────────────────── -->
     <section id="clientes" style="margin-top:60px;">
-        <h2 style="margin-bottom:20px;">Clientes <span style="color:#00ffd5;">Registrados</span></h2>
+        <h2 style="margin-bottom:20px;">Clientes <span>Registrados</span></h2>
 
         <% const clientes = users.filter(u => u.role !== 'admin'); %>
         <% if (clientes.length === 0) { %>
@@ -138,7 +138,7 @@
                                 <h3 style="margin-bottom:4px;"><%= cliente.name %></h3>
                                 <small style="color:#555;"><%= cliente.email %></small>
                             </div>
-                            <span style="background:rgba(0,255,213,0.08);border:1px solid rgba(0,255,213,0.2);color:#00ffd5;font-size:0.7rem;padding:4px 10px;border-radius:50px;">
+                            <span style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.13);color:#999;font-size:0.7rem;padding:4px 10px;border-radius:50px;">
                                 Cliente
                             </span>
                         </div>
@@ -155,8 +155,8 @@
                         </div>
 
                         <div style="display:flex;gap:10px;margin-bottom:16px;">
-                            <div style="flex:1;background:rgba(0,255,213,0.05);border:1px solid rgba(0,255,213,0.15);padding:10px;border-radius:10px;text-align:center;">
-                                <strong style="color:#00ffd5;font-size:1.3rem;"><%= openTickets %></strong>
+                            <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);padding:10px;border-radius:10px;text-align:center;">
+                                <strong style="color:#fff;font-size:1.3rem;"><%= openTickets %></strong>
                                 <small style="display:block;color:#555;font-size:0.75rem;">Tickets abiertos</small>
                             </div>
                             <div style="flex:1;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:10px;border-radius:10px;text-align:center;">
@@ -193,7 +193,8 @@
                         <% } %>
 
                         <form action="/admin/users/delete" method="POST" style="margin-top:10px;"
-                            onsubmit="return confirm('¿Eliminar a <%= cliente.name %>? Esta acción no se puede deshacer.')">
+                            data-name="<%= cliente.name %>"
+                            onsubmit="return confirm('¿Eliminar a ' + this.dataset.name + '? Esta acción no se puede deshacer.')">
                             <input type="hidden" name="email" value="<%= cliente.email %>">
                             <button type="submit" class="btn-delete">Eliminar usuario</button>
                         </form>
@@ -205,7 +206,7 @@
 
     <!-- ── TICKETS ────────────────────────────────────────────────────────── -->
     <section id="tickets" style="margin-top:60px;">
-        <h2 style="margin-bottom:20px;">Tickets de <span style="color:#00ffd5;">Soporte</span></h2>
+        <h2 style="margin-bottom:20px;">Tickets de <span>Soporte</span></h2>
         <div class="card">
             <% if (tickets.length === 0) { %>
                 <p style="color:#555;text-align:center;padding:20px;">No hay tickets aún.</p>
@@ -218,7 +219,7 @@
                                     <strong><%= t.id %></strong>
                                     <span style="color:#555;font-size:0.85rem;margin-left:10px;"><%= t.user %> · <%= t.email || '' %></span>
                                 </div>
-                                <span style="font-size:0.75rem;color:<%= t.status === 'Abierto' ? '#00ffd5' : '#555' %>;">
+                                <span style="font-size:0.75rem;color:<%= t.status === 'Abierto' ? '#fff' : '#555' %>;">
                                     <%= t.status %>
                                 </span>
                             </div>
@@ -231,7 +232,7 @@
                                     <button type="submit" style="width:auto;padding:8px 18px;font-size:0.8rem;margin-top:8px;">Responder y cerrar</button>
                                 </form>
                             <% } else { %>
-                                <p style="font-size:0.85rem;color:#00ffd5;background:rgba(0,255,213,0.05);padding:10px;border-radius:8px;margin-top:10px;">
+                                <p style="font-size:0.85rem;color:#ccc;background:rgba(255,255,255,0.04);border-left:2px solid rgba(255,255,255,0.2);padding:10px;border-radius:8px;margin-top:10px;">
                                     <strong>R:</strong> <%= t.adminResponse %>
                                 </p>
                             <% } %>
@@ -245,7 +246,7 @@
     <!-- ── MENSAJES DE CONTACTO ───────────────────────────────────────────── -->
     <section id="contactos" style="margin-top:60px;margin-bottom:80px;">
         <h2 style="margin-bottom:20px;">
-            Mensajes de <span style="color:#00ffd5;">Contacto</span>
+            Mensajes de <span>Contacto</span>
             <% const unreadCount = contacts.filter(c => !c.read).length; %>
             <% if (unreadCount > 0) { %>
                 <span class="notif-badge" style="position:static;display:inline-flex;margin-left:10px;background:#ffb800;"><%= unreadCount %></span>
@@ -272,7 +273,7 @@
                                     <small style="color:#555;"><%= c.date %></small>
                                 </div>
                             </div>
-                            <p style="font-size:0.85rem;color:#00ffd5;margin-bottom:6px;font-weight:600;"><%= c.subject %></p>
+                            <p style="font-size:0.85rem;color:#fff;margin-bottom:6px;font-weight:600;"><%= c.subject %></p>
                             <p style="font-size:0.9rem;color:#aaa;line-height:1.6;"><%= c.message %></p>
                         </li>
                     <% }); %>
@@ -293,8 +294,8 @@
             datasets: [{
                 label: 'Visitas',
                 data: [Number(document.getElementById('visitsChart').dataset.visits) || 0],
-                backgroundColor: 'rgba(0,255,213,0.2)',
-                borderColor: '#00ffd5',
+                backgroundColor: 'rgba(255,255,255,0.12)',
+                borderColor: 'rgba(255,255,255,0.6)',
                 borderWidth: 2,
                 borderRadius: 10,
                 barThickness: 50

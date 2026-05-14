@@ -285,12 +285,11 @@ app.get('/clients', isAuthenticated, (req, res) => {
 app.get('/admin', isAuthenticated, (req, res) => {
     if (req.session.user.role !== 'admin') return res.status(403).send('Acceso denegado');
     const allUsers = getUsers();
-    const clients = getData('clients.json');
     const tickets = getData('tickets.json');
     const stats = getData('stats.json');
     const leads = getData('leads.json');
     const contacts = getData('contacts.json');
-    res.render('admin', { users: allUsers, clients, tickets, stats, leads, contacts });
+    res.render('admin', { users: allUsers, tickets, stats, leads, contacts });
 });
 
 app.post('/admin/tickets/respond', isAuthenticated, (req, res) => {

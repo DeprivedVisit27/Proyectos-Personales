@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { addUser } = require('../users');
 
 router.get('/login', (req, res) => {
     res.render('login');
@@ -17,7 +18,7 @@ router.post('/login', (req, res) => {
     res.redirect('/client/dashboard');
 });
 
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
     const {
         name,
         company,
@@ -33,6 +34,15 @@ router.post('/register', (req, res) => {
         projectType,
         email
     };
+
+    // Save to Google Sheets
+    await addUser({
+        name,
+        company,
+        whatsapp,
+        projectType,
+        email
+    });
 
     res.redirect('/client/dashboard');
 });

@@ -12,6 +12,34 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+
+  <meta property="og:image" content="img/meg.jpg" />
+  <meta property="og:url" content="https://missmb.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TattooParlor",
+    "name": "Miss MB Tattoo Realismo",
+    "description": "Artista de tatuajes realistas con base en Costa Rica. Agenda tu cita para un diseño personalizado y altamente detallado.",
+    "image": "https://missmb.com/img/meg.jpg",
+    "url": "https://missmb.com",
+    "telephone": "+50688888888",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Escazú, San José",
+      "addressLocality": "San José",
+      "addressRegion": "CR",
+      "postalCode": "10201",
+      "addressCountry": "CR"
+    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Thursday","Friday","Saturday"], "opens": "09:00", "closes": "19:00" }
+    ],
+    "sameAs": ["https://www.instagram.com/__miss__mb___/"]
+  }
+  </script>
 </head>
 <body>
 
@@ -26,76 +54,73 @@
       <li><a href="#sobre-mi">Sobre Mí</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
       <li><a href="#agendar" class="nav__cta">Agendar Cita</a></li>
+      <li><a href="#admin">Admin</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
   <section class="hero" id="inicio">
-    <div class="hero__bg"></div>
-    <div class="hero__rings"></div>
-    <div class="hero__content">
-      <p class="hero__subtitle">Tattoo Artist · Realismo</p>
-      <h1 class="hero__title">MISS <em>MB</em></h1>
-      <div class="hero__divider"></div>
-      <p class="hero__tagline">Cada trazo cuenta tu historia</p>
-      <div class="hero__actions">
-        <a href="#portfolio" class="btn btn--outline">Ver Portfolio</a>
-        <a href="#agendar" class="btn btn--gold">Agendar Cita</a>
+    <div class="container hero__grid">
+      <div class="hero__card">
+        <div class="hero__image">
+          <img src="img/meg.jpg" alt="Foto de entrada de Meg — Miss MB" />
+        </div>
+        <span class="hero__label">REALISMO</span>
       </div>
-    </div>
-    <div class="hero__scroll">
-      <span></span>
-      <p>Scroll</p>
+      <div class="hero__text">
+        <p class="section-label">Sobre mí</p>
+        <h1 class="hero__title">El arte que<br /><em>vive en tu piel</em></h1>
+        <p class="hero__description">
+          Soy Miss MB, artista de tatuajes especializada en <strong>realismo</strong>. Mi trabajo se enfoca en capturar detalles, texturas y emociones en cada pieza — convirtiendo ideas en obras de arte permanentes.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span>+500</span>
+            <p>Tatuajes realizados</p>
+          </div>
+          <div class="hero__stat">
+            <span>+5</span>
+            <p>Años de experiencia</p>
+          </div>
+          <div class="hero__stat">
+            <span>100%</span>
+            <p>Diseños personalizados</p>
+          </div>
+        </div>
+        <a href="#agendar" class="btn btn--gold hero__cta">Agenda tu cita</a>
+      </div>
     </div>
   </section>
 
   <!-- ABOUT -->
   <section class="about" id="sobre-mi">
     <div class="container about__grid">
-      <div class="about__image-wrap">
+      <div class="about__image-wrap reveal reveal-d1">
         <div class="about__image">
-          <!--
-            CLIENTE: Reemplaza el bloque .img-placeholder con:
-            <img src="img/artista.jpg" alt="Miss MB Tattoo Artist" />
-          -->
-          <div class="img-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-            <span>Foto del artista</span>
-          </div>
+          <img src="img/meg.jpg" alt="Meg trabajando en un tatuaje realista" />
         </div>
-        <div class="about__frame"></div>
-        <div class="about__badge">Realismo</div>
+        <span class="about__badge">Experiencia en realismo</span>
       </div>
-      <div class="about__text">
-        <p class="section-label">Sobre Mí</p>
-        <h2 class="section-title">El arte que<br /><em>vive en tu piel</em></h2>
+      <div class="about__text reveal reveal-d2">
+        <p class="section-label">Sobre mí</p>
+        <h2 class="section-title">Del estudio a tu piel con confianza y detalle</h2>
         <p class="about__desc">
-          Soy Miss MB, artista de tatuajes especializada en <strong>realismo</strong>.
-          Mi trabajo se enfoca en capturar detalles, texturas y emociones en cada pieza —
-          convirtiendo ideas en obras de arte permanentes.
-        </p>
-        <p class="about__desc">
-          Cada tatuaje es único. Trabajo contigo desde el concepto hasta el resultado final
-          para asegurarme de que el diseño refleje exactamente lo que imaginas.
+          Soy Miss MB, tatuadora especializada en realismo. Mi proceso combina una escucha detallada, diseño personalizado y una técnica suave para que cada tatuaje sea una obra que perdure con estilo y seguridad.
         </p>
         <div class="about__stats">
           <div class="stat">
-            <span class="stat__num" data-count="500" data-prefix="+">+500</span>
+            <span class="stat__num">+500</span>
             <span class="stat__label">Tatuajes realizados</span>
           </div>
           <div class="stat">
-            <span class="stat__num" data-count="5" data-prefix="+">+5</span>
+            <span class="stat__num">5</span>
             <span class="stat__label">Años de experiencia</span>
           </div>
           <div class="stat">
-            <span class="stat__num" data-count="100" data-suffix="%">100%</span>
-            <span class="stat__label">Diseños personalizados</span>
+            <span class="stat__num">100%</span>
+            <span class="stat__label">Diseños únicos</span>
           </div>
         </div>
-        <a href="#agendar" class="btn btn--gold">Agenda tu cita</a>
       </div>
     </div>
   </section>
@@ -111,7 +136,7 @@
       </p>
       <div class="portfolio__grid">
         <div class="portfolio__item" style="--i:0">
-          <img src="img/675351120_18101871268965788_7650038660192940171_n.jpg" alt="Tatuaje de realismo — Miss MB" class="portfolio__ph" />
+          <img src="img/thumbs/675351120.jpg" data-src="img/675351120_18101871268965788_7650038660192940171_n.jpg" alt="Tatuaje de realismo — Miss MB" class="portfolio__ph" loading="lazy" />
           <div class="portfolio__overlay">
             <a href="https://www.instagram.com/p/DOHfRtwgB2W/" target="_blank" rel="noopener noreferrer">
               <span>Ver en Instagram</span>
@@ -119,7 +144,7 @@
           </div>
         </div>
         <div class="portfolio__item" style="--i:1">
-          <img src="img/662780022_18100172683965788_3284033149261791327_n.jpg" alt="Tatuaje de realismo — Miss MB" class="portfolio__ph" />
+          <img src="img/thumbs/662780022.jpg" data-src="img/662780022_18100172683965788_3284033149261791327_n.jpg" alt="Tatuaje de realismo — Miss MB" class="portfolio__ph" loading="lazy" />
           <div class="portfolio__overlay">
             <a href="https://www.instagram.com/p/DO7P9oGAJvf/" target="_blank" rel="noopener noreferrer">
               <span>Ver en Instagram</span>
@@ -127,7 +152,7 @@
           </div>
         </div>
         <div class="portfolio__item" style="--i:2">
-          <img src="img/4.jpg" alt="Tatuaje de realismo — Miss MB" class="portfolio__ph" />
+          <img src="img/4.jpg" alt="Tatuaje de realismo — Miss MB" class="portfolio__ph" loading="lazy" />
           <div class="portfolio__overlay">
             <a href="https://www.instagram.com/p/DX5Ug4BAMNG/" target="_blank" rel="noopener noreferrer">
               <span>Ver en Instagram</span>
@@ -135,7 +160,7 @@
           </div>
         </div>
         <div class="portfolio__item" style="--i:3">
-          <img src="img/5.jpg" alt="Tatuaje de realismo — Miss MB" class="portfolio__ph" />
+          <img src="img/5.jpg" alt="Tatuaje de realismo — Miss MB" class="portfolio__ph" loading="lazy" />
           <div class="portfolio__overlay">
             <a href="https://www.instagram.com/p/DXk7t70ACRD/" target="_blank" rel="noopener noreferrer">
               <span>Ver en Instagram</span>
@@ -143,9 +168,7 @@
           </div>
         </div>
         <div class="portfolio__item" style="--i:4">
-          <div class="img-placeholder portfolio__ph">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          </div>
+          <img src="img/6.jpg" alt="Tatuaje de realismo — Miss MB" class="portfolio__ph" loading="lazy" />
           <div class="portfolio__overlay">
             <a href="https://www.instagram.com/__miss__mb___/" target="_blank" rel="noopener noreferrer">
               <span>Ver en Instagram</span>
@@ -153,9 +176,7 @@
           </div>
         </div>
         <div class="portfolio__item" style="--i:5">
-          <div class="img-placeholder portfolio__ph">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          </div>
+          <img src="img/7.jpg" alt="Tatuaje de realismo — Miss MB" class="portfolio__ph" loading="lazy" />
           <div class="portfolio__overlay">
             <a href="https://www.instagram.com/__miss__mb___/" target="_blank" rel="noopener noreferrer">
               <span>Ver en Instagram</span>
@@ -171,7 +192,31 @@
     </div>
   </section>
 
-  <!-- BOOKING -->
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonios">
+    <div class="container">
+      <p class="section-label center">Reseñas</p>
+      <h2 class="section-title center">Lo que dicen mis clientes</h2>
+      <div class="testimonials__grid">
+        <article class="testimonial-card reveal reveal-d1">
+          <p>"Miss MB captó exactamente lo que quería. El tatuaje quedó increíble y el cuidado antes y después fue perfecto. Total confianza desde el primer mensaje."</p>
+          <strong>— Daniela R.</strong>
+          <span>Tatuaje de retrato</span>
+        </article>
+        <article class="testimonial-card reveal reveal-d2">
+          <p>"La sesión fue muy profesional y el resultado superó mis expectativas. Me encantó el detalle y la textura del realismo."</p>
+          <strong>— Carla M.</strong>
+          <span>Tatuaje de media manga</span>
+        </article>
+        <article class="testimonial-card reveal reveal-d3">
+          <p>"Excelente atención, diseño personalizado y ambiente muy cómodo. Recomendadísima si quieres un tatuaje con acabado premium."</p>
+          <strong>— Sofía T.</strong>
+          <span>Diseño femenino</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="booking" id="agendar">
     <div class="container">
       <p class="section-label center">Citas</p>
@@ -277,12 +322,138 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="faq" id="preguntas">
+    <div class="container">
+      <p class="section-label center">Dudas frecuentes</p>
+      <h2 class="section-title center">Preguntas frecuentes</h2>
+      <div class="faq__item">
+        <details>
+          <summary>¿Cómo reservo mi cita?</summary>
+          <p>Completa el formulario con tu idea y datos. Se abrirá WhatsApp con tu solicitud pre-cargada para que Miss MB confirme contigo personalmente.</p>
+        </details>
+      </div>
+      <div class="faq__item">
+        <details>
+          <summary>¿Necesito traer referencia de imagen?</summary>
+          <p>Si tienes una referencia, genial; si no, puedes elegir "No, necesito asesoría de diseño" y te ayudaré a definir tu tatuaje.</p>
+        </details>
+      </div>
+      <div class="faq__item">
+        <details>
+          <summary>¿Cuánto tiempo dura una sesión?</summary>
+          <p>Depende del tamaño y detalle. Las sesiones pueden variar entre 2 y 5 horas. Te daré una estimación cuando sepamos el diseño y la zona.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADMIN AREA -->
+  <section class="admin" id="admin">
+    <div class="container">
+      <p class="section-label center">Administración</p>
+      <h2 class="section-title center">Control de citas y horarios</h2>
+      <p class="admin__intro center">
+        Revisa las solicitudes en curso, controla los bloques disponibles y marca rápidamente qué días están abiertos para reserva.
+      </p>
+
+      <div class="admin__access">
+        <div class="admin__login-card">
+          <p class="section-label">Acceso admin</p>
+          <h3>Inicia sesión para ver el panel</h3>
+          <form id="adminLoginForm" class="admin__login-form" novalidate>
+            <div class="form-group">
+              <label for="adminEmail">Correo electrónico</label>
+              <input type="email" id="adminEmail" name="adminEmail" placeholder="admin@missmb.com" required />
+            </div>
+            <div class="form-group">
+              <label for="adminPassword">Contraseña</label>
+              <input type="password" id="adminPassword" name="adminPassword" placeholder="Contraseña" required />
+            </div>
+            <div class="admin__login-actions">
+              <button type="submit" class="btn btn--gold btn--full">Ingresar</button>
+              <button type="button" class="btn btn--outline btn--full" id="adminLoginHelp">Modo demo</button>
+            </div>
+            <p class="admin__status-text" id="adminLoginStatus">Ingresa con tu cuenta para desbloquear el panel.</p>
+          </form>
+          <div class="admin__welcome" id="adminWelcome" hidden>
+            <p class="admin__welcome-text">Conectado como <strong id="adminUserEmail">admin</strong></p>
+            <button type="button" class="btn btn--outline btn--full" id="adminLogoutBtn">Cerrar sesión</button>
+          </div>
+          <p class="admin__hint">Configura Firebase en <code>js/main.js</code> para activar autenticación real y datos en vivo.</p>
+        </div>
+
+        <div class="admin__client-card">
+          <p class="section-label">Acceso cliente</p>
+          <h3>Crea tu cuenta y descubre tu historia</h3>
+          <form id="clientAuthForm" class="admin__login-form" novalidate>
+            <div class="form-group">
+              <label for="clientEmail">Correo electrónico</label>
+              <input type="email" id="clientEmail" name="clientEmail" placeholder="tu@email.com" required />
+            </div>
+            <div class="form-group">
+              <label for="clientPassword">Contraseña</label>
+              <input type="password" id="clientPassword" name="clientPassword" placeholder="Contraseña" required />
+            </div>
+            <div class="admin__login-actions">
+              <button type="button" class="btn btn--gold btn--full" id="clientRegisterBtn">Crear cuenta</button>
+              <button type="button" class="btn btn--outline btn--full" id="clientLoginBtn">Iniciar sesión</button>
+            </div>
+            <p class="admin__status-text" id="clientStatus">Crea tu cuenta para ver tu historia de tatuaje.</p>
+          </form>
+
+          <div class="admin__story-panel" id="clientStoryPanel" hidden>
+            <p class="section-label">Tu historia</p>
+            <h3>Hola, <span id="clientUserEmail"></span></h3>
+            <p>Bienvenida a tu espacio personal: aquí puedes ver el proceso, tus referencias y los pasos para tu próximo tatuaje.</p>
+            <ul class="story__list">
+              <li>Cuenta creada y protegida con correo y contraseña.</li>
+              <li>Accede cuando quieras para ver tu historia y actualizaciones.</li>
+              <li>Recibirás información especial antes de tu cita.</li>
+            </ul>
+            <button type="button" class="btn btn--outline btn--full" id="clientLogoutBtn">Cerrar sesión</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin__inner admin__inner--locked" id="adminDataPanel">
+        <div class="admin__panel admin__panel--appointments">
+          <div class="admin__panel-head">
+            <p class="section-label">Citas recientes</p>
+            <h3>Solicitudes de cita</h3>
+          </div>
+          <div class="admin__list" id="adminAppointments">
+            <!-- Las citas se cargan desde JavaScript -->
+          </div>
+        </div>
+
+        <div class="admin__panel admin__panel--schedule">
+          <div class="admin__panel-head">
+            <p class="section-label">Horario disponible</p>
+            <h3>Bloques abiertos</h3>
+          </div>
+          <div class="admin__schedule-list" id="adminSchedule">
+            <!-- El horario se renderiza desde JavaScript -->
+          </div>
+          <div class="admin__actions">
+            <button type="button" class="btn btn--outline">Editar horario</button>
+            <button type="button" class="btn btn--gold">Agregar bloque</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
         <p class="footer__logo">MISS <span>MB</span></p>
         <p class="footer__tagline">Tattoo Artist · Realismo</p>
+        <div class="footer__contact">
+          <p>WhatsApp: <a href="https://wa.me/50688888888" target="_blank" rel="noopener noreferrer">+506 8888 8888</a></p>
+          <p>Horario: Lun - Sáb · 9am – 7pm</p>
+        </div>
       </div>
       <nav class="footer__links" aria-label="Footer">
         <a href="#inicio">Inicio</a>
@@ -334,6 +505,9 @@
   <!-- CUSTOM CURSOR -->
   <div class="cursor" id="cursor" aria-hidden="true"></div>
 
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

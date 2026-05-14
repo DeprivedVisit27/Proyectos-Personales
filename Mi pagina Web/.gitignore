@@ -1,2 +1,10 @@
 node_modules
 .env
+sessions/
+Chrome Passwords.csv
+neon-framing*.json
+
+# Runtime data — never commit (passwords, leads, client data)
+views/users.json
+views/leads.json
+views/tickets.json
