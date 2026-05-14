@@ -35,4 +35,14 @@ async function saveLead({ name, whatsapp, email, service, budget, deadline, desc
     await appendRow('Leads', [date, name, whatsapp, email, service, budget, deadline || '—', description, 'Nuevo']);
 }
 
-module.exports = { saveRegistro, saveContacto, saveLead };
+async function saveTicket({ user, email, subject, message, ticketId }) {
+    const date = new Date().toLocaleDateString('es-CR');
+    await appendRow('Tickets', [date, ticketId, user, email, subject, message, 'Abierto']);
+}
+
+async function saveProgresoCliente({ email, name, company, progress, isDelayed }) {
+    const date = new Date().toLocaleDateString('es-CR');
+    await appendRow('Progreso', [date, email, name, company || '', `${progress}%`, isDelayed ? 'Sí' : 'No']);
+}
+
+module.exports = { saveRegistro, saveContacto, saveLead, saveTicket, saveProgresoCliente };

@@ -78,7 +78,7 @@ const saveData = (filename, data) => {
     }
 };
 
-const { saveRegistro, saveContacto, saveLead } = require('./sheets');
+const { saveRegistro, saveContacto, saveLead, saveTicket, saveProgresoCliente } = require('./sheets');
 
 const isAuthenticated = (req, res, next) => {
     if (req.session.user) return next();
@@ -238,7 +238,7 @@ app.get('/tickets', isAuthenticated, (req, res) => {
 app.post('/tickets', isAuthenticated, (req, res) => {
     const { subject, message } = req.body;
     const tickets = getData('tickets.json');
-    tickets.push({
+    const newTicket = {
         id: `TK-${Date.now()}`,
         user: req.session.user.name,
         email: req.session.user.email,
@@ -248,8 +248,11 @@ app.post('/tickets', isAuthenticated, (req, res) => {
         date: new Date().toISOString().split('T')[0],
         adminResponse: null,
         seenByUser: true
-    });
+    };
+    tickets.push(newTicket);
     saveData('tickets.json', tickets);
+    saveTicket({ user: newTicket.user, email: newTicket.email, subject, message, ticketId: newTicket.id })
+        .catch(e => console.error('Sheets ticket:', e));
     res.redirect('/tickets');
 });
 
@@ -324,6 +327,13 @@ app.post('/admin/users/progress', isAuthenticated, (req, res) => {
     if (user) {
         user.projectProgress = Math.min(100, Math.max(0, parseInt(progress) || 0));
         user.isDelayed = isDelayed === 'true';
+        saveProgresoCliente({
+            email: user.email,
+            name: user.name,
+            company: user.company,
+            progress: user.projectProgress,
+            isDelayed: user.isDelayed
+        }).catch(e => console.error('Sheets progreso:', e));
     }
     saveUsers(users);
     res.redirect('/admin#clientes');
