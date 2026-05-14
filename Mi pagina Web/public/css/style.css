@@ -2258,6 +2258,7 @@ button:hover { background: #e2e2e2; }
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255,255,255,0.06);
+  overflow: visible;
 }
 
 .lp-header-inner {
@@ -2266,8 +2267,9 @@ button:hover { background: #e2e2e2; }
   padding: 0 48px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
   height: 64px;
+  overflow: visible;
 }
 
 .lp-logo {
@@ -2286,6 +2288,8 @@ button:hover { background: #e2e2e2; }
 /* Tech dropdown — lives inside .lp-nav */
 .lp-dropdown-wrap {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .lp-dropdown-btn {

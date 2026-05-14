@@ -510,35 +510,34 @@
     document.getElementById('quote-success').style.display = 'block';
   }
 
-  (function () {
+  document.addEventListener('DOMContentLoaded', function () {
     var btn  = document.getElementById('techBtn');
     var menu = document.getElementById('techMenu');
     var wrap = document.getElementById('techDropdown');
     if (!btn || !menu || !wrap) return;
 
-    function open() {
-      menu.classList.add('lp-dropdown--open');
+    function openDD() {
+      menu.style.display = 'block';
       wrap.classList.add('open');
     }
-    function close() {
-      menu.classList.remove('lp-dropdown--open');
+    function closeDD() {
+      menu.style.display = 'none';
       wrap.classList.remove('open');
     }
-    function toggle(e) {
-      e.stopPropagation();
-      menu.classList.contains('lp-dropdown--open') ? close() : open();
-    }
 
-    btn.addEventListener('click', toggle);
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      menu.style.display === 'block' ? closeDD() : openDD();
+    });
 
     document.addEventListener('click', function (e) {
-      if (!wrap.contains(e.target)) close();
+      if (!wrap.contains(e.target)) closeDD();
     });
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') close();
+      if (e.key === 'Escape') closeDD();
     });
-  })();
+  });
 </script>
 <script src="/js/particles.js"></script>
 <script src="/js/interactions.js"></script>
