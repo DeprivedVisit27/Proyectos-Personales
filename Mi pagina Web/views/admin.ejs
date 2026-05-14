@@ -326,42 +326,62 @@
         }
     };
 
+    // Datos seguros desde servidor
+    const leadsRaw   = <%- JSON.stringify(leads   || []) %>;
+    const ticketsRaw = <%- JSON.stringify(tickets || []) %>;
+
     // Leads por servicio
-    const leadsRaw = <%- JSON.stringify(leads) %>;
-    const serviceCounts = leadsRaw.reduce((acc, l) => { acc[l.service] = (acc[l.service] || 0) + 1; return acc; }, {});
-    new Chart(document.getElementById('leadsServiceChart'), {
-        type: 'bar',
-        data: {
-            labels: Object.keys(serviceCounts),
-            datasets: [{ label: 'Leads', data: Object.values(serviceCounts),
-                backgroundColor: 'rgba(255,255,255,0.1)', borderColor: 'rgba(255,255,255,0.5)',
-                borderWidth: 1, borderRadius: 6 }]
-        },
-        options: { ...chartDefaults, plugins: { legend: { display: false } } }
-    });
+    const serviceCounts = leadsRaw.reduce((acc, l) => {
+        const key = l.service || 'Sin definir';
+        acc[key] = (acc[key] || 0) + 1;
+        return acc;
+    }, {});
+
+    if (Object.keys(serviceCounts).length > 0) {
+        new Chart(document.getElementById('leadsServiceChart'), {
+            type: 'bar',
+            data: {
+                labels: Object.keys(serviceCounts),
+                datasets: [{ label: 'Leads', data: Object.values(serviceCounts),
+                    backgroundColor: 'rgba(0,210,255,0.15)', borderColor: 'rgba(0,210,255,0.6)',
+                    borderWidth: 1, borderRadius: 6 }]
+            },
+            options: { ...chartDefaults, plugins: { legend: { display: false } } }
+        });
+    } else {
+        document.getElementById('leadsServiceChart').parentElement.innerHTML += '<p style="color:#555;text-align:center;padding:20px;font-size:0.85rem;">Sin datos aún</p>';
+    }
 
     // Leads por estado
-    const statusCounts = leadsRaw.reduce((acc, l) => { acc[l.status] = (acc[l.status] || 0) + 1; return acc; }, {});
+    const statusCounts = leadsRaw.reduce((acc, l) => {
+        const key = l.status || 'Nuevo';
+        acc[key] = (acc[key] || 0) + 1;
+        return acc;
+    }, {});
     const statusColors = ['rgba(255,255,255,0.7)','rgba(96,165,250,0.7)','rgba(251,191,36,0.7)','rgba(52,211,153,0.7)','rgba(248,113,113,0.7)'];
-    new Chart(document.getElementById('leadsStatusChart'), {
-        type: 'doughnut',
-        data: {
-            labels: Object.keys(statusCounts),
-            datasets: [{ data: Object.values(statusCounts), backgroundColor: statusColors, borderWidth: 0 }]
-        },
-        options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#888', font: { size: 11 } } } } }
-    });
+
+    if (Object.keys(statusCounts).length > 0) {
+        new Chart(document.getElementById('leadsStatusChart'), {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(statusCounts),
+                datasets: [{ data: Object.values(statusCounts), backgroundColor: statusColors, borderWidth: 0 }]
+            },
+            options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#888', font: { size: 11 } } } } }
+        });
+    } else {
+        document.getElementById('leadsStatusChart').parentElement.innerHTML += '<p style="color:#555;text-align:center;padding:20px;font-size:0.85rem;">Sin datos aún</p>';
+    }
 
     // Visitas · Leads · Tickets
-    const ticketsRaw = <%- JSON.stringify(tickets) %>;
     new Chart(document.getElementById('visitsChart'), {
         type: 'bar',
         data: {
             labels: ['Visitas', 'Leads', 'Tickets'],
             datasets: [{
                 data: [Number(document.getElementById('visitsChart').dataset.visits) || 0, leadsRaw.length, ticketsRaw.length],
-                backgroundColor: ['rgba(255,255,255,0.12)','rgba(96,165,250,0.2)','rgba(251,191,36,0.2)'],
-                borderColor: ['rgba(255,255,255,0.5)','rgba(96,165,250,0.7)','rgba(251,191,36,0.7)'],
+                backgroundColor: ['rgba(255,255,255,0.12)','rgba(0,210,255,0.2)','rgba(251,191,36,0.2)'],
+                borderColor: ['rgba(255,255,255,0.5)','rgba(0,210,255,0.7)','rgba(251,191,36,0.7)'],
                 borderWidth: 1, borderRadius: 8
             }]
         },
