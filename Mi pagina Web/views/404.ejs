@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 — Página no encontrada</title>
+  <title>404 — Página no encontrada · Loop-Landing.com</title>
   <link rel="stylesheet" href="/css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
   <style>
-    .err-wrap { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; }
+    .err-wrap { min-height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; }
     .err-code { font-family: 'Orbitron', sans-serif; font-size: clamp(6rem,18vw,14rem); font-weight: 800; line-height: 1; letter-spacing: -6px; color: transparent; -webkit-text-stroke: 1px rgba(0,210,255,0.25); position: relative; }
     .err-code::after { content: '404'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.04); font-size: inherit; filter: blur(20px); }
     .err-title { font-size: clamp(1.2rem,3vw,1.8rem); font-weight: 700; color: var(--text); margin: 16px 0 12px; letter-spacing: -0.5px; }
@@ -16,16 +16,30 @@
   </style>
 </head>
 <body>
-  <canvas id="bg-canvas"></canvas>
-  <div class="err-wrap">
-    <div class="err-code">404</div>
-    <h1 class="err-title">Página no encontrada</h1>
-    <p class="err-sub">La ruta que buscás no existe o fue movida. Navegá de vuelta al inicio.</p>
-    <div class="err-actions">
-      <a href="/" class="l-btn l-btn-primary">← Volver al inicio</a>
-      <a href="/portafolio" class="l-btn l-btn-ghost">Ver trabajos</a>
-    </div>
+<div class="bg-slideshow">
+  <div class="bg-slide" style="background-image:url('/img/jamesmarkosborne-code-1076536_1920.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/fotis-fotopoulos-6sAl6aQ4OWI-unsplash.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/pankaj-patel-Fi-GJaLRGKc-unsplash.jpg')"></div>
+</div>
+<canvas id="bg-canvas"></canvas>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<%- include('./partials/lp-header', { user: locals.user }) %>
+
+<div class="err-wrap">
+  <div class="err-code">404</div>
+  <h1 class="err-title">Página no encontrada</h1>
+  <p class="err-sub">La ruta que buscás no existe o fue movida. Navegá de vuelta al inicio.</p>
+  <div class="err-actions">
+    <a href="/" class="lp-btn lp-btn-grad">← Volver al inicio</a>
+    <a href="/portafolio" class="lp-btn lp-btn-ghost">Ver trabajos</a>
   </div>
-  <script src="/js/particles.js"></script>
+</div>
+
+<%- include('./partials/lp-footer') %>
+
+<script src="/js/particles.js"></script>
+<script src="/js/menu-toggle.js"></script>
 </body>
 </html>

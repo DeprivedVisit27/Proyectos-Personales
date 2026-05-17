@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Loop-Landing.com</title>
+<meta name="description" content="Artículos sobre desarrollo web, landing pages, SaaS y automatizaciones IA desde Costa Rica.">
+<link rel="stylesheet" href="/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="bg-slideshow">
+  <div class="bg-slide" style="background-image:url('/img/jamesmarkosborne-code-1076536_1920.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/fotis-fotopoulos-6sAl6aQ4OWI-unsplash.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/pankaj-patel-Fi-GJaLRGKc-unsplash.jpg')"></div>
+</div>
+<canvas id="bg-canvas"></canvas>
+<%- include('./partials/lp-header', { user: locals.user }) %>
+
+<section class="lp-section lp-wrap" style="padding-top:60px;">
+  <p class="lp-label">BLOG</p>
+  <h1 class="lp-section-title">Recursos & artículos</h1>
+  <p style="color:rgba(255,255,255,0.45);margin:8px 0 48px;font-size:0.95rem;">Desarrollo web, automatización IA y consejos para hacer crecer tu negocio digital.</p>
+
+  <% if (!posts || posts.length === 0) { %>
+    <div style="text-align:center;padding:80px 20px;color:#444;">
+      <p style="font-size:1.1rem;">Próximamente — primeros artículos en camino.</p>
+    </div>
+  <% } else { %>
+    <div class="blog-grid">
+      <% posts.forEach(function(post) { %>
+        <a href="/blog/<%= post.slug %>" class="blog-card-link">
+          <article class="blog-card">
+            <% if (post.tags && post.tags.length > 0) { %>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
+                <% post.tags.forEach(function(tag) { %>
+                  <span style="font-size:0.7rem;padding:3px 10px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.18);color:#00d4ff;border-radius:50px;text-transform:uppercase;letter-spacing:0.5px;"><%= tag %></span>
+                <% }); %>
+              </div>
+            <% } %>
+            <h2 style="font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 10px;line-height:1.4;"><%= post.title %></h2>
+            <p style="color:#555;font-size:0.88rem;line-height:1.6;margin:0 0 16px;"><%= post.excerpt %></p>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:0.75rem;color:#444;"><%= post.date %></span>
+              <span style="font-size:0.82rem;color:#00d4ff;font-weight:600;">Leer →</span>
+            </div>
+          </article>
+        </a>
+      <% }); %>
+    </div>
+  <% } %>
+</section>
+
+<%- include('./partials/lp-footer') %>
+<script src="/js/particles.js"></script>
+</body>
+</html>

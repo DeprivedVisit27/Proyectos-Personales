@@ -1,0 +1,13 @@
+[
+  {
+    "email": "garettjohan12@gmail.com",
+    "subscription": {
+      "endpoint": "https://fcm.googleapis.com/fcm/send/cKMj5AKCNcQ:APA91bG8x3594badtYuJKFwZJHi9JHAzBDHtXoZ44H6bH7VEAdK5U1MVAxg43d4X4kk3htzbC9-eTMAx2cwtKksy717w4oyhpTyMrbETflJlHwfVhzaninqoiayLCsMJzV_ZSzORXTi3",
+      "expirationTime": null,
+      "keys": {
+        "p256dh": "BEyQ72QUu3oAT4x83WPIVsq-uG1tpzQfjIOgAAvScZHKHIBxPs0Z3zRYFb4BN50UGOHHH8PAAuLOSUZ7zFlGxBE",
+        "auth": "Zjh2V18dC-Umwqj6FQr1zQ"
+      }
+    }
+  }
+]

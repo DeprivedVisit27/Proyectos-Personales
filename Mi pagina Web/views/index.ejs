@@ -3,91 +3,476 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Garett Barrantes</title>
+<title>Loop-Landing — Landing Pages que convierten</title>
+<meta name="description" content="Construimos landing pages, SaaS y automatizaciones IA que convierten visitantes en clientes. Curridabat, Costa Rica.">
+<meta property="og:title" content="Loop-Landing — Landing Pages que convierten">
+<meta property="og:description" content="Landing pages, SaaS y automatizaciones IA desde Curridabat, Costa Rica.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://loop-landing.com">
+<meta property="og:image" content="/logo-rflx.png">
 <link rel="stylesheet" href="/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Loop-Landing.com",
+  "description": "Desarrollo de landing pages, SaaS y automatizaciones IA en Costa Rica",
+  "url": "https://loop-landing.com",
+  "telephone": "+50663144171",
+  "email": "garettjohan12@gmail.com",
+  "founder": { "@type": "Person", "name": "Garett Barrantes Benavides" },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Curridabat",
+    "addressRegion": "San José",
+    "addressCountry": "CR"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios digitales",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Landing Pages", "description": "Diseño y desarrollo de landing pages que convierten visitantes en clientes" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Aplicaciones SaaS", "description": "Plataformas web completas con autenticación, panel admin y gestión de clientes" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automatizaciones IA", "description": "Flujos inteligentes con n8n para captación y seguimiento de leads" } }
+    ]
+  }
+}
+</script>
 </head>
 <body>
 
-<div class="background"></div>
-
-<a class="whatsapp-float" href="https://wa.me/50663144171" target="_blank" aria-label="Contactar por WhatsApp">
-📲
-</a>
-
-<div class="container">
-
-<nav>
-<a href="/" class="logo" style="text-decoration: none; color: inherit;">
-<span class="logo-mark">GB</span>
-<span class="logo-text">Garett Barrantes</span>
-<span style="font-size: 0.95rem; display: inline-block; transform: translateY(-1px);">🌍✨</span>
-</a>
-<button class="menu-toggle" type="button" aria-expanded="false" aria-label="Abrir menú">☰</button>
-<div class="nav-links" aria-label="Enlaces de navegación">
-<a href="/portafolio" class="nav-btn" data-tooltip="Ver proyectos terminados">📁 Trabajos</a>
-<a href="/contacto" class="nav-btn" data-tooltip="Envíanos un mensaje">✉️ Contacto</a>
-<a href="/login" class="nav-btn" data-tooltip="Accede a tu cuenta">🔐 Login</a>
-<a href="/register" class="nav-btn nav-btn--primary" data-tooltip="Crea tu cuenta gratis">📝 Registro</a>
-<a href="https://wa.me/50663144171" target="_blank" class="nav-btn" data-tooltip="Chatea con nosotros">📲 WhatsApp</a>
-<a href="https://www.instagram.com/garett_barrantes/?hl=es-la" target="_blank" class="nav-btn" data-tooltip="Síguenos en Instagram">📸 Instagram</a>
+<div class="bg-slideshow">
+  <div class="bg-slide" style="background-image:url('/img/jamesmarkosborne-code-1076536_1920.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/fotis-fotopoulos-6sAl6aQ4OWI-unsplash.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/pankaj-patel-Fi-GJaLRGKc-unsplash.jpg')"></div>
 </div>
-</nav>
+<canvas id="bg-canvas"></canvas>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
 
-<section class="hero">
-<h1>
-Construye tu
-<span>ecosistema digital</span>
-profesional
-</h1>
-<p>
-Portal SaaS moderno para clientes, proyectos, hosting y soporte.
-</p>
-<div class="hero-buttons">
-<a href="/register" class="primary-btn">Comenzar</a>
-<a href="/login" class="secondary-btn">Ingresar</a>
-</div>
+<% if (weeklySong && weeklySong.title) { %>
+<a href="<%= weeklySong.url %>" target="_blank" rel="noopener" class="spotify-widget">
+  <div class="spotify-widget-icon">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+  </div>
+  <div class="spotify-widget-info">
+    <span class="spotify-widget-label">Esta semana escucho</span>
+    <span class="spotify-widget-title"><%= weeklySong.title %></span>
+    <span class="spotify-widget-artist"><%= weeklySong.artist %></span>
+  </div>
+  <div class="spotify-widget-bars">
+    <span></span><span></span><span></span><span></span>
+  </div>
+</a>
+<% } %>
+
+<%- include('./partials/lp-header', { user: locals.user }) %>
+
+<!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section class="lp-hero lp-wrap">
+
+  <div class="lp-hero-badge reveal" style="transition-delay:0.05s">
+    <span class="lp-live-dot"></span>
+    Disponible para proyectos · 2026
+  </div>
+
+  <h1 class="lp-hero-title reveal" style="transition-delay:0.15s">
+    Construimos<br>
+    <span class="lp-grad-text">Landing Pages</span><br>
+    que venden.
+  </h1>
+
+  <p class="lp-hero-sub reveal" style="transition-delay:0.25s">
+    Somos <strong>Loop-Landing.com</strong> — un estudio de desarrollo digital en
+    <strong>Curridabat, Costa Rica</strong>, especializado en landing pages con AWS S3,
+    SaaS y automatizaciones IA que generan resultados reales para tu negocio.
+  </p>
+
+  <div class="lp-hero-actions reveal" style="transition-delay:0.35s">
+    <a href="#cotizacion" class="lp-btn lp-btn-grad">Iniciar proyecto →</a>
+    <a href="/portafolio" class="lp-btn lp-btn-ghost">Ver portafolio</a>
+    <a href="https://wa.me/50663144171" target="_blank" class="lp-btn lp-btn-wa">💬 WhatsApp</a>
+  </div>
+
+  <div class="lp-hero-stats reveal" style="transition-delay:0.45s">
+    <div class="lp-stat">
+      <span class="lp-stat-n lp-grad-text">15+</span>
+      <span class="lp-stat-l">Proyectos</span>
+    </div>
+    <div class="lp-stat-sep"></div>
+    <div class="lp-stat">
+      <span class="lp-stat-n lp-grad-text">3</span>
+      <span class="lp-stat-l">Países</span>
+    </div>
+    <div class="lp-stat-sep"></div>
+    <div class="lp-stat">
+      <span class="lp-stat-n lp-grad-text">100%</span>
+      <span class="lp-stat-l">Satisfacción</span>
+    </div>
+    <div class="lp-stat-sep"></div>
+    <div class="lp-stat">
+      <span class="lp-stat-n" style="color:#10b981;">24/7</span>
+      <span class="lp-stat-l">Soporte</span>
+    </div>
+  </div>
+
 </section>
 
-<section class="welcome">
-<div class="welcome-content">
-<h2>Bienvenido a la nueva era del <span>desarrollo digital</span></h2>
-<p>Especialista en landing pages modernas y efectivas. Creo experiencias web que convierten visitantes en clientes, con diseños atractivos y optimizados para resultados. Únete a emprendedores que ya están potenciando su presencia online con mis soluciones personalizadas.</p>
-<a href="/portafolio" class="welcome-btn">Saber más</a>
-</div>
+<div class="lp-hr lp-wrap"></div>
+
+<!-- ════════════════════════════════════════
+     SERVICIOS
+════════════════════════════════════════ -->
+<section class="lp-section lp-wrap" id="servicios">
+  <div class="lp-section-top reveal">
+    <div>
+      <p class="lp-label">SERVICIOS</p>
+      <h2 class="lp-section-title">¿Qué construimos?</h2>
+    </div>
+    <a href="#cotizacion" class="lp-btn lp-btn-ghost" style="align-self:flex-end;">Cotizar →</a>
+  </div>
+
+  <div class="lp-services-grid">
+
+    <div class="lp-scard lp-scard--cyan reveal" style="transition-delay:0.05s">
+      <div class="lp-scard-icon">◈</div>
+      <span class="lp-scard-num">01</span>
+      <h3>Landing Pages</h3>
+      <p>Diseños modernos, rápidos y conversores. Desplegadas en AWS S3 o tu propio servidor. Optimizadas para captar clientes reales.</p>
+      <ul class="lp-scard-list">
+        <li>Diseño responsive</li>
+        <li>SEO básico incluido</li>
+        <li>Formulario de contacto</li>
+        <li>Integración WhatsApp</li>
+      </ul>
+      <a href="/precios" class="lp-scard-link">Ver precios →</a>
+    </div>
+
+    <div class="lp-scard lp-scard--purple reveal" style="transition-delay:0.18s">
+      <div class="lp-scard-icon">⬡</div>
+      <span class="lp-scard-num">02</span>
+      <h3>Aplicaciones SaaS</h3>
+      <p>Plataformas web completas con autenticación, panel admin, gestión de clientes, tickets de soporte y facturación PDF.</p>
+      <ul class="lp-scard-list">
+        <li>Login + registro seguro</li>
+        <li>Panel de administración</li>
+        <li>Google Sheets integrado</li>
+        <li>Reportes en Chart.js</li>
+      </ul>
+      <a href="/precios" class="lp-scard-link">Ver precios →</a>
+    </div>
+
+    <div class="lp-scard lp-scard--pink reveal" style="transition-delay:0.31s">
+      <div class="lp-scard-icon">⟁</div>
+      <span class="lp-scard-num">03</span>
+      <h3>Automatizaciones IA</h3>
+      <p>Flujos inteligentes con n8n que trabajan 24/7: notificaciones automáticas, captación de leads y seguimiento sin intervención.</p>
+      <ul class="lp-scard-list">
+        <li>Flows con n8n</li>
+        <li>Emails automáticos</li>
+        <li>CRM básico incluido</li>
+        <li>Recordatorios por WA</li>
+      </ul>
+      <a href="/precios" class="lp-scard-link">Ver precios →</a>
+    </div>
+
+  </div>
 </section>
 
-<section class="grid" id="servicios">
+<div class="lp-hr lp-wrap"></div>
 
-<a href="/clients" class="card-link">
-<div class="card">
-<h3>Clientes</h3>
-<p>Historial y panel privado para cada cliente.</p>
-</div>
-</a>
+<!-- ════════════════════════════════════════
+     PROYECTOS
+════════════════════════════════════════ -->
+<section class="lp-section lp-wrap" id="proyectos">
+  <div class="lp-section-top reveal">
+    <div>
+      <p class="lp-label">PORTAFOLIO</p>
+      <h2 class="lp-section-title">Proyectos recientes</h2>
+    </div>
+    <a href="/portafolio" class="lp-btn lp-btn-ghost" style="align-self:flex-end;">Ver todos →</a>
+  </div>
 
-<a href="/portafolio" class="card-link">
-<div class="card">
-<h3>Landing Pages</h3>
-<p>Diseños modernos y conversores para tu negocio.</p>
-</div>
-</a>
+  <div class="lp-projects-grid">
 
-<a href="/tickets" class="card-link">
-<div class="card">
-<h3>Tickets</h3>
-<p>Soporte profesional y comunicación centralizada.</p>
-</div>
-</a>
+    <div class="lp-proj lp-proj--featured reveal" style="transition-delay:0.05s">
+      <div class="lp-proj-head" style="background:linear-gradient(135deg,rgba(0,212,255,0.15),rgba(124,58,237,0.15));">
+        <span class="lp-proj-emoji">🐔</span>
+        <span class="lp-badge-wip">● En proceso</span>
+      </div>
+      <div class="lp-proj-body">
+        <span class="lp-proj-cat">SaaS · App Web</span>
+        <h3>EcoPollo Premium</h3>
+        <p>Sistema de cotización con clasificación automática de clientes en 5 segmentos, descuentos por volumen y panel administrativo. Cartago, Costa Rica.</p>
+        <div class="lp-proj-tech">
+          <span>Node.js</span><span>AWS S3</span><span>Google Sheets</span><span>Chart.js</span>
+        </div>
+      </div>
+    </div>
 
+    <div class="lp-proj reveal" style="transition-delay:0.15s">
+      <div class="lp-proj-head" style="background:linear-gradient(135deg,rgba(0,0,0,0.8),rgba(180,140,60,0.15));">
+        <span class="lp-proj-emoji">🖋</span>
+        <span class="lp-badge-wip">● En proceso</span>
+      </div>
+      <div class="lp-proj-body">
+        <span class="lp-proj-cat">Landing Page</span>
+        <h3>Miss MB Tattoo</h3>
+        <p>Landing de agendamiento para tatuadora. Diseño negro y dorado con integración WhatsApp directa.</p>
+        <div class="lp-proj-tech">
+          <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lp-proj reveal" style="transition-delay:0.25s">
+      <div class="lp-proj-head" style="background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(0,100,60,0.2));">
+        <span class="lp-proj-emoji">🌿</span>
+        <span class="lp-badge-done">✓ Entregado</span>
+      </div>
+      <div class="lp-proj-body">
+        <span class="lp-proj-cat">Landing Page</span>
+        <h3>ArteVerde Vivero</h3>
+        <p>Landing boutique con catálogo de variedades, tabla de precios, galería antes/después y agenda de citas vía WhatsApp.</p>
+        <div class="lp-proj-tech">
+          <span>HTML5</span><span>CSS3</span><span>WA API</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lp-proj reveal" style="transition-delay:0.35s">
+      <div class="lp-proj-head" style="background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(236,72,153,0.1));">
+        <span class="lp-proj-emoji">🚀</span>
+        <span class="lp-badge-wip">● En proceso</span>
+      </div>
+      <div class="lp-proj-body">
+        <span class="lp-proj-cat">SaaS</span>
+        <h3>Mi Web Pro</h3>
+        <p>Plataforma SaaS completa para gestión de clientes, proyectos, tickets de soporte y facturación PDF.</p>
+        <div class="lp-proj-tech">
+          <span>Node.js</span><span>Express</span><span>EJS</span><span>PDFKit</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </section>
 
-<footer style="text-align: center; margin-top: 50px; padding: 20px; color: #555; border-top: 1px solid rgba(255,255,255,0.05);">
-<p>Visitas totales: <span style="color: #00ffd5; font-weight: bold;"><%= visits %></span></p>
-</footer>
+<div class="lp-hr lp-wrap"></div>
 
-</div>
+<!-- ════════════════════════════════════════
+     PROCESO
+════════════════════════════════════════ -->
+<section class="lp-section lp-wrap">
+  <p class="lp-label reveal" style="text-align:center">EL PROCESO</p>
+  <h2 class="lp-section-title reveal" style="transition-delay:0.1s;text-align:center;margin-bottom:40px">¿Cómo trabajamos?</h2>
+  <div class="lp-process-grid">
+    <div class="lp-proc-step reveal" style="transition-delay:0.05s">
+      <div class="lp-proc-n lp-grad-text">01</div>
+      <h3>Cotizás</h3>
+      <p>Llenás el formulario con tu idea. Te contactamos en menos de 24 horas con una propuesta clara y detallada.</p>
+    </div>
+    <div class="lp-proc-arrow reveal" style="transition-delay:0.18s">→</div>
+    <div class="lp-proc-step reveal" style="transition-delay:0.22s">
+      <div class="lp-proc-n lp-grad-text">02</div>
+      <h3>Nos reunimos</h3>
+      <p>Definimos el alcance, fechas y precio exacto. Sin sorpresas, todo por escrito y acordado.</p>
+    </div>
+    <div class="lp-proc-arrow reveal" style="transition-delay:0.35s">→</div>
+    <div class="lp-proc-step reveal" style="transition-delay:0.38s">
+      <div class="lp-proc-n lp-grad-text">03</div>
+      <h3>Entregamos</h3>
+      <p>Desarrollamos, probamos y entregamos. Seguís el avance en tiempo real desde tu panel de cliente.</p>
+    </div>
+  </div>
+</section>
 
-<script src="/js/background-rotate.js"></script>
+<div class="lp-hr lp-wrap"></div>
+
+<!-- ════════════════════════════════════════
+     TESTIMONIOS
+════════════════════════════════════════ -->
+<section class="lp-section lp-wrap">
+  <p class="lp-label reveal" style="text-align:center">CLIENTES</p>
+  <h2 class="lp-section-title reveal" style="transition-delay:0.1s;text-align:center;margin-bottom:40px">Lo que dicen de nosotros</h2>
+  <div class="lp-tgrid">
+
+    <% if (testimonios && testimonios.length > 0) { %>
+      <% testimonios.slice(-6).forEach(function(t, i) { %>
+        <div class="lp-tcard reveal" style="transition-delay:<%= (i * 0.12).toFixed(2) %>s">
+          <div class="lp-tcard-stars"><% for(var i=0;i<t.rating;i++){%>★<% } %></div>
+          <p>"<%= t.text %>"</p>
+          <div class="lp-tcard-author">
+            <div class="lp-tcard-av" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">
+              <%= t.name.split(' ').map(function(n){return n[0];}).join('').toUpperCase().slice(0,2) %>
+            </div>
+            <div><strong><%= t.name %></strong><span><%= t.company || t.service %></span></div>
+          </div>
+        </div>
+      <% }); %>
+    <% } else { %>
+      <div class="reveal" style="grid-column:1/-1;text-align:center;padding:48px 24px;">
+        <div style="font-size:2.5rem;margin-bottom:16px;">💬</div>
+        <p style="color:rgba(255,255,255,0.35);font-size:1rem;line-height:1.7;max-width:440px;margin:0 auto;">
+          Los testimonios de clientes aparecerán aquí cuando sean aprobados.<br>
+          <a href="/#cotizacion" style="color:rgba(0,212,255,0.7);text-decoration:none;">¿Trabajamos juntos?</a>
+        </p>
+      </div>
+    <% } %>
+
+  </div>
+</section>
+
+<div class="lp-hr lp-wrap"></div>
+
+<!-- ════════════════════════════════════════
+     ESTADO DE COTIZACIÓN
+════════════════════════════════════════ -->
+<section class="lp-section lp-wrap" id="estado">
+  <div class="lp-section-top reveal">
+    <div>
+      <p class="lp-label">SEGUIMIENTO</p>
+      <h2 class="lp-section-title">¿Cómo va tu cotización?</h2>
+      <p style="color:rgba(255,255,255,0.45);margin:8px 0 0;font-size:0.95rem;">Ingresá tu correo para ver el estado actual de tu proyecto.</p>
+    </div>
+  </div>
+
+  <div class="lp-estado-wrap reveal">
+    <div class="lp-estado-form">
+      <input type="email" id="estadoEmail" placeholder="tu@email.com" class="lp-estado-input" autocomplete="email">
+      <button onclick="consultarEstado()" class="lp-btn lp-btn-grad">Consultar →</button>
+    </div>
+    <div id="estadoResult" class="lp-estado-result" style="display:none;"></div>
+  </div>
+</section>
+
+<div class="lp-hr lp-wrap"></div>
+
+<!-- ════════════════════════════════════════
+     FORMULARIO DE COTIZACIÓN
+════════════════════════════════════════ -->
+<section class="lp-section lp-wrap" id="cotizacion">
+  <div class="lp-section-top reveal">
+    <div>
+      <p class="lp-label">CONTACTO</p>
+      <h2 class="lp-section-title">¿Qué necesitas construir?</h2>
+      <p style="color:rgba(200,230,255,0.55);margin:0 0 36px;font-size:0.97rem;max-width:560px;line-height:1.7;text-align:center;">
+        Contanos tu idea y te respondemos en menos de <strong style="color:#00d4ff;">24 horas</strong> con una propuesta clara y sin compromisos.
+      </p>
+    </div>
+  </div>
+
+  <div id="quote-success" class="quote-success" style="display:none;">
+    <div class="quote-success-icon">✓</div>
+    <h3>¡Mensaje recibido!</h3>
+    <p>Te contactaremos pronto. Mientras tanto podés ver nuestros trabajos.</p>
+    <a href="/portafolio" class="lp-btn lp-btn-grad" style="margin-top:20px;display:inline-block;">Ver portafolio</a>
+  </div>
+
+  <form class="quote-form reveal" id="quote-form" action="/cotizacion" method="POST">
+    <input type="text" name="website" style="display:none;position:absolute;left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="quote-row">
+      <div class="quote-field"><label>Nombre completo</label><input type="text" name="name" placeholder="Tu nombre" required></div>
+      <div class="quote-field"><label>WhatsApp</label><input type="tel" name="whatsapp" placeholder="+506 0000 0000" required pattern="[\+\d\s\-\(\)]{7,20}" title="Ingresá un número de WhatsApp válido (mín. 7 dígitos)"></div>
+    </div>
+    <div class="quote-row">
+      <div class="quote-field"><label>Correo electrónico</label><input type="email" name="email" placeholder="tu@email.com" required></div>
+      <div class="quote-field"><label>Tipo de servicio</label>
+        <select name="service">
+          <option value="Landing Page">Landing Page</option>
+          <option value="Tienda Online">Tienda Online</option>
+          <option value="Pagina Web">Página Web Corporativa</option>
+          <option value="SaaS">Aplicación SaaS</option>
+          <option value="Automatizacion">Automatización / IA</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+    </div>
+    <div class="quote-row">
+      <div class="quote-field"><label>Presupuesto estimado</label>
+        <select name="budget">
+          <option value="$200 - $500">$200 – $500</option>
+          <option value="$500 - $1000">$500 – $1,000</option>
+          <option value="$1000 - $3000">$1,000 – $3,000</option>
+          <option value="$3000+">$3,000+</option>
+          <option value="No definido">No definido aún</option>
+        </select>
+      </div>
+      <div class="quote-field"><label>¿Fecha límite?</label><input type="text" name="deadline" placeholder="Ej: 2 semanas, fin de mes…"></div>
+    </div>
+    <div class="quote-field" style="margin-top:16px;">
+      <label>Descripción del proyecto</label>
+      <textarea name="description" placeholder="Cuéntanos qué querés lograr con tu proyecto…" rows="4" required></textarea>
+    </div>
+    <button type="submit" class="quote-submit">Solicitar cotización →</button>
+  </form>
+</section>
+
+<%- include('./partials/lp-footer') %>
+
+<script>
+  if (window.location.search.includes('ok=1')) {
+    document.getElementById('quote-form').style.display = 'none';
+    document.getElementById('quote-success').style.display = 'block';
+  }
+
+  function consultarEstado() {
+    var email = document.getElementById('estadoEmail').value.trim();
+    var result = document.getElementById('estadoResult');
+    if (!email) {
+      result.style.display = 'block';
+      result.innerHTML = '<p class="lp-estado-error">Ingresá tu correo electrónico.</p>';
+      return;
+    }
+    result.style.display = 'block';
+    result.innerHTML = '<p class="lp-estado-loading">Consultando…</p>';
+    fetch('/api/cotizacion/estado?email=' + encodeURIComponent(email))
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data.found) {
+          result.innerHTML =
+            '<p class="lp-estado-error">No encontramos una cotización con ese correo.<br>' +
+            '<a href="#cotizacion" style="color:rgba(0,210,255,0.8);">¿Querés cotizar?</a></p>';
+          return;
+        }
+        var steps = ['Nuevo', 'Contactado', 'Propuesta enviada', 'En negociación', 'Ganado'];
+        var idx = steps.indexOf(data.status);
+        if (idx === -1) idx = 0;
+        var stepsHtml = steps.map(function(s, i) {
+          var cls = i < idx ? 'done' : i === idx ? 'active' : 'pending';
+          return '<div class="lp-step lp-step--' + cls + '">' +
+            '<div class="lp-step-dot"></div>' +
+            '<span>' + s + '</span>' +
+            '</div>';
+        }).join('<div class="lp-step-line"></div>');
+        result.innerHTML =
+          '<div class="lp-estado-card">' +
+          '<div class="lp-estado-info">' +
+          '<strong>' + escapeHtml(data.name) + '</strong>' +
+          '<span>' + escapeHtml(data.service) + ' · ' + escapeHtml(data.date) + '</span>' +
+          '<span class="lp-estado-id">' + escapeHtml(data.id) + '</span>' +
+          '</div>' +
+          '<div class="lp-steps">' + stepsHtml + '</div>' +
+          '</div>';
+      })
+      .catch(function() {
+        result.innerHTML = '<p class="lp-estado-error">Error al consultar. Intentá de nuevo.</p>';
+      });
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  document.getElementById('estadoEmail').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') consultarEstado();
+  });
+</script>
+<script src="/js/particles.js"></script>
+<script src="/js/interactions.js"></script>
 <script src="/js/menu-toggle.js"></script>
 </body>
 </html>

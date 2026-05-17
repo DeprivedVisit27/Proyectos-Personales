@@ -1,170 +1,164 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio - Trabajos Terminados</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio — Loop-Landing.com</title>
+  <meta name="description" content="Proyectos de landing pages, SaaS y automatizaciones creados por Loop-Landing.com.">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body class="page-portafolio">
-    <canvas id="bg-canvas"></canvas>
-    <div class="container">
-        <nav>
-            <a href="/" class="logo" style="text-decoration: none; color: inherit;">MI WEB PRO</a>
-            <div class="nav-actions">
-                <a href="/contacto" class="nav-btn" data-tooltip="Envíanos un mensaje">Contacto</a>
-                <% if (user) { %>
-                    <a href="/dashboard" class="nav-btn nav-btn--primary" data-tooltip="Tu panel de control">Dashboard</a>
-                <% } else { %>
-                    <a href="/register" class="nav-btn nav-btn--primary" data-tooltip="Crea tu cuenta gratis">Empezar proyecto</a>
-                <% } %>
-            </div>
-        </nav>
+<div class="bg-slideshow">
+  <div class="bg-slide" style="background-image:url('/img/jamesmarkosborne-code-1076536_1920.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/fotis-fotopoulos-6sAl6aQ4OWI-unsplash.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/pankaj-patel-Fi-GJaLRGKc-unsplash.jpg')"></div>
+</div>
+<canvas id="bg-canvas"></canvas>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
 
-        <header style="text-align:center;margin:50px 0;">
-            <h1>Nuestros <span>Trabajos</span></h1>
-            <p style="color:#888;margin-top:12px;">Ecosistemas digitales creados para nuestros clientes.</p>
-        </header>
+<%- include('./partials/lp-header', { user: locals.user }) %>
 
-        <!-- Filtros -->
-        <div class="filter-bar">
-            <button class="filter-btn active" data-filter="all">Todos</button>
-            <% const categories = [...new Set(projects.map(p => p.category))]; %>
-            <% categories.forEach(cat => { %>
-                <button class="filter-btn" data-filter="<%= cat %>"><%= cat %></button>
-            <% }); %>
-        </div>
+<section class="lp-section lp-wrap" style="padding-top:60px;">
+  <p class="lp-label">PORTAFOLIO</p>
+  <h1 class="lp-section-title">Nuestros proyectos</h1>
+  <p style="color:rgba(255,255,255,0.45);margin:8px 0 36px;font-size:0.95rem;">Ecosistemas digitales creados para nuestros clientes.</p>
 
-        <!-- Tech stack -->
-        <section class="tech-section">
-            <h2 style="text-align:center;margin-bottom:30px;font-size:1.1rem;color:#555;text-transform:uppercase;letter-spacing:3px;">Tecnologías</h2>
-            <div class="tech-stack">
-                <div class="tech-item"><i class="fab fa-node-js"></i><span>Node.js</span></div>
-                <div class="tech-item"><i class="fab fa-js-square"></i><span>JavaScript</span></div>
-                <div class="tech-item"><i class="fab fa-react"></i><span>React</span></div>
-                <div class="tech-item"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
-                <div class="tech-item"><i class="fas fa-database"></i><span>MongoDB</span></div>
-                <div class="tech-item"><i class="fab fa-aws"></i><span>S3</span></div>
-                <div class="tech-item"><i class="fas fa-globe"></i><span>CloudFront</span></div>
-                <div class="tech-item"><i class="fas fa-route"></i><span>Route 53</span></div>
-            </div>
-        </section>
+  <!-- Filtros -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">Todos</button>
+    <% var categories = []; %>
+    <% projects.forEach(function(p) { if (categories.indexOf(p.category) === -1) categories.push(p.category); }); %>
+    <% categories.forEach(function(cat) { %>
+      <button class="filter-btn" data-filter="<%= cat %>"><%= cat %></button>
+    <% }); %>
+  </div>
 
-        <!-- Grid de proyectos -->
-        <h2 style="margin-top:50px;margin-bottom:25px;">Proyectos Destacados</h2>
-        <div class="grid" id="projects-grid">
-            <% projects.forEach(project => { %>
-                <div class="card project-card" data-category="<%= project.category %>" data-project='<%- JSON.stringify(project) %>'>
-                    <% if (project.status) { %>
-                        <span class="status-badge <%= project.status === 'Terminado' ? 'badge-done' : 'badge-wip' %>">
-                            <%= project.status %>
-                        </span>
-                    <% } %>
-
-                    <div class="card-thumb">
-                        <% if (project.logo) { %>
-                            <img src="<%= project.logo %>" alt="<%= project.title %>" style="max-height:110px;max-width:90%;object-fit:contain;">
-                        <% } else if (project.icon) { %>
-                            <i class="<%= project.icon %>" style="font-size:3.5rem;color:#00ffd5;"></i>
-                        <% } else { %>
-                            <span style="color:#555;">[<%= project.category %>]</span>
-                        <% } %>
-                    </div>
-
-                    <span class="category-tag"><%= project.category %></span>
-                    <h3 style="margin:10px 0 6px;"><%= project.title %></h3>
-                    <p style="font-size:0.9rem;color:#888;line-height:1.5;"><%= project.description %></p>
-
-                    <% if (project.technologies && project.technologies.length) { %>
-                        <div class="tech-pills" style="margin-top:14px;">
-                            <% project.technologies.forEach(t => { %>
-                                <span class="tech-pill"><%= t %></span>
-                            <% }); %>
-                        </div>
-                    <% } %>
-
-                    <button class="detail-btn" onclick="openModal(this)">Ver detalle</button>
-                </div>
-            <% }); %>
-        </div>
+  <!-- Tech stack -->
+  <div class="tech-section" style="margin:40px 0;">
+    <div class="tech-stack">
+      <div class="tech-item"><i class="fab fa-node-js"></i><span>Node.js</span></div>
+      <div class="tech-item"><i class="fab fa-js-square"></i><span>JavaScript</span></div>
+      <div class="tech-item"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
+      <div class="tech-item"><i class="fas fa-database"></i><span>MongoDB</span></div>
+      <div class="tech-item"><i class="fab fa-aws"></i><span>AWS S3</span></div>
+      <div class="tech-item"><i class="fas fa-globe"></i><span>CloudFront</span></div>
+      <div class="tech-item"><i class="fas fa-route"></i><span>Route 53</span></div>
     </div>
+  </div>
 
-    <!-- Modal -->
-    <div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
-        <div class="modal-box">
-            <button class="modal-close" onclick="closeModal()">✕</button>
-            <div id="modal-thumb" class="modal-thumb"></div>
-            <div id="modal-badges" style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap;"></div>
-            <h2 id="modal-title" style="color:#00ffd5;margin-bottom:8px;"></h2>
-            <p id="modal-desc" style="color:#aaa;line-height:1.6;margin-bottom:16px;"></p>
-            <div id="modal-techs" class="tech-pills" style="margin-bottom:20px;"></div>
-            <a id="modal-github" href="#" target="_blank" rel="noopener noreferrer" class="primary-btn" style="display:none;text-decoration:none;">Ver en GitHub</a>
+  <!-- Grid de proyectos -->
+  <div class="grid" id="projects-grid">
+    <% projects.forEach(function(project) { %>
+      <div class="card project-card" data-category="<%= project.category %>" data-project='<%- JSON.stringify(project) %>'>
+        <% if (project.status) { %>
+          <span class="status-badge <%= project.status === 'Terminado' ? 'badge-done' : 'badge-wip' %>">
+            <%= project.status %>
+          </span>
+        <% } %>
+
+        <div class="card-thumb">
+          <% if (project.logo) { %>
+            <img src="<%= project.logo %>" alt="<%= project.title %>" style="max-height:110px;max-width:90%;object-fit:contain;">
+          <% } else if (project.icon) { %>
+            <i class="<%= project.icon %>" style="font-size:3.5rem;color:#00ffd5;"></i>
+          <% } else { %>
+            <span style="color:#555;">[<%= project.category %>]</span>
+          <% } %>
         </div>
-    </div>
 
-    <script>
-        // Filtros
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const filter = btn.dataset.filter;
-                document.querySelectorAll('.project-card').forEach(card => {
-                    card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
-                });
-            });
-        });
+        <span class="category-tag"><%= project.category %></span>
+        <h3 style="margin:10px 0 6px;"><%= project.title %></h3>
+        <p style="font-size:0.9rem;color:#888;line-height:1.5;"><%= project.description %></p>
 
-        // Modal
-        function openModal(btn) {
-            const card = btn.closest('.project-card');
-            const project = JSON.parse(card.dataset.project);
+        <% if (project.technologies && project.technologies.length) { %>
+          <div class="tech-pills" style="margin-top:14px;">
+            <% project.technologies.forEach(function(t) { %>
+              <span class="tech-pill"><%= t %></span>
+            <% }); %>
+          </div>
+        <% } %>
 
-            const thumb = document.getElementById('modal-thumb');
-            thumb.innerHTML = project.logo
-                ? `<img src="${project.logo}" alt="${project.title}" style="max-height:100px;max-width:200px;object-fit:contain;">`
-                : project.icon
-                    ? `<i class="${project.icon}" style="font-size:3rem;color:#00ffd5;"></i>`
-                    : '';
+        <button class="detail-btn" onclick="openModal(this)">Ver detalle</button>
+      </div>
+    <% }); %>
+  </div>
+</section>
 
-            const badges = document.getElementById('modal-badges');
-            badges.innerHTML = '';
-            if (project.category) badges.innerHTML += `<span class="category-tag">${project.category}</span>`;
-            if (project.status) {
-                const cls = project.status === 'Terminado' ? 'badge-done' : 'badge-wip';
-                badges.innerHTML += `<span class="status-badge ${cls}" style="position:static;">${project.status}</span>`;
-            }
+<!-- Modal -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-thumb" class="modal-thumb"></div>
+    <div id="modal-badges" style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap;"></div>
+    <h2 id="modal-title" style="color:#00ffd5;margin-bottom:8px;"></h2>
+    <p id="modal-desc" style="color:#aaa;line-height:1.6;margin-bottom:16px;"></p>
+    <div id="modal-techs" class="tech-pills" style="margin-bottom:20px;"></div>
+    <a id="modal-github" href="#" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-grad" style="display:none;">Ver en GitHub</a>
+  </div>
+</div>
 
-            document.getElementById('modal-title').textContent = project.title;
-            document.getElementById('modal-desc').textContent = project.description;
+<%- include('./partials/lp-footer') %>
 
-            const techs = document.getElementById('modal-techs');
-            techs.innerHTML = (project.technologies || []).map(t => `<span class="tech-pill">${t}</span>`).join('');
+<script>
+  document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.dataset.filter;
+      document.querySelectorAll('.project-card').forEach(function(card) {
+        card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+      });
+    });
+  });
 
-            const ghBtn = document.getElementById('modal-github');
-            if (project.github) {
-                ghBtn.href = project.github;
-                ghBtn.style.display = 'inline-block';
-            } else {
-                ghBtn.style.display = 'none';
-            }
+  function openModal(btn) {
+    var card = btn.closest('.project-card');
+    var project = JSON.parse(card.dataset.project);
 
-            document.getElementById('modal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
+    var thumb = document.getElementById('modal-thumb');
+    thumb.innerHTML = project.logo
+      ? '<img src="' + project.logo + '" alt="' + project.title + '" style="max-height:100px;max-width:200px;object-fit:contain;">'
+      : project.icon
+        ? '<i class="' + project.icon + '" style="font-size:3rem;color:#00ffd5;"></i>'
+        : '';
 
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-            document.body.style.overflow = '';
-        }
+    var badges = document.getElementById('modal-badges');
+    badges.innerHTML = '';
+    if (project.category) badges.innerHTML += '<span class="category-tag">' + project.category + '</span>';
+    if (project.status) {
+      var cls = project.status === 'Terminado' ? 'badge-done' : 'badge-wip';
+      badges.innerHTML += '<span class="status-badge ' + cls + '" style="position:static;">' + project.status + '</span>';
+    }
 
-        function closeModalOutside(e) {
-            if (e.target === document.getElementById('modal')) closeModal();
-        }
+    document.getElementById('modal-title').textContent = project.title;
+    document.getElementById('modal-desc').textContent = project.description;
 
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-    </script>
-    <script src="/js/particles.js"></script>
+    var techs = document.getElementById('modal-techs');
+    techs.innerHTML = (project.technologies || []).map(function(t) { return '<span class="tech-pill">' + t + '</span>'; }).join('');
+
+    var ghBtn = document.getElementById('modal-github');
+    if (project.github) { ghBtn.href = project.github; ghBtn.style.display = 'inline-block'; }
+    else { ghBtn.style.display = 'none'; }
+
+    document.getElementById('modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modal')) closeModal();
+  }
+
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+</script>
+<script src="/js/particles.js"></script>
+<script src="/js/menu-toggle.js"></script>
 </body>
 </html>

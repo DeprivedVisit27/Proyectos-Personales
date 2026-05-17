@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Precios — Garett Barrantes</title>
+  <title>Precios — Loop-Landing.com</title>
   <meta name="description" content="Planes y precios para landing pages, SaaS y automatizaciones. Desarrollo digital desde Costa Rica.">
   <link rel="stylesheet" href="/css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px,1fr)); gap: 16px; margin-top: 48px; }
     .pricing-card { background: var(--bg-1); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 40px 32px; display: flex; flex-direction: column; gap: 0; transition: border-color .25s, transform .25s; }
@@ -15,7 +15,7 @@
     .pricing-badge { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: rgba(0,210,255,0.9); margin-bottom: 14px; display: block; }
     .pricing-name { font-size: 1.3rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
     .pricing-price { font-size: 2.6rem; font-weight: 800; color: var(--text); letter-spacing: -2px; line-height: 1; margin-bottom: 6px; font-family: 'Orbitron', sans-serif; }
-    .pricing-price span { font-size: 1rem; font-weight: 400; color: var(--text-2); letter-spacing: 0; font-family: 'Inter', sans-serif; }
+    .pricing-price span { font-size: 1rem; font-weight: 400; color: var(--text-2); letter-spacing: 0; font-family: sans-serif; }
     .pricing-desc { font-size: 0.88rem; color: var(--text-2); line-height: 1.65; margin: 16px 0 28px; }
     .pricing-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
     .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 11px; flex: 1; margin-bottom: 32px; }
@@ -32,43 +32,28 @@
   </style>
 </head>
 <body>
+<div class="bg-slideshow">
+  <div class="bg-slide" style="background-image:url('/img/jamesmarkosborne-code-1076536_1920.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/fotis-fotopoulos-6sAl6aQ4OWI-unsplash.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/pankaj-patel-Fi-GJaLRGKc-unsplash.jpg')"></div>
+</div>
 <canvas id="bg-canvas"></canvas>
-<div class="landing-wrap">
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
 
-  <header class="l-header">
-    <div class="landing-wrap">
-      <nav>
-        <a href="/" class="logo" style="text-decoration:none;">
-          <span class="logo-mark">GB</span>
-          <span class="logo-text">Garett Barrantes</span>
-        </a>
-        <button class="menu-toggle" type="button" aria-label="Menú">☰</button>
-        <div class="nav-links">
-          <a href="/portafolio">📁 Trabajos</a>
-          <a href="/precios">💰 Precios</a>
-          <a href="/contacto">✉️ Contacto</a>
-          <% if (user) { %>
-            <a href="/dashboard">⚡ Dashboard</a>
-          <% } else { %>
-            <a href="/login">🔐 Login</a>
-            <a href="/register" style="color:#fff;font-weight:600;">📝 Registro</a>
-          <% } %>
-        </div>
-      </nav>
-    </div>
-  </header>
+<%- include('./partials/lp-header', { user: locals.user }) %>
 
-  <section style="padding: 100px 0 60px; text-align: center;">
-    <div class="l-section-label">Inversión</div>
-    <h1 class="l-section-title" style="margin-bottom:12px;">Planes y precios</h1>
-    <p style="color:var(--text-2);font-size:1rem;max-width:480px;margin:0 auto;line-height:1.75;">
-      Cada proyecto es diferente. Estos rangos son una guía — cotizamos exacto según tu necesidad.
-    </p>
-  </section>
+<section class="lp-section lp-wrap" style="padding-top:60px;text-align:center;">
+  <p class="lp-label">INVERSIÓN</p>
+  <h1 class="lp-section-title" style="margin-bottom:12px;">Planes y precios</h1>
+  <p style="color:rgba(255,255,255,0.45);font-size:1rem;max-width:480px;margin:0 auto;line-height:1.75;">
+    Cada proyecto es diferente. Estos rangos son una guía — cotizamos exacto según tu necesidad.
+  </p>
+</section>
 
+<div class="lp-wrap" style="padding-bottom:80px;">
   <div class="pricing-grid">
 
-    <!-- Plan 1 -->
     <div class="pricing-card">
       <span class="pricing-badge">Starter</span>
       <div class="pricing-name">Landing Page</div>
@@ -87,7 +72,6 @@
       <a href="/#cotizacion" class="pricing-cta">Solicitar cotización →</a>
     </div>
 
-    <!-- Plan 2 (featured) -->
     <div class="pricing-card featured">
       <span class="pricing-badge">⚡ Más popular</span>
       <div class="pricing-name">Plataforma Web</div>
@@ -106,7 +90,6 @@
       <a href="/#cotizacion" class="pricing-cta cta-primary">Solicitar cotización →</a>
     </div>
 
-    <!-- Plan 3 -->
     <div class="pricing-card">
       <span class="pricing-badge">Enterprise</span>
       <div class="pricing-name">SaaS Completo</div>
@@ -128,19 +111,77 @@
   </div>
 
   <p class="pricing-note">
-    ¿Tenés un proyecto diferente? <a href="/#cotizacion" style="color:var(--text-2);text-decoration:underline;">Contanos tu idea</a> y armamos una propuesta a medida.<br>
+    ¿Tenés un proyecto diferente? <a href="/#cotizacion" style="color:rgba(255,255,255,0.5);text-decoration:underline;">Contanos tu idea</a> y armamos una propuesta a medida.<br>
     Todos los proyectos incluyen 30 días de soporte post-entrega.
   </p>
-
 </div>
 
-<footer class="l-footer landing-wrap" style="margin-top: 80px;">
-  <span>© 2025 Garett Barrantes · Costa Rica</span>
-  <div style="display:flex;gap:18px;">
-    <a href="/portafolio" class="l-footer-link">Portafolio</a>
-    <a href="https://wa.me/50663144171" target="_blank" class="l-footer-link">WhatsApp</a>
+<!-- ── Calculadora interactiva ───────────────────────────────────────────── -->
+<div class="lp-wrap" style="padding-bottom:80px;margin-top:16px;">
+  <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(0,212,255,0.15);border-radius:20px;padding:40px 44px;">
+    <p class="lp-label" style="margin-bottom:6px;">CALCULADORA</p>
+    <h2 style="font-size:1.35rem;margin:0 0 6px;color:#fff;font-family:'Orbitron',sans-serif;">Calculá tu presupuesto</h2>
+    <p style="color:rgba(255,255,255,0.35);font-size:0.88rem;margin:0 0 32px;">Seleccioná lo que necesitás — el estimado se actualiza en tiempo real.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;" class="calc-grid">
+      <div>
+        <p style="font-size:0.7rem;font-weight:700;color:#444;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 14px;">Tipo de proyecto</p>
+        <div style="display:flex;flex-direction:column;gap:8px;" id="calc-type">
+          <label class="calc-opt"><input type="radio" name="ctype" value="300" checked> Landing Page básica</label>
+          <label class="calc-opt"><input type="radio" name="ctype" value="900"> Plataforma Web / SaaS</label>
+          <label class="calc-opt"><input type="radio" name="ctype" value="2800"> Ecosistema SaaS completo</label>
+        </div>
+
+        <p style="font-size:0.7rem;font-weight:700;color:#444;text-transform:uppercase;letter-spacing:0.1em;margin:24px 0 14px;">Módulos adicionales</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <label class="calc-opt"><input type="checkbox" class="calc-extra" value="150"> Panel de administración</label>
+          <label class="calc-opt"><input type="checkbox" class="calc-extra" value="200"> Automatizaciones IA (n8n)</label>
+          <label class="calc-opt"><input type="checkbox" class="calc-extra" value="100"> Blog integrado</label>
+          <label class="calc-opt"><input type="checkbox" class="calc-extra" value="120"> Pasarela de pagos (Stripe)</label>
+          <label class="calc-opt"><input type="checkbox" class="calc-extra" value="80"> Integración WhatsApp directa</label>
+          <label class="calc-opt"><input type="checkbox" class="calc-extra" value="90"> SEO avanzado + Schema markup</label>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;justify-content:center;">
+        <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.2);border-radius:16px;padding:36px 28px;text-align:center;">
+          <p style="font-size:0.7rem;color:#444;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 6px;">Estimado desde</p>
+          <div id="calc-result" style="font-size:3.2rem;font-weight:800;background:linear-gradient(135deg,#00d4ff,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;margin-bottom:6px;">$300</div>
+          <p style="font-size:0.75rem;color:#383838;margin:0 0 28px;">* Rango orientativo. El precio final varía según detalles.</p>
+          <a href="/#cotizacion" class="lp-btn lp-btn-grad" style="display:block;text-align:center;text-decoration:none;">Obtener cotización exacta →</a>
+          <a href="https://wa.me/50663144171" target="_blank" style="display:block;text-align:center;margin-top:10px;font-size:0.8rem;color:#25d366;text-decoration:none;">💬 Consultar por WhatsApp</a>
+        </div>
+      </div>
+    </div>
   </div>
-</footer>
+</div>
+
+<style>
+.calc-opt {
+  display:flex;align-items:center;gap:10px;padding:10px 14px;
+  background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);
+  border-radius:10px;cursor:pointer;font-size:0.87rem;color:#888;
+  transition:border-color .2s,background .2s,color .2s;
+}
+.calc-opt:hover { border-color:rgba(0,212,255,0.25);background:rgba(0,212,255,0.04);color:#fff; }
+.calc-opt input[type=radio]:checked ~ *, .calc-opt:has(input:checked) { color:#e8f4ff; }
+.calc-opt input { accent-color:#00d4ff;flex-shrink:0; }
+@media(max-width:680px){ .calc-grid { grid-template-columns:1fr !important; } }
+</style>
+<script>
+(function(){
+  function updateCalc(){
+    var base = parseInt(document.querySelector('#calc-type input:checked')?.value||300);
+    var extras = Array.from(document.querySelectorAll('.calc-extra:checked')).reduce(function(s,el){return s+parseInt(el.value);},0);
+    document.getElementById('calc-result').textContent = '$'+(base+extras).toLocaleString('en-US');
+  }
+  document.querySelectorAll('#calc-type input, .calc-extra').forEach(function(el){
+    el.addEventListener('change', updateCalc);
+  });
+})();
+</script>
+
+<%- include('./partials/lp-footer') %>
 
 <script src="/js/particles.js"></script>
 <script src="/js/menu-toggle.js"></script>

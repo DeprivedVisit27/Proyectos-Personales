@@ -3,93 +3,356 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Mi Web Pro</title>
+    <title>Dashboard — Loop-Landing.com</title>
     <link rel="stylesheet" href="/css/style.css">
+    <style>
+      .dash-wrap {
+        display: flex;
+        gap: 24px;
+        align-items: flex-start;
+        margin-top: 40px;
+        padding-bottom: 60px;
+      }
+      /* Sidebar */
+      .dash-sidebar {
+        min-width: 220px;
+        width: 220px;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        position: sticky;
+        top: 90px;
+      }
+      .dash-sidebar-label {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        color: #444;
+        text-transform: uppercase;
+        margin: 0 0 6px;
+      }
+      .dash-nav-card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 13px 15px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 12px;
+        text-decoration: none;
+        color: #ccc;
+        font-size: 0.88rem;
+        font-weight: 500;
+        transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
+      }
+      .dash-nav-card:hover {
+        background: rgba(0,212,255,0.07);
+        border-color: rgba(0,212,255,0.25);
+        color: #fff;
+        transform: translateX(3px);
+      }
+      .dash-nav-card .icon {
+        font-size: 1.1rem;
+        width: 28px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+      .dash-nav-card .label { flex: 1; }
+      .dash-nav-card .meta {
+        font-size: 0.72rem;
+        color: #555;
+        margin-top: 2px;
+      }
+      .dash-nav-card.admin-card {
+        border-color: rgba(0,255,213,0.2);
+        background: rgba(0,255,213,0.04);
+        color: #00ffd5;
+      }
+      .dash-nav-card.admin-card:hover {
+        background: rgba(0,255,213,0.1);
+        border-color: rgba(0,255,213,0.4);
+      }
+      /* Main */
+      .dash-main { flex: 1; min-width: 0; }
+      /* Cotizacion cards */
+      .cot-row {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 12px;
+        padding: 16px 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+        transition: border-color 0.2s;
+      }
+      .cot-row:hover { border-color: rgba(0,212,255,0.18); }
+      /* Stats row at top */
+      .dash-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+      .dash-stat {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 12px;
+        padding: 16px 18px;
+        text-align: center;
+      }
+      .dash-stat-n {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #00d4ff;
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+      .dash-stat-l {
+        font-size: 0.72rem;
+        color: #555;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      /* Progress mini */
+      .dash-progress {
+        width: 100%;
+        height: 4px;
+        background: rgba(255,255,255,0.08);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-top: 6px;
+      }
+      .dash-progress-fill {
+        height: 100%;
+        border-radius: 4px;
+        background: linear-gradient(90deg, #00d4ff, #7c3aed);
+        transition: width 1s ease;
+      }
+      @media (max-width: 768px) {
+        .dash-wrap { flex-direction: column; }
+        .dash-sidebar { width: 100%; position: static; }
+        .dash-stats { grid-template-columns: repeat(3, 1fr); }
+      }
+    </style>
 </head>
 <body class="dashboard-body">
-    <canvas id="bg-canvas"></canvas>
-    <nav>
-        <a href="/" class="logo" style="text-decoration:none;color:inherit;">MI WEB PRO</a>
-        <div class="nav-actions">
-            <span style="color:#888;font-size:0.88rem;padding:0 4px;">Hola, <%= user.name %></span>
-            <a href="/perfil" class="nav-btn" data-tooltip="Edita tu información">Mi perfil</a>
-            <% if (notifCount > 0) { %>
-                <a href="/tickets" class="nav-btn" data-tooltip="<%= notifCount %> respuesta(s) nueva(s)" style="position:relative;">
-                    Soporte <span class="notif-badge"><%= notifCount %></span>
-                </a>
-            <% } else { %>
-                <a href="/tickets" class="nav-btn" data-tooltip="Centro de soporte">Soporte</a>
-            <% } %>
-            <% if (user.role === 'admin') { %>
-                <a href="/admin" class="nav-btn nav-btn--primary" data-tooltip="Panel de administración">Admin</a>
-            <% } %>
-            <a href="/logout" class="nav-btn" data-tooltip="Cerrar sesión">Salir</a>
-        </div>
-    </nav>
+<div class="bg-slideshow">
+  <div class="bg-slide" style="background-image:url('/img/jamesmarkosborne-code-1076536_1920.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/fotis-fotopoulos-6sAl6aQ4OWI-unsplash.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/pankaj-patel-Fi-GJaLRGKc-unsplash.jpg')"></div>
+</div>
+<canvas id="bg-canvas"></canvas>
+<%- include('./partials/lp-header', { user: locals.user }) %>
 
-    <div class="container">
-        <% if (newResponses && newResponses.length > 0) { %>
-            <div class="notification-banner">
-                <div class="notification-icon">🔔</div>
-                <div class="notification-text">
-                    <strong>¡Tienes una respuesta!</strong> Soporte respondió a <%= newResponses.length %> de tus tickets.
-                </div>
-                <a href="/tickets" class="primary-btn" style="margin:0;padding:8px 16px;font-size:0.85rem;">Ver respuesta</a>
-            </div>
-        <% } %>
+<div class="container" style="max-width:1400px;">
 
-        <h1 style="margin:40px 0 30px;">Panel de Control</h1>
-        <div class="grid">
-            <a href="/portafolio" class="card-link">
-                <div class="card">
-                    <h3>Mis Proyectos</h3>
-                    <p>Estado del desarrollo:</p>
-                    <div class="progress-container">
-                        <div class="progress-bar <%= isDelayed ? 'delayed' : '' %>" data-progress="<%= projectProgress %>"></div>
-                    </div>
-                    <p class="<%= isDelayed ? 'delayed-text' : 'completed-text' %>" style="font-size:12px;margin-top:8px;">
-                        <%= projectProgress %>% <%= isDelayed ? 'Retrasado' : 'Completado' %>
-                    </p>
-                </div>
-            </a>
-
-            <a href="/tickets" class="card-link">
-                <div class="card">
-                    <h3>Soporte <% if (notifCount > 0) { %><span class="notif-badge" style="position:static;display:inline-flex;vertical-align:middle;margin-left:6px;"><%= notifCount %></span><% } %></h3>
-                    <p>Tienes <strong><%= ticketCount %></strong> tickets activos.</p>
-                </div>
-            </a>
-
-            <a href="/perfil" class="card-link">
-                <div class="card">
-                    <h3>Mi Perfil</h3>
-                    <p>Actualiza tu nombre, empresa, WhatsApp y contraseña.</p>
-                </div>
-            </a>
-
-            <a href="/mis-archivos" class="card-link">
-                <div class="card">
-                    <h3>📂 Mis Archivos</h3>
-                    <p>Descargá los entregables y documentos de tu proyecto.</p>
-                </div>
-            </a>
-
-            <% if (user.role === 'admin') { %>
-                <a href="/admin" class="card-link">
-                    <div class="card" style="border:1px solid #00ffd5;background:rgba(0,255,213,0.05);">
-                        <h3>Panel Admin</h3>
-                        <p>Gestión global de usuarios, clientes y tickets.</p>
-                    </div>
-                </a>
-            <% } %>
-        </div>
+  <% if (newResponses && newResponses.length > 0) { %>
+  <div class="notification-banner" style="margin-top:24px;">
+    <div class="notification-icon">🔔</div>
+    <div class="notification-text">
+      <strong>¡Tienes una respuesta!</strong> Soporte respondió a <%= newResponses.length %> de tus tickets.
     </div>
+    <a href="/tickets" class="primary-btn" style="margin:0;padding:8px 16px;font-size:0.85rem;">Ver respuesta</a>
+  </div>
+  <% } %>
 
-    <script>
-        document.querySelectorAll('.progress-bar[data-progress]').forEach(el => {
-            el.style.width = `${Number(el.dataset.progress) || 0}%`;
-        });
-    </script>
-    <script src="/js/particles.js"></script>
+  <div class="dash-wrap">
+
+    <!-- ── Sidebar ──────────────────────────────────────────────── -->
+    <aside class="dash-sidebar">
+      <p class="dash-sidebar-label">Acceso rápido</p>
+
+      <a href="/portafolio" class="dash-nav-card">
+        <span class="icon">🚀</span>
+        <div class="label">
+          Mis Proyectos
+          <div class="meta"><%= projectProgress %>% completado</div>
+          <div class="dash-progress" style="margin-top:6px;">
+            <div class="dash-progress-fill" style="width:<%= projectProgress %>%;background:<%= isDelayed ? '#f87171' : 'linear-gradient(90deg,#00d4ff,#7c3aed)' %>;"></div>
+          </div>
+        </div>
+      </a>
+
+      <a href="/tickets" class="dash-nav-card">
+        <span class="icon">🎫</span>
+        <div class="label">
+          Soporte
+          <% if (notifCount > 0) { %>
+            <span class="notif-badge" style="position:static;display:inline-flex;vertical-align:middle;margin-left:6px;font-size:0.7rem;"><%= notifCount %></span>
+          <% } %>
+          <div class="meta"><%= ticketCount %> ticket<%= ticketCount !== 1 ? 's' : '' %> activo<%= ticketCount !== 1 ? 's' : '' %></div>
+        </div>
+      </a>
+
+      <a href="/perfil" class="dash-nav-card">
+        <span class="icon">👤</span>
+        <div class="label">
+          Mi Perfil
+          <div class="meta"><%= user.name %></div>
+        </div>
+      </a>
+
+      <a href="/mis-archivos" class="dash-nav-card">
+        <span class="icon">📂</span>
+        <div class="label">
+          Mis Archivos
+          <div class="meta">Entregables y docs</div>
+        </div>
+      </a>
+
+      <a href="/chat" class="dash-nav-card">
+        <span class="icon">💬</span>
+        <div class="label">
+          Chat en vivo
+          <div class="meta">Equipo Loop-Landing</div>
+        </div>
+      </a>
+
+      <% if (user.email === 'garettjohan12@gmail.com') { %>
+      <a href="/admin" class="dash-nav-card admin-card">
+        <span class="icon">⚙️</span>
+        <div class="label">
+          Panel Admin
+          <div class="meta" style="color:rgba(0,255,213,0.5);">Gestión global</div>
+        </div>
+      </a>
+      <% } %>
+    </aside>
+
+    <!-- ── Main Content ─────────────────────────────────────────── -->
+    <main class="dash-main">
+
+      <h1 style="margin:0 0 24px;font-size:1.5rem;">Panel de Control</h1>
+
+      <!-- Stats row -->
+      <div class="dash-stats">
+        <div class="dash-stat">
+          <div class="dash-stat-n lp-stat-n"><%= (userLeads || []).length %></div>
+          <div class="dash-stat-l">Cotizaciones</div>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-n lp-stat-n"><%= ticketCount %></div>
+          <div class="dash-stat-l">Tickets abiertos</div>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-n lp-stat-n"><%= projectProgress %>%</div>
+          <div class="dash-stat-l">Avance</div>
+        </div>
+        <% if (notifCount > 0) { %>
+        <div class="dash-stat" style="border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.05);">
+          <div class="dash-stat-n lp-stat-n" style="color:#00d4ff;"><%= notifCount %></div>
+          <div class="dash-stat-l" style="color:#00d4ff;">Sin leer</div>
+        </div>
+        <% } %>
+      </div>
+
+      <!-- ── Mis Cotizaciones ──────────────────────────────────── -->
+      <% var leads = userLeads || []; %>
+      <% if (leads.length > 0) { %>
+      <section style="margin-bottom:32px;">
+        <h2 style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:14px;letter-spacing:-0.2px;display:flex;align-items:center;gap:8px;">
+          📋 Mis Cotizaciones
+          <span style="font-size:0.72rem;font-weight:400;color:#555;"><%= leads.length %> solicitud<%= leads.length !== 1 ? 'es' : '' %></span>
+        </h2>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <% var statusOrder = ['Nuevo','Contactado','Propuesta enviada','En negociación','Ganado','En proceso','Terminado']; %>
+          <% leads.slice().reverse().forEach(function(lead) { %>
+          <%
+            var idx = statusOrder.indexOf(lead.status);
+            if (idx === -1) idx = 0;
+            var statusColor = idx === 0 ? '#888'
+              : idx === 1 ? '#60a5fa'
+              : idx === 2 ? '#fbbf24'
+              : idx === 3 ? '#a78bfa'
+              : idx === 4 ? '#34d399'
+              : idx === 5 ? '#00d4ff'
+              : '#ffffff';
+          %>
+          <div class="cot-row">
+            <div style="flex:1;min-width:160px;">
+              <div style="font-weight:600;font-size:0.9rem;color:#fff;margin-bottom:2px;"><%= lead.service %></div>
+              <div style="font-size:0.75rem;color:#555;"><%= lead.budget %> · <%= lead.date %></div>
+              <div style="font-size:0.7rem;color:#333;margin-top:3px;font-family:monospace;"><%= lead.id %></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:<%= statusColor %>;box-shadow:0 0 6px <%= statusColor %>;flex-shrink:0;"></span>
+              <span style="font-size:0.8rem;font-weight:600;color:<%= statusColor %>;"><%= lead.status || 'Nuevo' %></span>
+            </div>
+            <div style="display:flex;gap:3px;align-items:center;">
+              <% statusOrder.forEach(function(s, i) { %>
+                <div style="width:<%= i <= idx ? '18px' : '12px' %>;height:4px;border-radius:4px;background:<%= i < idx ? '#34d399' : i === idx ? statusColor : 'rgba(255,255,255,0.07)' %>;transition:all .3s;"></div>
+              <% }); %>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+      </section>
+      <% } else { %>
+      <div style="background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.07);border-radius:12px;padding:28px;text-align:center;margin-bottom:32px;">
+        <p style="color:#444;font-size:0.88rem;margin:0;">Aún no tienes cotizaciones. <a href="/#contacto" style="color:#00d4ff;text-decoration:none;">Solicita una →</a></p>
+      </div>
+      <% } %>
+
+      <!-- ── Dejar reseña ────────────────────────────────────────── -->
+      <% if (projectProgress >= 80 && !testimonialSent) { %>
+      <section>
+        <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(251,191,36,0.2);border-radius:14px;padding:24px 28px;">
+          <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 4px;">⭐ ¿Cómo fue tu experiencia?</h3>
+          <p style="color:#555;font-size:0.85rem;margin:0 0 18px;">Tu opinión ayuda a otros clientes. Se publicará en la página principal.</p>
+          <form action="/dashboard/testimonio" method="POST">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+              <div>
+                <label style="font-size:0.75rem;color:#555;display:block;margin-bottom:4px;">Empresa (opcional)</label>
+                <input type="text" name="company" value="<%= user.company || '' %>" placeholder="Tu empresa…" style="margin:0;padding:9px 12px;font-size:0.85rem;">
+              </div>
+              <div>
+                <label style="font-size:0.75rem;color:#555;display:block;margin-bottom:4px;">Calificación</label>
+                <select name="rating" style="margin:0;padding:9px 12px;font-size:0.85rem;">
+                  <option value="5">★★★★★ Excelente</option>
+                  <option value="4">★★★★☆ Muy bueno</option>
+                  <option value="3">★★★☆☆ Bueno</option>
+                </select>
+              </div>
+            </div>
+            <div style="margin-bottom:14px;">
+              <label style="font-size:0.75rem;color:#555;display:block;margin-bottom:4px;">Tu reseña</label>
+              <textarea name="text" required rows="3" maxlength="280"
+                placeholder="Cuéntanos tu experiencia con Loop-Landing.com…"
+                style="width:100%;background:#0a0a0a;border:1px solid #222;color:#fff;padding:10px 12px;border-radius:10px;font-size:0.85rem;resize:vertical;margin:0;"></textarea>
+            </div>
+            <button type="submit" style="width:auto;margin:0;padding:10px 22px;font-size:0.85rem;border-radius:8px;">Enviar reseña</button>
+          </form>
+        </div>
+      </section>
+      <% } %>
+      <% if (testimonialSent === 'ok') { %>
+      <div style="background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:10px;padding:14px 18px;margin-top:20px;color:#34d399;font-size:0.88rem;">
+        ✅ ¡Gracias por tu reseña! Se publicará una vez que la aprobemos.
+      </div>
+      <% } %>
+
+    </main>
+  </div><!-- /.dash-wrap -->
+</div><!-- /.container -->
+
+<script>
+  if ('serviceWorker' in navigator && 'PushManager' in window) {
+    navigator.serviceWorker.register('/sw.js').then(async reg => {
+      const permission = await Notification.requestPermission();
+      if (permission !== 'granted') return;
+      let sub = await reg.pushManager.getSubscription();
+      if (!sub) {
+        const res = await fetch('/push/vapid-public');
+        const { key } = await res.json();
+        sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: key });
+      }
+      await fetch('/push/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(sub) });
+    }).catch(() => {});
+  }
+</script>
+<script src="/js/particles.js"></script>
+<%- include('./partials/lp-footer') %>
 </body>
 </html>

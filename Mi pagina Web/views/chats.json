@@ -1,0 +1,13 @@
+[
+  {
+    "email": "garettjohan12@gmail.com",
+    "messages": [
+      {
+        "from": "garettjohan12@gmail.com",
+        "text": "hola",
+        "time": "10:15 p. m.",
+        "readByAdmin": false
+      }
+    ]
+  }
+]

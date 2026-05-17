@@ -7,15 +7,14 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<div class="bg-slideshow">
+  <div class="bg-slide" style="background-image:url('/img/jamesmarkosborne-code-1076536_1920.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/fotis-fotopoulos-6sAl6aQ4OWI-unsplash.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/pankaj-patel-Fi-GJaLRGKc-unsplash.jpg')"></div>
+</div>
 <canvas id="bg-canvas"></canvas>
+<%- include('./partials/lp-header', { user: locals.user }) %>
 <div class="container">
-  <nav>
-    <a href="/" class="logo" style="text-decoration:none;color:inherit;">MI WEB PRO</a>
-    <div class="nav-actions">
-      <a href="/dashboard" class="nav-btn">Dashboard</a>
-      <a href="/logout" class="nav-btn">Salir</a>
-    </div>
-  </nav>
 
   <h1 style="margin:40px 0 8px;">Mis <span>Archivos</span></h1>
   <p style="color:#666;margin-bottom:32px;">Entregables y documentos de tu proyecto.</p>
@@ -39,5 +38,6 @@
   <% } %>
 </div>
 <script src="/js/particles.js"></script>
+<%- include('./partials/lp-footer') %>
 </body>
 </html>

@@ -7,22 +7,14 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<div class="bg-slideshow">
+  <div class="bg-slide" style="background-image:url('/img/jamesmarkosborne-code-1076536_1920.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/fotis-fotopoulos-6sAl6aQ4OWI-unsplash.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/pankaj-patel-Fi-GJaLRGKc-unsplash.jpg')"></div>
+</div>
     <canvas id="bg-canvas"></canvas>
+<%- include('./partials/lp-header', { user: locals.user }) %>
     <div class="container">
-        <nav>
-            <a href="/" class="logo" style="text-decoration:none;color:inherit;">MI WEB PRO</a>
-            <div style="display:flex;gap:16px;align-items:center;">
-                <a href="/dashboard">Dashboard</a>
-                <% if (notifCount > 0) { %>
-                    <a href="/tickets" style="position:relative;">
-                        Soporte <span class="notif-badge"><%= notifCount %></span>
-                    </a>
-                <% } else { %>
-                    <a href="/tickets">Soporte</a>
-                <% } %>
-                <a href="/logout">Salir</a>
-            </div>
-        </nav>
 
         <div class="auth-container" style="max-width:600px;margin-top:60px;">
             <h1 style="margin-bottom:6px;">Mi <span style="color:#00ffd5;">Perfil</span></h1>
@@ -61,5 +53,6 @@
         </div>
     </div>
 <script src="/js/particles.js"></script>
+<%- include('./partials/lp-footer') %>
 </body>
 </html>

@@ -1,0 +1,29 @@
+[
+  {
+    "id": "TPL-1",
+    "name": "Landing Page Básica",
+    "service": "Landing Page",
+    "budget": "$300 - $500",
+    "deadline": "2 semanas",
+    "scope": "<h2>Alcance del proyecto</h2><ul><li>Diseño responsivo 1 página</li><li>Sección hero + servicios + contacto</li><li>Formulario de contacto</li><li>Integración WhatsApp</li><li>SEO básico</li></ul>",
+    "terms": "50% anticipo al inicio · 50% al entregable final. Incluye 2 rondas de revisiones."
+  },
+  {
+    "id": "TPL-2",
+    "name": "SaaS Web Completo",
+    "service": "Aplicación SaaS",
+    "budget": "$1500 - $3000",
+    "deadline": "6-8 semanas",
+    "scope": "<h2>Alcance del proyecto</h2><ul><li>Panel de administración</li><li>Sistema de usuarios y autenticación</li><li>Base de datos + API REST</li><li>Dashboard con métricas</li><li>Soporte por 30 días</li></ul>",
+    "terms": "40% anticipo · 30% a mitad de proyecto · 30% al entregable. Incluye 3 rondas de revisiones."
+  },
+  {
+    "id": "TPL-3",
+    "name": "Automatización IA",
+    "service": "Automatización IA",
+    "budget": "$500 - $1200",
+    "deadline": "3-4 semanas",
+    "scope": "<h2>Alcance del proyecto</h2><ul><li>Análisis de flujos actuales</li><li>Diseño de automatización en n8n/Make</li><li>Integración con sistemas existentes</li><li>Documentación y capacitación</li></ul>",
+    "terms": "50% anticipo · 50% al entregable. Incluye 30 días de soporte post-entrega."
+  }
+]

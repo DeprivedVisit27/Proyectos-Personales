@@ -7,7 +7,13 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<div class="bg-slideshow">
+  <div class="bg-slide" style="background-image:url('/img/jamesmarkosborne-code-1076536_1920.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/fotis-fotopoulos-6sAl6aQ4OWI-unsplash.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/pankaj-patel-Fi-GJaLRGKc-unsplash.jpg')"></div>
+</div>
     <canvas id="bg-canvas"></canvas>
+<%- include('./partials/lp-header', { user: locals.user }) %>
     <div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; text-align: center;">
         <div class="card" style="max-width: 500px; padding: 50px;">
             <h1 style="font-size: 80px; color: #00ffd5; margin-bottom: 10px;"><%= status %></h1>
@@ -23,5 +29,6 @@
         </div>
     </div>
 <script src="/js/particles.js"></script>
+<%- include('./partials/lp-footer') %>
 </body>
 </html>

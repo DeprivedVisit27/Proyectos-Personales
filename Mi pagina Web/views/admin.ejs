@@ -1,83 +1,236 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Admin Panel - Mi Web Pro</title>
+    <title>Admin — Loop-Landing.com</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      /* ── Admin visibility improvements ── */
+      .admin-stat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 14px;
+        margin-bottom: 32px;
+      }
+      .admin-stat {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 14px;
+        padding: 20px 18px;
+        text-align: center;
+        transition: border-color .2s, transform .15s;
+      }
+      .admin-stat:hover { border-color: rgba(0,212,255,0.25); transform: translateY(-2px); }
+      .admin-stat-n {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1;
+        margin-bottom: 6px;
+        background: linear-gradient(135deg, #00d4ff, #7c3aed);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .admin-stat-n.green  { background: linear-gradient(135deg, #34d399, #059669); -webkit-background-clip: text; background-clip: text; }
+      .admin-stat-n.yellow { background: linear-gradient(135deg, #fbbf24, #f59e0b); -webkit-background-clip: text; background-clip: text; }
+      .admin-stat-n.red    { background: linear-gradient(135deg, #f87171, #dc2626); -webkit-background-clip: text; background-clip: text; }
+      .admin-stat-l {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #444;
+        font-weight: 600;
+      }
+
+      /* ── Sticky section nav ── */
+      .admin-section-bar {
+        position: sticky;
+        top: 52px;
+        z-index: 300;
+        background: rgba(6,6,14,0.97);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(0,212,255,0.1);
+        display: flex;
+        gap: 0;
+        overflow-x: auto;
+        scrollbar-width: none;
+        margin: 0 -40px;
+        padding: 0 40px;
+      }
+      .admin-section-bar::-webkit-scrollbar { display: none; }
+      .admin-section-bar a {
+        color: #444;
+        text-decoration: none;
+        font-size: 0.78rem;
+        font-weight: 600;
+        white-space: nowrap;
+        padding: 12px 16px;
+        border-bottom: 2px solid transparent;
+        transition: color .2s, border-color .2s;
+      }
+      .admin-section-bar a:hover { color: #fff; border-bottom-color: rgba(0,212,255,0.5); }
+      .admin-section-bar a.active { color: #00d4ff; border-bottom-color: #00d4ff; }
+
+      /* ── Section titles ── */
+      .admin-section-title {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 0.5px;
+        margin: 0 0 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .admin-section-title .count-badge {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 400;
+        color: #555;
+      }
+
+      /* ── Footer at bottom ── */
+      html, body { height: 100%; }
+      body { display: flex !important; flex-direction: column !important; min-height: 100vh !important; }
+      .container { flex: 1 0 auto; }
+      .admin-footer { flex-shrink: 0; margin-top: auto; }
+
+      /* ── Lead cards: more visible data ── */
+      .lead-item { position: relative; }
+      .lead-name-big { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+      .lead-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+      .lead-meta-chip {
+        font-size: 0.72rem; font-weight: 600; padding: 3px 10px;
+        border-radius: 50px; border: 1px solid;
+      }
+      .chip-service { color: #00d4ff; border-color: rgba(0,212,255,0.3); background: rgba(0,212,255,0.07); }
+      .chip-budget  { color: #34d399; border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.07); }
+      .chip-date    { color: #888;    border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); }
+
+      /* ── Client stat numbers ── */
+      .client-stat-n {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #00d4ff, #7c3aed);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      }
+      .client-stat-n.open { background: linear-gradient(135deg, #f87171, #dc2626); -webkit-background-clip: text; background-clip: text; }
+
+      /* ── Scroll spy ── */
+      .admin-section-bar a.active { color: #00d4ff; border-bottom-color: #00d4ff; }
+    </style>
 </head>
 <body>
+<div class="bg-slideshow">
+  <div class="bg-slide" style="background-image:url('/img/jamesmarkosborne-code-1076536_1920.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/fotis-fotopoulos-6sAl6aQ4OWI-unsplash.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/pankaj-patel-Fi-GJaLRGKc-unsplash.jpg')"></div>
+</div>
 <canvas id="bg-canvas"></canvas>
+<%- include('./partials/lp-header', { user: locals.user }) %>
 <div class="container">
 
-    <nav>
-        <a href="/" class="logo">ADMIN CONTROL</a>
-        <div class="nav-actions">
-            <a href="#leads"    class="nav-btn" data-tooltip="Cotizaciones recibidas">Leads</a>
-            <a href="#clientes" class="nav-btn" data-tooltip="Clientes registrados">Clientes</a>
-            <a href="#tickets"  class="nav-btn" data-tooltip="Soporte activo">Tickets</a>
-            <a href="#contactos" class="nav-btn" data-tooltip="Mensajes de contacto">Mensajes</a>
-            <a href="/dashboard" class="nav-btn" data-tooltip="Tu panel de control">Dashboard</a>
-            <a href="/logout"   class="nav-btn" data-tooltip="Cerrar sesión">Salir</a>
-        </div>
-    </nav>
+    <!-- Barra de secciones admin -->
+    <div class="admin-section-bar">
+        <a href="#leads">📋 Leads</a>
+        <a href="#clientes">👥 Clientes</a>
+        <a href="#tickets">🎫 Tickets</a>
+        <a href="#pagos">💳 Pagos</a>
+        <a href="#testimonios">⭐ Reviews</a>
+        <a href="#blog">📝 Blog</a>
+        <a href="#newsletter">📧 Newsletter</a>
+        <a href="#webhooks">🔗 Webhooks</a>
+        <a href="#templates">📄 Templates</a>
+        <a href="#contactos">💬 Mensajes</a>
+        <a href="/admin/chat" style="color:#00d4ff;font-weight:600;">💬 Chat</a>
+    </div>
 
-    <h1 style="margin:40px 0 30px;">Panel de <span>Administración</span></h1>
+    <h1 style="margin:32px 0 24px;font-family:'Orbitron',sans-serif;font-size:1.3rem;letter-spacing:1px;">
+      Panel de <span style="background:linear-gradient(135deg,#00d4ff,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Administración</span>
+    </h1>
 
     <!-- ── Stats ──────────────────────────────────────────────── -->
-    <div class="stats">
-        <div class="stat-card">
-            <h3><%= (users || []).filter(u => u.role !== 'admin').length %></h3>
-            <p>Clientes</p>
+    <div class="admin-stat-grid">
+        <div class="admin-stat">
+            <div class="admin-stat-n"><%= (users || []).filter(u => u.role !== 'admin').length %></div>
+            <div class="admin-stat-l">👥 Clientes</div>
         </div>
-        <div class="stat-card stat-card--accent">
-            <h3><%= (leads || []).filter(l => l.status === 'Nuevo').length %></h3>
-            <p>Leads nuevos</p>
+        <div class="admin-stat" style="border-color:rgba(0,212,255,0.18);">
+            <div class="admin-stat-n"><%= (leads || []).filter(l => l.status === 'Nuevo').length %></div>
+            <div class="admin-stat-l">📋 Leads nuevos</div>
         </div>
-        <div class="stat-card">
-            <h3><%= (tickets || []).filter(t => t.status === 'Abierto').length %></h3>
-            <p>Tickets abiertos</p>
+        <div class="admin-stat" style="border-color:rgba(248,113,113,0.18);">
+            <div class="admin-stat-n red"><%= (tickets || []).filter(t => t.status === 'Abierto').length %></div>
+            <div class="admin-stat-l">🎫 Tickets abiertos</div>
         </div>
-        <div class="stat-card">
-            <h3><%= (tickets || []).filter(t => t.status === 'Cerrado').length %></h3>
-            <p>Tickets cerrados</p>
+        <div class="admin-stat">
+            <div class="admin-stat-n" style="background:linear-gradient(135deg,#aaa,#666);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"><%= (tickets || []).filter(t => t.status === 'Cerrado').length %></div>
+            <div class="admin-stat-l">✅ Tickets cerrados</div>
         </div>
-        <div class="stat-card">
-            <h3><%= (stats || {}).visits || 0 %></h3>
-            <p>Visitas totales</p>
+        <div class="admin-stat">
+            <div class="admin-stat-n" style="background:linear-gradient(135deg,#e8f4ff,#aaa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"><%= (stats || {}).visits || 0 %></div>
+            <div class="admin-stat-l">👁 Visitas totales</div>
         </div>
-        <div class="stat-card stat-card--warn">
-            <h3><%= (contacts || []).filter(c => !c.read).length %></h3>
-            <p>Mensajes nuevos</p>
+        <div class="admin-stat" style="border-color:rgba(251,191,36,0.18);">
+            <div class="admin-stat-n yellow"><%= (contacts || []).filter(c => !c.read).length %></div>
+            <div class="admin-stat-l">💬 Mensajes nuevos</div>
+        </div>
+        <div class="admin-stat" style="border-color:rgba(52,211,153,0.22);">
+            <div class="admin-stat-n green">$<%= (pagos || []).reduce(function(sum,p){ return sum + (parseFloat(p.amount)||0); }, 0).toLocaleString('en-US') %></div>
+            <div class="admin-stat-l">💵 Total cobrado</div>
+        </div>
+        <div class="admin-stat">
+            <div class="admin-stat-n" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"><%= (newsletterSubs||[]).length %></div>
+            <div class="admin-stat-l">📧 Suscriptores</div>
         </div>
     </div>
 
     <!-- ── Gráficos ───────────────────────────────────────────── -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px;">
         <div class="card">
-            <h3 style="margin-bottom:16px;">Leads por servicio</h3>
+            <h3 style="margin-bottom:16px;font-family:'Orbitron',sans-serif;font-size:0.82rem;letter-spacing:0.5px;color:#fff;">Leads por servicio</h3>
             <div id="chart-service-wrap"><canvas id="leadsServiceChart" style="max-height:220px;"></canvas></div>
         </div>
         <div class="card">
-            <h3 style="margin-bottom:16px;">Leads por estado</h3>
+            <h3 style="margin-bottom:16px;font-family:'Orbitron',sans-serif;font-size:0.82rem;letter-spacing:0.5px;color:#fff;">Leads por estado</h3>
             <div id="chart-status-wrap"><canvas id="leadsStatusChart" style="max-height:220px;"></canvas></div>
         </div>
     </div>
     <div class="card" style="margin-top:16px;">
-        <h3 style="margin-bottom:16px;">Visitas · Leads · Tickets</h3>
+        <h3 style="margin-bottom:16px;font-family:'Orbitron',sans-serif;font-size:0.82rem;letter-spacing:0.5px;color:#fff;">Visitas · Leads · Tickets</h3>
         <canvas id="visitsChart" style="max-height:200px;width:100%;"></canvas>
     </div>
 
     <!-- ── LEADS ──────────────────────────────────────────────── -->
     <section id="leads" style="margin-top:60px;">
-        <h2 style="margin-bottom:20px;">
-            Cotizaciones / <span>Leads</span>
-            <% var newLeadsCount = (leads || []).filter(function(l){ return l.status === 'Nuevo'; }).length; %>
-            <% if (newLeadsCount > 0) { %>
-                <span class="notif-badge" style="position:static;display:inline-flex;margin-left:10px;"><%= newLeadsCount %></span>
-            <% } %>
-        </h2>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+            <h2 class="admin-section-title" style="margin:0;">
+                📋 Leads
+                <% var newLeadsCount = (leads || []).filter(function(l){ return l.status === 'Nuevo'; }).length; %>
+                <% if (newLeadsCount > 0) { %>
+                    <span class="notif-badge" style="position:static;display:inline-flex;"><%= newLeadsCount %></span>
+                <% } else { %>
+                    <span class="count-badge"><%= (leads||[]).length %> total</span>
+                <% } %>
+            </h2>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <a href="/admin/leads/export"
+                    style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;font-size:0.8rem;border-radius:8px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.25);color:#34d399;text-decoration:none;white-space:nowrap;">
+                    ⬇ Exportar CSV
+                </a>
+                <button onclick="toggleKanban()" id="btn-kanban"
+                    style="padding:8px 16px;font-size:0.8rem;border-radius:8px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);color:#00d4ff;cursor:pointer;width:auto;margin:0;">
+                    🗂 Vista Kanban
+                </button>
+            </div>
+        </div>
 
         <% if (!leads || leads.length === 0) { %>
             <div class="card" style="text-align:center;color:#555;padding:40px;">
@@ -89,39 +242,112 @@
                     <div class="lead-item">
                         <div class="lead-avatar"><%= ((lead.name || '?').charAt(0)).toUpperCase() %></div>
                         <div class="lead-info">
-                            <div class="lead-top">
-                                <strong><%= lead.name || '—' %></strong>
-                                <span class="lead-tag lead-service"><%= lead.service || '—' %></span>
-                                <span class="lead-tag lead-budget"><%= lead.budget || '—' %></span>
+                            <div class="lead-name-big"><%= lead.name || '—' %></div>
+                            <div class="lead-meta">
+                                <span class="lead-meta-chip chip-service">⚡ <%= lead.service || '—' %></span>
+                                <span class="lead-meta-chip chip-budget">💰 <%= lead.budget || '—' %></span>
                                 <% if (lead.deadline && lead.deadline !== '—') { %>
-                                    <span class="lead-tag" style="color:#888;">📅 <%= lead.deadline %></span>
+                                    <span class="lead-meta-chip chip-date">📅 <%= lead.deadline %></span>
                                 <% } %>
                             </div>
                             <div class="lead-contact">
-                                <span>📱 <%= lead.whatsapp || '—' %></span>
-                                <span>✉ <%= lead.email || '—' %></span>
+                                <span>📱 <strong style="color:#ccc;"><%= lead.whatsapp || '—' %></strong></span>
+                                <span>✉ <strong style="color:#ccc;"><%= lead.email || '—' %></strong></span>
+                                <span style="color:#333;font-size:0.72rem;font-family:monospace;"><%= lead.id %></span>
                             </div>
                             <p class="lead-desc"><%= lead.description || '' %></p>
+
+                            <!-- Notas internas -->
+                            <form action="/admin/leads/notes" method="POST" style="margin-top:10px;display:flex;gap:8px;align-items:flex-end;">
+                                <input type="hidden" name="leadId" value="<%= lead.id %>">
+                                <div style="flex:1;">
+                                    <small style="color:#444;display:block;margin-bottom:3px;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.5px;">Nota interna</small>
+                                    <input type="text" name="notes" value="<%= lead.adminNotes || '' %>"
+                                        placeholder="Agregar nota privada…"
+                                        style="margin:0;padding:8px 12px;font-size:0.82rem;background:#0a0a0a;border-color:#222;">
+                                </div>
+                                <button type="submit" style="width:auto;margin:0;padding:8px 14px;font-size:0.78rem;border-radius:8px;">Guardar</button>
+                            </form>
                         </div>
                         <div class="lead-actions">
-                            <small style="color:#555;display:block;margin-bottom:8px;text-align:right;"><%= lead.date || '' %></small>
+                            <small style="color:#555;display:block;margin-bottom:10px;text-align:right;"><%= lead.date || '' %></small>
+
+                            <%
+                                var curStatus = lead.status || 'Nuevo';
+                                var isProceso  = curStatus === 'En proceso';
+                                var isTerminado = curStatus === 'Terminado';
+                            %>
+
+                            <!-- Botones rápidos -->
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;">
+                                <form action="/admin/leads/status" method="POST">
+                                    <input type="hidden" name="leadId" value="<%= lead.id %>">
+                                    <input type="hidden" name="status" value="En proceso">
+                                    <button type="submit" style="width:100%;margin:0;padding:9px 6px;font-size:0.78rem;border-radius:8px;
+                                        background:<%= isProceso ? 'rgba(0,212,255,0.18)' : 'rgba(0,212,255,0.05)' %>;
+                                        border:1px solid <%= isProceso ? 'rgba(0,212,255,0.6)' : 'rgba(0,212,255,0.2)' %>;
+                                        color:<%= isProceso ? '#00d4ff' : '#555' %>;
+                                        font-weight:<%= isProceso ? '700' : '500' %>;">
+                                        🔧 En proceso
+                                    </button>
+                                </form>
+                                <form action="/admin/leads/status" method="POST">
+                                    <input type="hidden" name="leadId" value="<%= lead.id %>">
+                                    <input type="hidden" name="status" value="Terminado">
+                                    <button type="submit" style="width:100%;margin:0;padding:9px 6px;font-size:0.78rem;border-radius:8px;
+                                        background:<%= isTerminado ? 'rgba(52,211,153,0.18)' : 'rgba(52,211,153,0.05)' %>;
+                                        border:1px solid <%= isTerminado ? 'rgba(52,211,153,0.6)' : 'rgba(52,211,153,0.2)' %>;
+                                        color:<%= isTerminado ? '#34d399' : '#555' %>;
+                                        font-weight:<%= isTerminado ? '700' : '500' %>;">
+                                        ✅ Terminado
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- Select completo para otros estados -->
                             <form action="/admin/leads/status" method="POST">
                                 <input type="hidden" name="leadId" value="<%= lead.id %>">
                                 <select name="status"
-                                    class="lead-status-select status-<%= (lead.status || 'Nuevo').toLowerCase().replace(/ /g,'-') %>"
+                                    class="lead-status-select status-<%= curStatus.toLowerCase().replace(/ /g,'-') %>"
                                     onchange="this.form.submit()">
-                                    <% ['Nuevo','Contactado','Propuesta enviada','Cerrado ganado','Cerrado perdido'].forEach(function(s) { %>
-                                        <option value="<%= s %>" <%= lead.status === s ? 'selected' : '' %>><%= s %></option>
+                                    <% ['Nuevo','Contactado','Propuesta enviada','En negociación','Ganado','En proceso','Terminado','Cerrado perdido'].forEach(function(s) { %>
+                                        <option value="<%= s %>" <%= curStatus === s ? 'selected' : '' %>><%= s %></option>
                                     <% }); %>
                                 </select>
                             </form>
-                            <% if (lead.whatsapp) { %>
-                                <a href="https://wa.me/<%= lead.whatsapp.replace(/\D/g,'') %>?text=Hola%20<%= encodeURIComponent(lead.name || '') %>%2C%20vi%20tu%20solicitud%20de%20cotizaci%C3%B3n%20para%20<%= encodeURIComponent(lead.service || '') %>%20y%20me%20gustar%C3%ADa%20coordinar."
+
+                            <!-- Contacto directo -->
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;">
+                                <% if (lead.whatsapp) { %>
+                                <a href="https://wa.me/<%= lead.whatsapp.replace(/\D/g,'') %>?text=Hola%20<%= encodeURIComponent(lead.name || '') %>%2C%20recib%C3%AD%20tu%20solicitud%20de%20<%= encodeURIComponent(lead.service || '') %>%20y%20me%20gustar%C3%ADa%20coordinar%20los%20detalles."
                                    target="_blank"
-                                   style="display:block;text-align:center;padding:8px;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.25);color:#25d366;border-radius:8px;text-decoration:none;font-size:0.8rem;margin-top:8px;">
-                                    📲 WhatsApp
+                                   style="display:flex;align-items:center;justify-content:center;gap:5px;padding:9px;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.25);color:#25d366;border-radius:8px;text-decoration:none;font-size:0.8rem;font-weight:600;">
+                                    💬 WA
                                 </a>
-                            <% } %>
+                                <% } %>
+                                <% if (lead.email) { %>
+                                <a href="mailto:<%= lead.email %>?subject=Tu%20cotizaci%C3%B3n%20de%20<%= encodeURIComponent(lead.service || 'servicio') %>%20%E2%80%94%20Loop-Landing.com&body=Hola%20<%= encodeURIComponent((lead.name || '').split(' ')[0]) %>%2C%0A%0ARecib%C3%AD%20tu%20solicitud%20para%20<%= encodeURIComponent(lead.service || '') %>%20con%20presupuesto%20<%= encodeURIComponent(lead.budget || '') %>.%0A%0AMe%20gustar%C3%ADa%20coordinar%20una%20reuni%C3%B3n%20para%20definir%20los%20detalles.%0A%0ASaludos%2C%0AGarett%20%E2%80%94%20Loop-Landing.com"
+                                   style="display:flex;align-items:center;justify-content:center;gap:5px;padding:9px;background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.2);color:#00d4ff;border-radius:8px;text-decoration:none;font-size:0.8rem;font-weight:600;">
+                                    ✉️ Mail
+                                </a>
+                                <% } %>
+                            </div>
+
+                            <!-- Propuesta PDF -->
+                            <a href="/admin/propuesta/<%= lead.id %>"
+                               style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px;padding:9px;background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.2);color:#fbbf24;border-radius:8px;text-decoration:none;font-size:0.8rem;font-weight:600;">
+                                📄 Generar propuesta PDF
+                            </a>
+
+                            <!-- Eliminar lead -->
+                            <form action="/admin/leads/delete" method="POST" style="margin-top:6px;"
+                                data-name="<%= lead.name %>"
+                                onsubmit="return confirm('¿Eliminar cotización de ' + this.dataset.name + '?')">
+                                <input type="hidden" name="leadId" value="<%= lead.id %>">
+                                <button type="submit" class="btn-delete" style="width:100%;margin:0;padding:7px;font-size:0.75rem;border-radius:8px;">
+                                    Eliminar cotización
+                                </button>
+                            </form>
                         </div>
                     </div>
                 <% }); %>
@@ -131,7 +357,7 @@
 
     <!-- ── CLIENTES ───────────────────────────────────────────── -->
     <section id="clientes" style="margin-top:60px;">
-        <h2 style="margin-bottom:20px;">Clientes <span>Registrados</span></h2>
+        <h2 class="admin-section-title">👥 Clientes <span class="count-badge"><%= ((users||[]).filter(function(u){return u.role!=='admin';}).length) %> registrados</span></h2>
 
         <% var clientes = (users || []).filter(function(u){ return u.role !== 'admin'; }); %>
         <% if (clientes.length === 0) { %>
@@ -170,13 +396,13 @@
                         </div>
 
                         <div style="display:flex;gap:10px;margin-bottom:16px;">
-                            <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);padding:10px;border-radius:10px;text-align:center;">
-                                <strong style="color:#fff;font-size:1.3rem;"><%= openTickets %></strong>
-                                <small style="display:block;color:#555;font-size:0.75rem;">Tickets abiertos</small>
+                            <div style="flex:1;background:rgba(248,113,113,0.05);border:1px solid rgba(248,113,113,0.2);padding:14px 10px;border-radius:10px;text-align:center;">
+                                <div class="client-stat-n open"><%= openTickets %></div>
+                                <small style="display:block;color:#666;font-size:0.72rem;margin-top:4px;text-transform:uppercase;letter-spacing:0.5px;">Abiertos</small>
                             </div>
-                            <div style="flex:1;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:10px;border-radius:10px;text-align:center;">
-                                <strong style="font-size:1.3rem;"><%= closedTickets %></strong>
-                                <small style="display:block;color:#555;font-size:0.75rem;">Tickets cerrados</small>
+                            <div style="flex:1;background:rgba(52,211,153,0.04);border:1px solid rgba(52,211,153,0.15);padding:14px 10px;border-radius:10px;text-align:center;">
+                                <div class="client-stat-n"><%= closedTickets %></div>
+                                <small style="display:block;color:#666;font-size:0.72rem;margin-top:4px;text-transform:uppercase;letter-spacing:0.5px;">Cerrados</small>
                             </div>
                         </div>
 
@@ -200,12 +426,19 @@
                             </div>
                         </form>
 
-                        <% if (cliente.whatsapp) { %>
-                            <a href="https://wa.me/<%= cliente.whatsapp.replace(/\D/g,'') %>" target="_blank"
-                               style="display:block;text-align:center;padding:10px;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.25);color:#25d366;border-radius:10px;text-decoration:none;font-size:0.85rem;margin-top:12px;">
-                                📲 Contactar por WhatsApp
+                        <div style="display:flex;gap:8px;margin-top:12px;">
+                            <% if (cliente.whatsapp) { %>
+                            <a href="https://wa.me/<%= cliente.whatsapp.replace(/\D/g,'') %>?text=Hola%20<%= encodeURIComponent((cliente.name||'').split(' ')[0]) %>%2C%20te%20contacto%20desde%20Loop-Landing.com%20respecto%20a%20tu%20proyecto."
+                               target="_blank"
+                               style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.25);color:#25d366;border-radius:10px;text-decoration:none;font-size:0.83rem;font-weight:600;">
+                                💬 WhatsApp
                             </a>
-                        <% } %>
+                            <% } %>
+                            <a href="mailto:<%= cliente.email %>?subject=Actualizaci%C3%B3n%20de%20tu%20proyecto%20%E2%80%94%20Loop-Landing.com&body=Hola%20<%= encodeURIComponent((cliente.name||'').split(' ')[0]) %>%2C%0A%0AQuería%20actualizarte%20sobre%20el%20estado%20de%20tu%20proyecto%20<%= encodeURIComponent(cliente.projectType||'') %>.%0A%0ASaludos%2C%0AGarett%20%E2%80%94%20Loop-Landing.com"
+                               style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.2);color:#00d4ff;border-radius:10px;text-decoration:none;font-size:0.83rem;font-weight:600;">
+                                ✉️ Email
+                            </a>
+                        </div>
 
                         <!-- Subir archivo -->
                         <form action="/admin/upload" method="POST" enctype="multipart/form-data" style="margin-top:12px;">
@@ -237,50 +470,300 @@
 
     <!-- ── TICKETS ────────────────────────────────────────────── -->
     <section id="tickets" style="margin-top:60px;">
-        <h2 style="margin-bottom:20px;">Tickets de <span>Soporte</span></h2>
-        <div class="card">
-            <% if (!tickets || tickets.length === 0) { %>
-                <p style="color:#555;text-align:center;padding:20px;">No hay tickets aún.</p>
-            <% } else { %>
-                <ul style="list-style:none;">
-                    <% tickets.forEach(function(t) { %>
-                        <li style="border-bottom:1px solid rgba(255,255,255,0.05);padding:15px 0;">
-                            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-                                <div>
-                                    <strong><%= t.id %></strong>
-                                    <span style="color:#555;font-size:0.85rem;margin-left:10px;"><%= t.user %> · <%= t.email || '' %></span>
+        <h2 class="admin-section-title">🎫 Tickets <span class="count-badge"><%= (tickets||[]).filter(function(t){return t.status==='Abierto';}).length %> abiertos</span></h2>
+        <% if (!tickets || tickets.length === 0) { %>
+            <div class="card" style="text-align:center;color:#555;padding:40px;"><p>No hay tickets aún.</p></div>
+        <% } else { %>
+            <div style="display:flex;flex-direction:column;gap:14px;">
+            <% tickets.slice().reverse().forEach(function(t) { %>
+                <%
+                    var msgs = t.messages || [];
+                    var isOpen = t.status === 'Abierto';
+                    var hasNew = msgs.some(function(m){ return m.from === 'user' && !t._adminSeen; });
+                %>
+                <div class="card" style="border-color:<%= isOpen ? 'rgba(0,212,255,0.22)' : 'rgba(255,255,255,0.06)' %>;">
+
+                    <!-- Cabecera -->
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
+                        <div>
+                            <strong style="color:#fff;"><%= t.subject %></strong>
+                            <small style="display:block;color:#555;margin-top:2px;"><%= t.user %> · <%= t.email %> · <span style="font-family:monospace;"><%= t.id %></span> · <%= t.date %></small>
+                        </div>
+                        <span style="font-size:0.72rem;padding:3px 10px;border-radius:50px;white-space:nowrap;
+                            background:<%= isOpen ? 'rgba(0,212,255,0.1)' : 'rgba(255,255,255,0.05)' %>;
+                            border:1px solid <%= isOpen ? 'rgba(0,212,255,0.3)' : 'rgba(255,255,255,0.1)' %>;
+                            color:<%= isOpen ? '#00d4ff' : '#555' %>;">
+                            <%= t.status %>
+                        </span>
+                    </div>
+
+                    <!-- Hilo de mensajes -->
+                    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;max-height:320px;overflow-y:auto;padding-right:4px;">
+                        <% msgs.forEach(function(msg) { %>
+                            <% var isUser = msg.from === 'user'; %>
+                            <div style="display:flex;flex-direction:column;align-items:<%= isUser ? 'flex-start' : 'flex-end' %>;">
+                                <div style="max-width:80%;padding:10px 14px;border-radius:<%= isUser ? '14px 14px 14px 4px' : '14px 14px 4px 14px' %>;font-size:0.86rem;line-height:1.5;
+                                    background:<%= isUser ? 'rgba(255,255,255,0.06)' : 'rgba(0,212,255,0.12)' %>;
+                                    border:1px solid <%= isUser ? 'rgba(255,255,255,0.1)' : 'rgba(0,212,255,0.22)' %>;
+                                    color:#e8f4ff;">
+                                    <%= msg.text %>
                                 </div>
-                                <span style="font-size:0.75rem;color:<%= t.status === 'Abierto' ? '#fff' : '#555' %>;">
-                                    <%= t.status %>
-                                </span>
+                                <small style="color:#444;font-size:0.72rem;margin-top:3px;padding:0 4px;">
+                                    <%= isUser ? t.user : 'Tú (admin)' %> · <%= msg.time %>
+                                </small>
                             </div>
-                            <p style="font-size:0.9rem;color:#aaa;margin:8px 0 0;"><strong><%= t.subject %>:</strong> <%= t.message || '' %></p>
-                            <% if (t.status === 'Abierto') { %>
-                                <form action="/admin/tickets/respond" method="POST" style="margin-top:12px;">
-                                    <input type="hidden" name="ticketId" value="<%= t.id %>">
-                                    <textarea name="response" placeholder="Escribe tu respuesta..." required
-                                        style="width:100%;background:#111827;border:1px solid #333;color:white;padding:10px;border-radius:8px;font-size:0.85rem;resize:vertical;min-height:70px;margin:0;"></textarea>
-                                    <button type="submit" style="width:auto;padding:8px 18px;font-size:0.8rem;margin-top:8px;">Responder y cerrar</button>
-                                </form>
-                            <% } else { %>
-                                <p style="font-size:0.85rem;color:#ccc;background:rgba(255,255,255,0.04);border-left:2px solid rgba(255,255,255,0.2);padding:10px;border-radius:8px;margin-top:10px;">
-                                    <strong>R:</strong> <%= t.adminResponse || '' %>
-                                </p>
-                            <% } %>
-                        </li>
-                    <% }); %>
-                </ul>
-            <% } %>
+                        <% }); %>
+                    </div>
+
+                    <!-- Responder + Cerrar -->
+                    <% if (isOpen) { %>
+                        <form action="/admin/tickets/respond" method="POST" style="display:flex;gap:8px;align-items:flex-end;margin-bottom:8px;">
+                            <input type="hidden" name="ticketId" value="<%= t.id %>">
+                            <textarea name="response" placeholder="Escribe tu respuesta al cliente…" required
+                                style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(0,212,255,0.16);border-radius:10px;padding:10px 12px;color:#e8f4ff;font-size:0.84rem;resize:none;height:52px;font-family:inherit;margin:0;"></textarea>
+                            <button type="submit" style="width:auto;margin:0;padding:10px 18px;font-size:0.82rem;border-radius:10px;white-space:nowrap;">Responder</button>
+                        </form>
+                        <form action="/admin/tickets/close" method="POST" style="margin:0;">
+                            <input type="hidden" name="ticketId" value="<%= t.id %>">
+                            <button type="submit" class="btn-delete" style="width:auto;margin:0;padding:7px 16px;font-size:0.78rem;border-radius:8px;">
+                                Cerrar ticket
+                            </button>
+                        </form>
+                    <% } %>
+                </div>
+            <% }); %>
+            </div>
+        <% } %>
+    </section>
+
+    <!-- ── PAGOS ────────────────────────────────────────────────── -->
+    <section id="pagos" style="margin-top:60px;">
+        <h2 class="admin-section-title">💳 Pagos <span class="count-badge">$<%= (pagos||[]).reduce(function(s,p){return s+(parseFloat(p.amount)||0);},0).toLocaleString('en-US') %> total</span></h2>
+
+        <!-- Formulario nuevo pago -->
+        <div class="card" style="margin-bottom:24px;">
+            <h3 style="margin-bottom:18px;font-size:0.95rem;">Registrar nuevo pago</h3>
+            <form action="/admin/pagos" method="POST">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                    <div>
+                        <label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Cliente (nombre)</label>
+                        <input type="text" name="name" required placeholder="Nombre completo" style="margin:0;padding:10px 14px;font-size:0.88rem;">
+                    </div>
+                    <div>
+                        <label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Email del cliente</label>
+                        <input type="email" name="email" required placeholder="cliente@email.com" style="margin:0;padding:10px 14px;font-size:0.88rem;">
+                    </div>
+                    <div>
+                        <label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Monto ($)</label>
+                        <input type="number" name="amount" required min="0" step="0.01" placeholder="0.00" style="margin:0;padding:10px 14px;font-size:0.88rem;">
+                    </div>
+                    <div>
+                        <label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Servicio</label>
+                        <input type="text" name="service" required placeholder="Landing page, SaaS…" style="margin:0;padding:10px 14px;font-size:0.88rem;">
+                    </div>
+                    <div>
+                        <label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Método de pago</label>
+                        <select name="method" style="margin:0;padding:10px 14px;font-size:0.88rem;">
+                            <option value="Transferencia">Transferencia</option>
+                            <option value="SINPE Móvil">SINPE Móvil</option>
+                            <option value="PayPal">PayPal</option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Notas (opcional)</label>
+                        <input type="text" name="notes" placeholder="Anticipo, saldo final…" style="margin:0;padding:10px 14px;font-size:0.88rem;">
+                    </div>
+                </div>
+                <button type="submit" style="width:auto;padding:10px 24px;">Registrar pago</button>
+            </form>
         </div>
+
+        <!-- Lista de pagos -->
+        <% var pagosList = (pagos || []).slice().reverse(); %>
+        <% if (pagosList.length === 0) { %>
+            <div class="card" style="text-align:center;color:#555;padding:40px;">
+                <p>Aún no hay pagos registrados.</p>
+            </div>
+        <% } else { %>
+            <div class="card" style="padding:0;overflow:hidden;">
+                <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+                    <thead>
+                        <tr style="background:rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.07);">
+                            <th style="padding:12px 16px;text-align:left;color:#555;font-weight:600;">Fecha</th>
+                            <th style="padding:12px 16px;text-align:left;color:#555;font-weight:600;">Cliente</th>
+                            <th style="padding:12px 16px;text-align:left;color:#555;font-weight:600;">Servicio</th>
+                            <th style="padding:12px 16px;text-align:right;color:#555;font-weight:600;">Monto</th>
+                            <th style="padding:12px 16px;text-align:left;color:#555;font-weight:600;">Método</th>
+                            <th style="padding:12px 16px;text-align:left;color:#555;font-weight:600;">Notas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% pagosList.forEach(function(p) { %>
+                            <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                                <td style="padding:12px 16px;color:#555;white-space:nowrap;"><%= p.date || '—' %></td>
+                                <td style="padding:12px 16px;">
+                                    <div style="font-weight:600;color:#fff;"><%= p.name || '—' %></div>
+                                    <div style="font-size:0.75rem;color:#444;"><%= p.email || '—' %></div>
+                                </td>
+                                <td style="padding:12px 16px;color:#aaa;"><%= p.service || '—' %></td>
+                                <td style="padding:12px 16px;text-align:right;font-weight:700;color:#34d399;white-space:nowrap;">$<%= parseFloat(p.amount||0).toLocaleString('es-CR') %></td>
+                                <td style="padding:12px 16px;"><span style="background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.18);color:#00d4ff;padding:3px 10px;border-radius:50px;font-size:0.75rem;"><%= p.method || '—' %></span></td>
+                                <td style="padding:12px 16px;color:#555;font-size:0.82rem;"><%= p.notes || '—' %></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                    <tfoot>
+                        <tr style="background:rgba(52,211,153,0.05);border-top:1px solid rgba(52,211,153,0.15);">
+                            <td colspan="3" style="padding:12px 16px;color:#555;font-size:0.82rem;">Total acumulado</td>
+                            <td style="padding:12px 16px;text-align:right;font-weight:700;color:#34d399;font-size:1rem;">
+                                $<%= (pagos || []).reduce(function(sum,p){ return sum + (parseFloat(p.amount)||0); }, 0).toLocaleString('es-CR') %>
+                            </td>
+                            <td colspan="2"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        <% } %>
+    </section>
+
+    <!-- ── TESTIMONIOS ──────────────────────────────────────────── -->
+    <section id="testimonios" style="margin-top:60px;">
+        <h2 class="admin-section-title">⭐ Testimonios
+            <% var pendingT = (testimonios||[]).filter(function(t){return !t.approved;}).length; %>
+            <% if (pendingT > 0) { %>
+                <span class="notif-badge" style="position:static;display:inline-flex;background:#ffb800;"><%= pendingT %> pendientes</span>
+            <% } else { %>
+                <span class="count-badge"><%= (testimonios||[]).length %> total</span>
+            <% } %>
+        </h2>
+        <% if (!testimonios || testimonios.length === 0) { %>
+            <div class="card" style="text-align:center;color:#555;padding:40px;"><p>Aún no hay testimonios.</p></div>
+        <% } else { %>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;">
+                <% testimonios.slice().reverse().forEach(function(t) { %>
+                    <div class="card" style="border-color:<%= t.approved ? 'rgba(52,211,153,0.25)' : 'rgba(255,184,0,0.2)' %>;">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+                            <div>
+                                <strong style="color:#fff;"><%= t.name %></strong>
+                                <small style="display:block;color:#555;"><%= t.company %> · <%= t.service %></small>
+                            </div>
+                            <span style="font-size:0.7rem;padding:3px 10px;border-radius:50px;
+                                background:<%= t.approved ? 'rgba(52,211,153,0.1)' : 'rgba(255,184,0,0.1)' %>;
+                                border:1px solid <%= t.approved ? 'rgba(52,211,153,0.3)' : 'rgba(255,184,0,0.3)' %>;
+                                color:<%= t.approved ? '#34d399' : '#ffb800' %>;">
+                                <%= t.approved ? 'Publicado' : 'Pendiente' %>
+                            </span>
+                        </div>
+                        <div style="color:#fbbf24;font-size:0.9rem;margin-bottom:8px;">
+                            <% for(var i=0;i<t.rating;i++){%>★<% } %>
+                        </div>
+                        <p style="color:#aaa;font-size:0.88rem;line-height:1.6;margin:0 0 14px;">"<%= t.text %>"</p>
+                        <small style="color:#444;display:block;margin-bottom:12px;"><%= t.date %></small>
+                        <div style="display:flex;gap:8px;">
+                            <% if (!t.approved) { %>
+                                <form action="/admin/testimonios/approve" method="POST" style="flex:1;margin:0;">
+                                    <input type="hidden" name="testId" value="<%= t.id %>">
+                                    <button type="submit" style="width:100%;margin:0;padding:8px;font-size:0.78rem;border-radius:8px;background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.3);color:#34d399;">Aprobar</button>
+                                </form>
+                            <% } %>
+                            <form action="/admin/testimonios/delete" method="POST" style="flex:1;margin:0;">
+                                <input type="hidden" name="testId" value="<%= t.id %>">
+                                <button type="submit" class="btn-delete" style="width:100%;margin:0;padding:8px;font-size:0.78rem;border-radius:8px;">Eliminar</button>
+                            </form>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } %>
+    </section>
+
+    <!-- ── BLOG ──────────────────────────────────────────────────── -->
+    <section id="blog" style="margin-top:60px;">
+        <h2 class="admin-section-title">📝 Blog <span class="count-badge"><%= (blogPosts||[]).length %> artículos</span></h2>
+
+        <!-- Editor -->
+        <div class="card" style="margin-bottom:24px;">
+            <h3 style="font-size:0.95rem;margin-bottom:18px;">Nuevo artículo</h3>
+            <form action="/admin/blog" method="POST">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                    <div>
+                        <label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Título</label>
+                        <input type="text" name="title" required placeholder="Título del artículo" style="margin:0;padding:10px 14px;font-size:0.88rem;">
+                    </div>
+                    <div>
+                        <label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Tags (separados por coma)</label>
+                        <input type="text" name="tags" placeholder="SEO, Landing Page, Node.js" style="margin:0;padding:10px 14px;font-size:0.88rem;">
+                    </div>
+                </div>
+                <div style="margin-bottom:12px;">
+                    <label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Extracto (descripción corta)</label>
+                    <input type="text" name="excerpt" required placeholder="Una frase que describe el artículo…" style="margin:0;padding:10px 14px;font-size:0.88rem;">
+                </div>
+                <div style="margin-bottom:12px;">
+                    <label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Contenido (HTML permitido)</label>
+                    <textarea name="content" required rows="8" placeholder="<h2>Subtítulo</h2><p>Texto del artículo...</p>"
+                        style="width:100%;background:#0a0a0a;border:1px solid #222;color:#fff;padding:12px;border-radius:10px;font-size:0.85rem;resize:vertical;font-family:monospace;margin:0;"></textarea>
+                </div>
+                <div style="display:flex;align-items:center;gap:16px;">
+                    <label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:#888;cursor:pointer;">
+                        <input type="checkbox" name="published" value="true" checked style="width:auto;margin:0;accent-color:#00d4ff;">
+                        Publicar inmediatamente
+                    </label>
+                    <button type="submit" style="width:auto;margin:0;padding:10px 24px;">Publicar artículo</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Lista de posts -->
+        <% if (!blogPosts || blogPosts.length === 0) { %>
+            <div class="card" style="text-align:center;color:#555;padding:30px;"><p>No hay artículos aún.</p></div>
+        <% } else { %>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+                <% blogPosts.slice().reverse().forEach(function(p) { %>
+                    <div style="background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                        <div style="flex:1;min-width:200px;">
+                            <strong style="color:#fff;display:block;margin-bottom:3px;"><%= p.title %></strong>
+                            <small style="color:#555;"><%= p.date %> · <% if (p.tags && p.tags.length) { %><%= p.tags.join(', ') %><% } %></small>
+                        </div>
+                        <span style="font-size:0.75rem;padding:3px 10px;border-radius:50px;
+                            background:<%= p.published ? 'rgba(52,211,153,0.1)' : 'rgba(255,255,255,0.04)' %>;
+                            border:1px solid <%= p.published ? 'rgba(52,211,153,0.3)' : 'rgba(255,255,255,0.1)' %>;
+                            color:<%= p.published ? '#34d399' : '#555' %>;">
+                            <%= p.published ? 'Publicado' : 'Borrador' %>
+                        </span>
+                        <div style="display:flex;gap:8px;">
+                            <% if (p.published) { %>
+                                <a href="/blog/<%= p.slug %>" target="_blank"
+                                   style="padding:7px 14px;background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.2);color:#00d4ff;border-radius:8px;text-decoration:none;font-size:0.78rem;">Ver →</a>
+                            <% } %>
+                            <form action="/admin/blog/toggle" method="POST" style="margin:0;">
+                                <input type="hidden" name="postId" value="<%= p.id %>">
+                                <button type="submit" style="width:auto;margin:0;padding:7px 14px;font-size:0.78rem;border-radius:8px;background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);color:#888;">
+                                    <%= p.published ? 'Despublicar' : 'Publicar' %>
+                                </button>
+                            </form>
+                            <form action="/admin/blog/delete" method="POST" style="margin:0;" onsubmit="return confirm('¿Eliminar este artículo?')">
+                                <input type="hidden" name="postId" value="<%= p.id %>">
+                                <button type="submit" class="btn-delete" style="width:auto;margin:0;padding:7px 14px;font-size:0.78rem;border-radius:8px;">Eliminar</button>
+                            </form>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } %>
     </section>
 
     <!-- ── MENSAJES DE CONTACTO ───────────────────────────────── -->
     <section id="contactos" style="margin-top:60px;margin-bottom:80px;">
-        <h2 style="margin-bottom:20px;">
-            Mensajes de <span>Contacto</span>
+        <h2 class="admin-section-title">
+            💬 Mensajes
             <% var unreadCount = (contacts || []).filter(function(c){ return !c.read; }).length; %>
             <% if (unreadCount > 0) { %>
-                <span class="notif-badge" style="position:static;display:inline-flex;margin-left:10px;background:#ffb800;"><%= unreadCount %></span>
+                <span class="notif-badge" style="position:static;display:inline-flex;background:#ffb800;"><%= unreadCount %> nuevos</span>
+            <% } else { %>
+                <span class="count-badge"><%= (contacts||[]).length %> total</span>
             <% } %>
         </h2>
         <% if (!contacts || contacts.length === 0) { %>
@@ -311,6 +794,188 @@
                 </ul>
             </div>
         <% } %>
+    </section>
+
+    <!-- ── KANBAN (oculto por defecto) ──────────────────────────── -->
+    <div id="kanban-board" style="display:none;margin-top:0;overflow-x:auto;padding-bottom:20px;">
+        <%
+            var kCols = [
+              { key:'Nuevo',             color:'#888' },
+              { key:'Contactado',        color:'#60a5fa' },
+              { key:'En negociación',    color:'#a78bfa' },
+              { key:'En proceso',        color:'#00d4ff' },
+              { key:'Terminado',         color:'#34d399' }
+            ];
+        %>
+        <div style="display:flex;gap:14px;min-width:max-content;padding:4px 0 12px;">
+            <% kCols.forEach(function(col) { %>
+                <div class="k-col" data-status="<%= col.key %>"
+                    style="width:240px;background:#0e0e0e;border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:14px;">
+                    <div style="font-size:0.78rem;font-weight:700;color:<%= col.color %>;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;display:flex;align-items:center;gap:6px;">
+                        <span style="width:7px;height:7px;border-radius:50%;background:<%= col.color %>;display:inline-block;"></span>
+                        <%= col.key %>
+                        <span class="k-count" style="margin-left:auto;font-size:0.72rem;background:rgba(255,255,255,0.05);padding:2px 7px;border-radius:50px;color:#555;">0</span>
+                    </div>
+                    <div class="k-cards" style="display:flex;flex-direction:column;gap:8px;min-height:60px;">
+                        <% var colLeads = (leads||[]).filter(function(l){ return (l.status||'Nuevo') === col.key; }); %>
+                        <% colLeads.forEach(function(lead) { %>
+                            <div class="k-card" draggable="true" data-id="<%= lead.id %>"
+                                style="background:#161616;border:1px solid rgba(255,255,255,0.07);border-radius:9px;padding:12px;cursor:grab;">
+                                <div style="font-weight:600;font-size:0.85rem;color:#fff;margin-bottom:4px;"><%= lead.name %></div>
+                                <div style="font-size:0.75rem;color:#555;margin-bottom:6px;"><%= lead.service %></div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span style="font-size:0.72rem;color:#444;"><%= lead.budget %></span>
+                                    <div style="display:flex;gap:6px;">
+                                        <% if (lead.whatsapp) { %>
+                                            <a href="https://wa.me/<%= lead.whatsapp.replace(/\D/g,'') %>" target="_blank"
+                                               style="font-size:0.72rem;color:#25d366;text-decoration:none;">💬</a>
+                                        <% } %>
+                                        <% if (lead.email) { %>
+                                            <a href="mailto:<%= lead.email %>" style="font-size:0.72rem;color:#00d4ff;text-decoration:none;">✉</a>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+
+    <!-- ── NEWSLETTER ───────────────────────────────────────────── -->
+    <section id="newsletter" style="margin-top:60px;">
+        <h2 class="admin-section-title">📧 Newsletter <span class="count-badge"><%= (newsletterSubs||[]).length %> suscriptores</span></h2>
+        <div class="card" style="margin-bottom:20px;">
+            <h3 style="font-size:0.92rem;margin-bottom:16px;">Enviar campaña</h3>
+            <form action="/admin/newsletter/send" method="POST">
+                <div style="margin-bottom:12px;">
+                    <label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Asunto</label>
+                    <input type="text" name="subject" required placeholder="Asunto del email…" style="margin:0;padding:10px 14px;font-size:0.88rem;">
+                </div>
+                <div style="margin-bottom:14px;">
+                    <label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Contenido (HTML permitido)</label>
+                    <textarea name="html" required rows="5" placeholder="<p>Contenido del email...</p>"
+                        style="width:100%;background:#0a0a0a;border:1px solid #222;color:#fff;padding:12px;border-radius:10px;font-size:0.85rem;resize:vertical;margin:0;"></textarea>
+                </div>
+                <button type="submit" style="width:auto;margin:0;padding:10px 24px;">Enviar a <%= (newsletterSubs||[]).length %> suscriptores</button>
+            </form>
+        </div>
+        <% if (newsletterSubs && newsletterSubs.length > 0) { %>
+        <div class="card" style="padding:0;overflow:hidden;">
+            <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+                <thead><tr style="background:rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.07);">
+                    <th style="padding:12px 16px;text-align:left;color:#555;">Email</th>
+                    <th style="padding:12px 16px;text-align:left;color:#555;">Nombre</th>
+                    <th style="padding:12px 16px;text-align:left;color:#555;">Fecha</th>
+                </tr></thead>
+                <tbody>
+                <% (newsletterSubs||[]).slice().reverse().forEach(function(s){ %>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                        <td style="padding:11px 16px;color:#aaa;"><%= s.email %></td>
+                        <td style="padding:11px 16px;color:#555;"><%= s.name || '—' %></td>
+                        <td style="padding:11px 16px;color:#444;"><%= s.date %></td>
+                    </tr>
+                <% }); %>
+                </tbody>
+            </table>
+        </div>
+        <% } %>
+    </section>
+
+    <!-- ── WEBHOOKS ──────────────────────────────────────────────── -->
+    <section id="webhooks" style="margin-top:60px;">
+        <h2 class="admin-section-title">🔗 Webhooks <span class="count-badge"><%= (webhooksConfig||[]).length %> configurados</span></h2>
+        <div class="card" style="margin-bottom:20px;">
+            <h3 style="font-size:0.92rem;margin-bottom:16px;">Agregar webhook</h3>
+            <form action="/admin/webhooks" method="POST">
+                <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;margin-bottom:12px;">
+                    <div>
+                        <label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">URL destino</label>
+                        <input type="url" name="url" required placeholder="https://hook.make.com/…" style="margin:0;padding:10px 14px;font-size:0.88rem;">
+                    </div>
+                    <div>
+                        <label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Evento</label>
+                        <select name="event" style="margin:0;padding:10px 14px;font-size:0.88rem;">
+                            <option value="*">Todos los eventos</option>
+                            <option value="lead.nuevo">lead.nuevo</option>
+                            <option value="lead.estado">lead.estado</option>
+                            <option value="pago.completado">pago.completado</option>
+                            <option value="ticket.nuevo">ticket.nuevo</option>
+                            <option value="registro.nuevo">registro.nuevo</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Secret (opcional)</label>
+                        <input type="text" name="secret" placeholder="token secreto…" style="margin:0;padding:10px 14px;font-size:0.88rem;">
+                    </div>
+                </div>
+                <button type="submit" style="width:auto;margin:0;padding:10px 20px;">Agregar</button>
+            </form>
+        </div>
+        <% if (webhooksConfig && webhooksConfig.length > 0) { %>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+            <% webhooksConfig.forEach(function(w){ %>
+                <div style="background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+                    <div style="flex:1;min-width:200px;">
+                        <code style="font-size:0.8rem;color:#00d4ff;word-break:break-all;"><%= w.url %></code>
+                        <div style="margin-top:4px;"><span style="font-size:0.72rem;padding:2px 8px;background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.15);color:#00d4ff;border-radius:50px;"><%= w.event %></span></div>
+                    </div>
+                    <form action="/admin/webhooks/delete" method="POST" style="margin:0;">
+                        <input type="hidden" name="id" value="<%= w.id %>">
+                        <button type="submit" class="btn-delete" style="width:auto;margin:0;padding:7px 14px;font-size:0.78rem;border-radius:8px;">Eliminar</button>
+                    </form>
+                </div>
+            <% }); %>
+        </div>
+        <% } else { %>
+            <div class="card" style="text-align:center;color:#555;padding:30px;"><p>No hay webhooks configurados.</p></div>
+        <% } %>
+    </section>
+
+    <!-- ── TEMPLATES DE PROPUESTAS ───────────────────────────────── -->
+    <section id="templates" style="margin-top:60px;margin-bottom:80px;">
+        <h2 class="admin-section-title">📄 Templates <span class="count-badge"><%= (propuestaTemplates||[]).length %> guardados</span></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;margin-bottom:20px;">
+            <% (propuestaTemplates||[]).forEach(function(t){ %>
+                <div class="card" style="border-color:rgba(251,191,36,0.15);">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+                        <div>
+                            <strong style="color:#fff;"><%= t.name %></strong>
+                            <small style="display:block;color:#555;margin-top:2px;"><%= t.service %> · <%= t.budget %></small>
+                        </div>
+                        <span style="font-size:0.72rem;color:#555;white-space:nowrap;">Plazo: <%= t.deadline %></span>
+                    </div>
+                    <p style="color:#444;font-size:0.8rem;margin:0 0 12px;line-height:1.5;"><%= (t.scope||'').replace(/<[^>]+>/g,'').substring(0,100) %>…</p>
+                    <form action="/admin/templates/delete" method="POST" style="margin:0;">
+                        <input type="hidden" name="id" value="<%= t.id %>">
+                        <button type="submit" class="btn-delete" style="width:100%;margin:0;padding:8px;font-size:0.78rem;border-radius:8px;">Eliminar template</button>
+                    </form>
+                </div>
+            <% }); %>
+        </div>
+        <!-- Nuevo template -->
+        <div class="card">
+            <h3 style="font-size:0.92rem;margin-bottom:16px;">Crear nuevo template</h3>
+            <form action="/admin/templates" method="POST">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                    <div><label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Nombre del template</label>
+                        <input type="text" name="name" required placeholder="Landing Page Premium" style="margin:0;padding:10px 14px;font-size:0.88rem;"></div>
+                    <div><label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Servicio</label>
+                        <input type="text" name="service" required placeholder="Landing Page" style="margin:0;padding:10px 14px;font-size:0.88rem;"></div>
+                    <div><label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Presupuesto</label>
+                        <input type="text" name="budget" placeholder="$500 - $1000" style="margin:0;padding:10px 14px;font-size:0.88rem;"></div>
+                    <div><label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Plazo</label>
+                        <input type="text" name="deadline" placeholder="2-3 semanas" style="margin:0;padding:10px 14px;font-size:0.88rem;"></div>
+                </div>
+                <div style="margin-bottom:12px;"><label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Alcance (HTML)</label>
+                    <textarea name="scope" rows="4" placeholder="<ul><li>Ítem del alcance</li></ul>"
+                        style="width:100%;background:#0a0a0a;border:1px solid #222;color:#fff;padding:12px;border-radius:10px;font-size:0.85rem;resize:vertical;margin:0;font-family:monospace;"></textarea></div>
+                <div style="margin-bottom:14px;"><label style="font-size:0.78rem;color:#555;display:block;margin-bottom:4px;">Términos de pago</label>
+                    <input type="text" name="terms" placeholder="50% anticipo · 50% al entregable" style="margin:0;padding:10px 14px;font-size:0.88rem;"></div>
+                <button type="submit" style="width:auto;margin:0;padding:10px 24px;">Guardar template</button>
+            </form>
+        </div>
     </section>
 
 </div>
@@ -390,7 +1055,92 @@
         options: Object.assign({}, chartBase, { plugins: { legend: { display: false } } })
     });
 })();
+
+/* ── Kanban drag & drop ── */
+var listView   = document.querySelector('.admin-leads-list');
+var kanbanBoard = document.getElementById('kanban-board');
+var btnKanban  = document.getElementById('btn-kanban');
+var kanbanActive = false;
+
+function toggleKanban() {
+    kanbanActive = !kanbanActive;
+    listView && (listView.style.display = kanbanActive ? 'none' : '');
+    kanbanBoard.style.display = kanbanActive ? 'block' : 'none';
+    btnKanban.textContent = kanbanActive ? '☰ Vista lista' : '🗂 Vista Kanban';
+    btnKanban.style.color = kanbanActive ? '#34d399' : '#00d4ff';
+    if (kanbanActive) initKanban();
+}
+
+/* ── Scroll spy for section nav ── */
+(function() {
+    var navLinks = document.querySelectorAll('.admin-section-bar a[href^="#"]');
+    var sections = Array.from(navLinks).map(function(a) {
+        return document.querySelector(a.getAttribute('href'));
+    }).filter(Boolean);
+    function onScroll() {
+        var scrollY = window.scrollY + 120;
+        var active = sections.reduce(function(found, s) {
+            return s.offsetTop <= scrollY ? s : found;
+        }, sections[0]);
+        navLinks.forEach(function(a) {
+            a.classList.toggle('active', active && a.getAttribute('href') === '#' + active.id);
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+})();
+
+function initKanban() {
+    var cols = document.querySelectorAll('.k-col');
+    cols.forEach(function(col) {
+        var cards = col.querySelectorAll('.k-card');
+        col.querySelector('.k-count').textContent = cards.length;
+        cards.forEach(function(card) {
+            card.addEventListener('dragstart', function(e) {
+                e.dataTransfer.setData('text/plain', card.dataset.id);
+                setTimeout(function(){ card.style.opacity = '0.4'; }, 0);
+            });
+            card.addEventListener('dragend', function() { card.style.opacity = '1'; });
+        });
+        col.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            col.style.background = 'rgba(0,212,255,0.05)';
+        });
+        col.addEventListener('dragleave', function() { col.style.background = ''; });
+        col.addEventListener('drop', function(e) {
+            e.preventDefault();
+            col.style.background = '';
+            var id = e.dataTransfer.getData('text/plain');
+            var card = document.querySelector('.k-card[data-id="' + id + '"]');
+            if (!card) return;
+            var oldCol = card.closest('.k-col');
+            var newStatus = col.dataset.status;
+            col.querySelector('.k-cards').appendChild(card);
+            oldCol.querySelector('.k-count').textContent = oldCol.querySelectorAll('.k-card').length;
+            col.querySelector('.k-count').textContent   = col.querySelectorAll('.k-card').length;
+            fetch('/admin/leads/kanban', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ leadId: id, status: newStatus })
+            }).catch(function(err){ console.error('Kanban update failed', err); });
+        });
+    });
+}
 </script>
 <script src="/js/particles.js"></script>
+
+<!-- ── Admin footer mínimo ───────────────────────────────────────────── -->
+<footer class="admin-footer" style="background:rgba(0,0,0,0.55);border-top:1px solid rgba(0,212,255,0.1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:18px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+  <span style="font-family:'Orbitron',sans-serif;font-size:0.72rem;font-weight:600;color:#333;letter-spacing:1px;">
+    <span style="background:linear-gradient(135deg,#00d4ff,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">LOOP-LANDING.COM</span>
+    &nbsp;·&nbsp; <span style="color:#292929;">© 2026 Panel Admin</span>
+  </span>
+  <div style="display:flex;gap:20px;align-items:center;">
+    <a href="/" target="_blank" style="font-size:0.75rem;color:#383838;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#383838'">Ver sitio ↗</a>
+    <a href="/portafolio" style="font-size:0.75rem;color:#383838;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#383838'">Portafolio</a>
+    <a href="https://wa.me/50663144171" target="_blank" style="font-size:0.75rem;color:#25d366;text-decoration:none;">💬 WhatsApp</a>
+    <a href="/logout" style="font-size:0.75rem;padding:6px 14px;background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.25);color:#f87171;border-radius:8px;text-decoration:none;transition:all .2s;" onmouseover="this.style.background='rgba(248,113,113,0.15)'" onmouseout="this.style.background='rgba(248,113,113,0.08)'">Cerrar sesión</a>
+  </div>
+</footer>
 </body>
 </html>

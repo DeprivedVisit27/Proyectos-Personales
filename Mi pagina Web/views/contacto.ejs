@@ -7,20 +7,14 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<div class="bg-slideshow">
+  <div class="bg-slide" style="background-image:url('/img/jamesmarkosborne-code-1076536_1920.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/fotis-fotopoulos-6sAl6aQ4OWI-unsplash.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/pankaj-patel-Fi-GJaLRGKc-unsplash.jpg')"></div>
+</div>
     <canvas id="bg-canvas"></canvas>
+<%- include('./partials/lp-header', { user: locals.user }) %>
     <div class="container">
-        <nav>
-            <a href="/" class="logo" style="text-decoration:none;color:inherit;">MI WEB PRO</a>
-            <div class="nav-actions">
-                <a href="/portafolio" class="nav-btn" data-tooltip="Ver trabajos realizados">Portafolio</a>
-                <% if (user) { %>
-                    <a href="/dashboard" class="nav-btn nav-btn--primary" data-tooltip="Tu panel de control">Dashboard</a>
-                <% } else { %>
-                    <a href="/login" class="nav-btn" data-tooltip="Accede a tu cuenta">Login</a>
-                    <a href="/register" class="nav-btn nav-btn--primary" data-tooltip="Crea tu cuenta gratis">Registro</a>
-                <% } %>
-            </div>
-        </nav>
 
         <div class="auth-container" style="max-width:600px;">
             <h1 style="margin-bottom:8px;">Contáctanos</h1>
@@ -45,5 +39,6 @@
         </div>
     </div>
 <script src="/js/particles.js"></script>
+<%- include('./partials/lp-footer') %>
 </body>
 </html>

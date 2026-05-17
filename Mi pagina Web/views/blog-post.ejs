@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= post.title %> — Loop-Landing.com</title>
+<meta name="description" content="<%= post.excerpt %>">
+<meta property="og:title" content="<%= post.title %> — Loop-Landing.com">
+<meta property="og:description" content="<%= post.excerpt %>">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="bg-slideshow">
+  <div class="bg-slide" style="background-image:url('/img/jamesmarkosborne-code-1076536_1920.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/fotis-fotopoulos-6sAl6aQ4OWI-unsplash.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('/img/pankaj-patel-Fi-GJaLRGKc-unsplash.jpg')"></div>
+</div>
+<canvas id="bg-canvas"></canvas>
+<%- include('./partials/lp-header', { user: locals.user }) %>
+
+<article class="lp-wrap" style="max-width:740px;margin:0 auto;padding:60px 20px 80px;">
+
+  <a href="/blog" style="font-size:0.82rem;color:#555;text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-bottom:32px;">← Volver al blog</a>
+
+  <% if (post.tags && post.tags.length > 0) { %>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;">
+      <% post.tags.forEach(function(tag) { %>
+        <span style="font-size:0.7rem;padding:3px 10px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.18);color:#00d4ff;border-radius:50px;text-transform:uppercase;letter-spacing:0.5px;"><%= tag %></span>
+      <% }); %>
+    </div>
+  <% } %>
+
+  <h1 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;color:#fff;line-height:1.2;margin:0 0 16px;"><%= post.title %></h1>
+  <p style="color:#444;font-size:0.82rem;margin:0 0 40px;"><%= post.date %> · Loop-Landing.com</p>
+
+  <div class="blog-content">
+    <%- post.content %>
+  </div>
+
+  <div style="margin-top:60px;padding:28px;background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:14px;">
+    <p style="margin:0 0 4px;font-size:0.78rem;color:#555;text-transform:uppercase;letter-spacing:0.8px;">¿Te sirvió este artículo?</p>
+    <h3 style="margin:0 0 12px;font-size:1rem;color:#fff;">Hablemos de tu proyecto</h3>
+    <a href="/#cotizacion" class="lp-btn lp-btn-grad" style="display:inline-block;">Cotizar ahora →</a>
+  </div>
+
+</article>
+
+<%- include('./partials/lp-footer') %>
+<script src="/js/particles.js"></script>
+</body>
+</html>

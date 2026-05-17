@@ -1,3 +1,32 @@
+// ── Ripple effect on all buttons ─────────
+document.addEventListener('click', function(e) {
+  var btn = e.target.closest('button, .nav-btn, .lp-btn, .lp-nav-cta, .quote-submit, .btn-delete, .admin-nav-toggle, .admin-section-bar a');
+  if (!btn) return;
+  var style = window.getComputedStyle(btn);
+  if (style.position === 'static') btn.style.position = 'relative';
+  if (style.overflow !== 'hidden') btn.style.overflow = 'hidden';
+  var r = btn.getBoundingClientRect();
+  var size = Math.max(r.width, r.height) * 1.6;
+  var x = e.clientX - r.left - size / 2;
+  var y = e.clientY - r.top  - size / 2;
+  var ripple = document.createElement('span');
+  ripple.style.cssText = [
+    'position:absolute',
+    'border-radius:50%',
+    'pointer-events:none',
+    'width:'  + size + 'px',
+    'height:' + size + 'px',
+    'left:'   + x    + 'px',
+    'top:'    + y    + 'px',
+    'background:rgba(255,255,255,0.18)',
+    'transform:scale(0)',
+    'animation:ripple-anim 0.55s cubic-bezier(.4,0,.2,1) forwards',
+    'z-index:999'
+  ].join(';');
+  btn.appendChild(ripple);
+  ripple.addEventListener('animationend', function() { ripple.remove(); });
+});
+
 // ── Custom cursor (desktop only) ─────────
 const cursor     = document.querySelector('.cursor');
 const cursorRing = document.querySelector('.cursor-ring');
@@ -48,7 +77,7 @@ if (header) {
 }
 
 // ── Reveal on scroll ─────────────────────
-const revealEls = document.querySelectorAll('.reveal');
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-scale');
 if (revealEls.length) {
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -57,8 +86,40 @@ if (revealEls.length) {
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.08 });
+  }, { threshold: 0.07 });
   revealEls.forEach(el => io.observe(el));
+}
+
+// ── Animated number counters ─────────────
+function animateCounter(el) {
+  const raw    = el.textContent.trim();
+  const suffix = raw.replace(/[\d.]/g, '');
+  const target = parseFloat(raw.replace(/[^\d.]/g, ''));
+  if (isNaN(target)) return;
+  const duration = 1400;
+  const start    = performance.now();
+  function tick(now) {
+    const elapsed  = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease     = 1 - Math.pow(1 - progress, 3);
+    const current  = Math.round(ease * target * 10) / 10;
+    el.textContent = (Number.isInteger(target) ? Math.round(current) : current) + suffix;
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+const statEls = document.querySelectorAll('.lp-stat-n');
+if (statEls.length) {
+  const counterIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCounter(e.target);
+        counterIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  statEls.forEach(el => counterIO.observe(el));
 }
 
 // ── 3D card tilt (desktop) ───────────────

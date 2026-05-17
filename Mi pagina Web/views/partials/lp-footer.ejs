@@ -1,0 +1,83 @@
+<footer class="lp-footer">
+  <div class="lp-wrap">
+
+    <div class="lp-footer-top">
+      <div class="lp-footer-brand">
+        <span class="lp-logo" style="font-size:1.1rem;"><span class="lp-logo-mark">♪</span><span class="lp-logo-text">LOOP<span class="lp-logo-accent">-LANDING</span><span class="lp-logo-dim">.COM</span></span></span>
+        <p>Desarrollo digital desde Curridabat, Costa Rica.<br>Landing pages, SaaS y automatizaciones que convierten.</p>
+        <div class="lp-footer-owner">
+          <span>👤 Garett Barrantes Benavides</span>
+          <span>📍 Curridabat, Costa Rica</span>
+        </div>
+      </div>
+
+      <div class="lp-footer-links-col">
+        <strong>Servicios</strong>
+        <a href="/precios">Landing Pages</a>
+        <a href="/precios">Aplicaciones SaaS</a>
+        <a href="/precios">Automatizaciones IA</a>
+        <a href="/precios">Ver precios</a>
+      </div>
+
+      <div class="lp-footer-links-col">
+        <strong>Empresa</strong>
+        <a href="/portafolio">Portafolio</a>
+        <a href="/blog">Blog</a>
+        <a href="/#proyectos">Proyectos</a>
+        <a href="/#estado">Mi cotización</a>
+        <a href="/login">Acceso clientes</a>
+      </div>
+
+      <div class="lp-footer-links-col">
+        <strong>Contacto</strong>
+        <a href="https://wa.me/50663144171" target="_blank">💬 WhatsApp</a>
+        <a href="https://www.instagram.com/garett_barrantes/" target="_blank">📸 Instagram</a>
+        <a href="/#cotizacion">✉ Cotización</a>
+        <div class="lp-support-badge">
+          <span class="lp-live-dot" style="background:#10b981;"></span>
+          Atención 24 hrs / 7 días
+        </div>
+      </div>
+    </div>
+
+    <div class="lp-footer-bottom">
+      <span>© 2026 Loop-Landing.com — Todos los derechos reservados.</span>
+      <div style="display:flex;gap:20px;">
+        <a href="https://www.instagram.com/garett_barrantes/" target="_blank">Instagram</a>
+        <a href="https://wa.me/50663144171" target="_blank">WhatsApp</a>
+        <a href="/portafolio">Portafolio</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/50663144171" target="_blank" aria-label="WhatsApp">💬</a>
+
+<!-- ── Exit-intent popup ─────────────────────────────────────────────────── -->
+<div id="exit-popup" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;">
+  <div style="background:#0d0d1a;border:1px solid rgba(0,212,255,0.3);border-radius:20px;padding:44px 40px;max-width:460px;width:90%;text-align:center;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.6);">
+    <button onclick="document.getElementById('exit-popup').style.display='none'" style="position:absolute;top:14px;right:18px;background:transparent;border:none;color:#444;font-size:1.3rem;cursor:pointer;line-height:1;" aria-label="Cerrar">✕</button>
+    <div style="font-size:2.8rem;margin-bottom:16px;">🚀</div>
+    <h2 style="font-size:1.35rem;margin:0 0 10px;color:#fff;">¿Antes de irte...</h2>
+    <p style="color:rgba(255,255,255,0.5);font-size:0.95rem;line-height:1.75;margin:0 0 28px;">Cotizá <strong style="color:#fff;">gratis</strong> y recibí una propuesta personalizada<br>en menos de <strong style="color:#00d4ff;">24 horas</strong>. Sin compromisos.</p>
+    <a href="/#cotizacion" onclick="document.getElementById('exit-popup').style.display='none'" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#00d4ff,#7c3aed);color:#fff;text-decoration:none;border-radius:12px;font-weight:700;font-size:0.95rem;letter-spacing:0.5px;box-shadow:0 8px 24px rgba(0,212,255,0.25);">Solicitar cotización gratis →</a>
+    <br>
+    <button onclick="document.getElementById('exit-popup').style.display='none';sessionStorage.setItem('ep','1')" style="margin-top:16px;background:transparent;border:none;color:#383838;font-size:0.78rem;cursor:pointer;text-decoration:underline;">No gracias, ya tengo sitio web</button>
+  </div>
+</div>
+<script>
+(function(){
+  if(sessionStorage.getItem('ep')) return;
+  var shown=false;
+  function show(){
+    if(shown||sessionStorage.getItem('ep')) return;
+    shown=true;
+    document.getElementById('exit-popup').style.display='flex';
+    sessionStorage.setItem('ep','1');
+  }
+  document.addEventListener('mouseleave',function(e){ if(e.clientY<=0) setTimeout(show,150); });
+  if(/Mobi|Android/i.test(navigator.userAgent)) setTimeout(show,35000);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') document.getElementById('exit-popup').style.display='none'; });
+})();
+</script>

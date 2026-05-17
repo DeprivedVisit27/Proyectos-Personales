@@ -1,44 +1,32 @@
-# ==============================
-# SEGURIDAD — nunca subir
-# ==============================
+# Credenciales y claves — NUNCA subir
+*-credentials.json
+*-service-account*.json
+neon-framing-*.json
+loop-landing-jarvis-*.json
 *.pem
 *.key
-*.p12
-*.pfx
-*.env
-*.env.*
-Chrome Passwords.csv
-*Passwords*.csv
-*passwords*.csv
+.env
+.env.*
 
-# ==============================
-# ARCHIVOS PERSONALES / BASURA
-# ==============================
-Personales/
-jarvis/
-scoped_dir*/
-*.exe
-*.dmg
-*.iso
-y.jpg
+# Datos sensibles del servidor (se gestionan en producción)
+Mi pagina Web/backups/
 
-# ==============================
-# EDITORES
-# ==============================
+# Editor
 .vscode/
 .idea/
-*.suo
-*.user
 
-# ==============================
-# NODE
-# ==============================
+# Node
 node_modules/
 npm-debug.log*
 
-# ==============================
-# SISTEMA OPERATIVO
-# ==============================
+# Claude Code
+.claude/
+
+# OS
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Archivos temporales
+*.tmp
+scoped_dir*/

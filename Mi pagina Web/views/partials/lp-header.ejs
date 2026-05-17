@@ -1,0 +1,145 @@
+<header class="lp-header">
+  <div class="lp-header-inner">
+
+    <a href="/" class="lp-logo">
+      <span class="lp-logo-mark">♪</span>
+      <span class="lp-logo-text">LOOP<span class="lp-logo-accent">-LANDING</span><span class="lp-logo-dim">.COM</span></span>
+    </a>
+
+    <nav class="lp-nav">
+      <a href="/portafolio">Proyectos</a>
+      <a href="/precios">Precios</a>
+      <a href="/#servicios">Servicios</a>
+      <a href="/#cotizacion">Contacto</a>
+      <% if (locals.user) { %>
+        <span class="lp-greeting" id="lp-greeting" data-name="<%= locals.user.name.split(' ')[0] %>"></span>
+        <a href="/dashboard" class="lp-nav-login">Dashboard</a>
+      <% } else { %>
+        <a href="/login" class="lp-nav-login">Iniciar sesión</a>
+      <% } %>
+      <a href="/#cotizacion" class="lp-nav-cta">Cotizar →</a>
+
+      <div class="lp-dropdown-wrap" id="techDropdown">
+        <button class="lp-dropdown-btn" id="techBtn" aria-label="Menú">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <rect x="2" y="4" width="14" height="1.5" rx="0.75" fill="currentColor"/>
+            <rect x="2" y="8.25" width="14" height="1.5" rx="0.75" fill="currentColor"/>
+            <rect x="2" y="12.5" width="14" height="1.5" rx="0.75" fill="currentColor"/>
+          </svg>
+        </button>
+        <div class="lp-dropdown" id="techMenu">
+          <p class="lp-drop-label">NAVEGACIÓN</p>
+          <div class="lp-drop-col">
+            <a href="/portafolio"   class="lp-drop-link">📁 Portafolio</a>
+            <a href="/precios"      class="lp-drop-link">💰 Precios</a>
+            <a href="/#servicios"   class="lp-drop-link">⚙️ Servicios</a>
+            <a href="/#proyectos"   class="lp-drop-link">🚀 Proyectos</a>
+            <a href="/#cotizacion"  class="lp-drop-link">✉️ Cotización</a>
+            <a href="/#estado"      class="lp-drop-link">📊 Mi cotización</a>
+          </div>
+          <div class="lp-drop-divider"></div>
+          <p class="lp-drop-label">CUENTA</p>
+          <div class="lp-drop-col">
+            <% if (locals.user) { %>
+              <a href="/dashboard"  class="lp-drop-link">⚡ Dashboard</a>
+              <a href="/tickets"    class="lp-drop-link">🎫 Mis tickets</a>
+              <a href="/logout"     class="lp-drop-link">🚪 Cerrar sesión</a>
+            <% } else { %>
+              <a href="/login"      class="lp-drop-link">🔐 Iniciar sesión</a>
+              <a href="/register"   class="lp-drop-link">📝 Registrarse</a>
+            <% } %>
+          </div>
+          <div class="lp-drop-divider"></div>
+          <p class="lp-drop-label">CONTACTO DIRECTO</p>
+          <div class="lp-drop-col">
+            <a href="https://wa.me/50663144171" target="_blank" class="lp-drop-link" style="color:#25d366;">💬 WhatsApp</a>
+            <a href="https://www.instagram.com/garett_barrantes/" target="_blank" class="lp-drop-link">📸 Instagram</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+  </div>
+</header>
+
+<!-- Tech carousel strip -->
+<div class="lp-tech-strip">
+  <div class="lp-tech-track">
+    <span><span style="color:#e34c26">⬡</span> HTML5</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#264de4">⬡</span> CSS3</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#f7df1e">⬡</span> JavaScript</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#68a063">⬡</span> Node.js</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#fff">⬡</span> Express.js</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#ff9900">⬡</span> AWS S3</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#34a853">⬡</span> Google Sheets</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#ea4b71">⬡</span> n8n</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#ff6384">⬡</span> Chart.js</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#00d4ff">⬡</span> PDFKit</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#aaa">⬡</span> EJS</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#aaa">⬡</span> Nodemailer</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#e34c26">⬡</span> HTML5</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#264de4">⬡</span> CSS3</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#f7df1e">⬡</span> JavaScript</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#68a063">⬡</span> Node.js</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#fff">⬡</span> Express.js</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#ff9900">⬡</span> AWS S3</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#34a853">⬡</span> Google Sheets</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#ea4b71">⬡</span> n8n</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#ff6384">⬡</span> Chart.js</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#00d4ff">⬡</span> PDFKit</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#aaa">⬡</span> EJS</span>
+    <span class="lp-sep">·</span>
+    <span><span style="color:#aaa">⬡</span> Nodemailer</span>
+    <span class="lp-sep">·</span>
+  </div>
+</div>
+
+<script>
+  (function () {
+    // Greeting based on local time
+    var el = document.getElementById('lp-greeting');
+    if (el) {
+      var h = new Date().getHours();
+      var greet = h < 12 ? 'Buenos días' : h < 18 ? 'Buenas tardes' : 'Buenas noches';
+      el.textContent = greet + ', ' + el.dataset.name;
+    }
+
+    // Hamburger dropdown
+    document.addEventListener('DOMContentLoaded', function () {
+      var btn  = document.getElementById('techBtn');
+      var menu = document.getElementById('techMenu');
+      var wrap = document.getElementById('techDropdown');
+      if (!btn || !menu || !wrap) return;
+      function openDD()  { menu.style.display = 'block'; wrap.classList.add('open'); }
+      function closeDD() { menu.style.display = 'none';  wrap.classList.remove('open'); }
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        menu.style.display === 'block' ? closeDD() : openDD();
+      });
+      document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) closeDD(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDD(); });
+    });
+  })();
+</script>
